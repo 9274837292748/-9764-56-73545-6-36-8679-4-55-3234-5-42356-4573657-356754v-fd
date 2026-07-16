@@ -459,7 +459,7 @@ settings["Names to exclude from transparency"] = {
 }
 --// Settings end
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/somethingsimade/CurrentAngleV4/refs/heads/main/v4.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xyrevex/stuff/refs/heads/main/currentangle/workaround2"))()
 REANIMATION=false 
 end
 REANIMATE.MouseButton1Click:Connect(function()
@@ -522,6 +522,25 @@ end
 --THIS SHIT IS CASE SENSITIVE CUH, ONE SINGLE MISTAKE WILL MESS THINGS UP
 -- VVVVVVVV
 local danceCache = {}
+local function GetDanceSource(url)
+local attempts = {url}
+local decoded = string.gsub(url, "%%20", " ")
+local encoded = string.gsub(url, " ", "%%20")
+if decoded ~= url then table.insert(attempts, decoded) end
+if encoded ~= url and encoded ~= decoded then table.insert(attempts, encoded) end
+local lastError
+for _,attempt in ipairs(attempts) do
+local success,result = pcall(function()
+return game:HttpGet(attempt)
+end)
+if success and type(result) == "string" and #result > 0 then
+return result
+end
+lastError = result
+end
+error(lastError or "Failed to download dance")
+end
+
 local function AddDance(Name, ScriptUrl)
 local filePath = "KRYSTALDANCE/"..Name
 if isfile(filePath) then
@@ -544,8 +563,11 @@ notify("Failed to load saved dance: "..Name.." - "..tostring(danceData))
 end
 end
 notify("Downloading dance: "..Name)
-local success, danceData = pcall(function()
-return loadstring(game:HttpGet(ScriptUrl))()
+local success, danceData, source = pcall(function()
+local downloaded = GetDanceSource(ScriptUrl)
+local loader, loadError = loadstring(downloaded)
+if not loader then error(loadError) end
+return loader(), downloaded
 end)
 
 if success and danceData then
@@ -554,7 +576,7 @@ local newDance = danceData:Clone()
 newDance.Name = Name
 newDance.Parent = full
 notify("Loaded: "..Name)
-writefile(filePath, game:HttpGet(ScriptUrl))
+writefile(filePath, source)
 return newDance
 else
 notify("Dance doesn't return KeyframeSequence: "..Name)
@@ -620,6 +642,71 @@ return s.SoundId
 end
 
 
+
+local function EncodeUrlComponent(value)
+return (tostring(value):gsub("([^%w%-_%.~])", function(char)
+return string.format("%%%02X", string.byte(char))
+end))
+end
+
+local function IsValidAudioData(data)
+if type(data) ~= "string" or #data < 64 then
+return false
+end
+local start = string.lower(data:sub(1, 256))
+if start:find("<!doctype", 1, true) or start:find("<html", 1, true) or start:find("github", 1, true) and start:find("<", 1, true) then
+return false
+end
+return true
+end
+
+local function GetAudioCandidates(file)
+local names = {}
+local seenNames = {}
+local function addName(name)
+if name and name ~= "" and not seenNames[name] then
+seenNames[name] = true
+names[#names + 1] = name
+end
+end
+addName(file)
+addName(string.lower(file))
+addName((file:gsub("_", " ")))
+addName(string.lower(file:gsub("_", " ")))
+
+local urls = {}
+local seenUrls = {}
+local function addUrl(url)
+if not seenUrls[url] then
+seenUrls[url] = true
+urls[#urls + 1] = url
+end
+end
+for _, name in ipairs(names) do
+local encoded = EncodeUrlComponent(name)
+addUrl("https://github.com/Solary-3/Scripts/raw/refs/heads/Audios-1/" .. encoded)
+addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/Audios-1/" .. encoded)
+addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/Audios-1/" .. encoded)
+addUrl("https://github.com/Solary-3/Scripts/blob/Audios-1/" .. encoded .. "?raw=true")
+end
+return urls
+end
+
+local function DownloadAudioData(file)
+local lastError = "audio not found"
+for _, url in ipairs(GetAudioCandidates(file)) do
+local ok, data = pcall(function()
+return game:HttpGet(url)
+end)
+if ok and IsValidAudioData(data) then
+return data, url
+end
+if not ok then
+lastError = tostring(data)
+end
+end
+return nil, lastError
+end
 
 local validAudioFiles = {
 "Sphere.mp3",
@@ -753,10 +840,6 @@ local validAudioFiles = {
 
 --THIS SHIT IS CASE SENSITIVE CUH, ONE SINGLE MISTAKE WILL MESS THINGS UP
 local function DanceAsset(file)
-if not table.find(validAudioFiles, file) then
-notify("Audio file not found: " .. file)
-return ""
-end
 local filePath = "KDV3/"..file
 if isfile(filePath) then
 local fileSize = 0
@@ -771,13 +854,16 @@ end
 
 if not isfile(filePath) then 
 notify("Downloading Audio: " .. file)
+local data, source = DownloadAudioData(file)
+if not data then
+notify("Failed to download audio: " .. file .. " - " .. tostring(source))
+return ""
+end
 local success, errorMsg = pcall(function()
-writefile(filePath, game:HttpGet("https://github.com/Solary-3/Scripts/blob/Audios-1/"..file.."?raw=true"))
+writefile(filePath, data)
 end)
-
 if not success then
-notify("Failed to download audio: " .. file .. " - " .. errorMsg)
-writefile(filePath, "")
+notify("Failed to save audio: " .. file .. " - " .. tostring(errorMsg))
 return ""
 end
 notify("Downloaded Audio: " .. file)
@@ -1407,6 +1493,570 @@ rjt:Cancel()
  end
  end
 end
+
+
+local ImportedTableOfDances={
+{Name="Rat 1",Music="rat.mp3",DanceName="Rat1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Boogie Down",Music="FunkedUp.mp3",DanceName="None",Url="None",Id=122471664395501,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Assumptions",Music="Assumptions.mp3",DanceName="Assumptions",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Assumptions.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Egypt",Music="Egypt.mp3",DanceName="Egypt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Egypt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Flop",Music="DO THE FLOP.mp3",DanceName="Flop",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="CaramellDansen",Music="caramell.mp3",DanceName="Nonw",Url="None",Id=114964447248296,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Heel Toe Hop",Music="Heel.mp3",DanceName="Heel",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/HeelToeHop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Gangnam",Music="gangnamm.mp3",DanceName="None",Url="None",Id=133530633475679,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Bomb Monkey",Music="Monkey.mp3",DanceName="BombMonkey",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bomb%20Monkey.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Starlit",Music="dancingin.mp3",DanceName="None",Url="None",Id=136139381223407,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Swag Walk",Music="dr.wav",DanceName="None",Url="None",Id=110403709064010,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Griddy",Music="griddy.mp3",DanceName="None",Url="None",Id=114928062507098,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Luxurious",Music="lux.ogg",DanceName="None",Url="None",Id=94534967284996,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Kazotsky",Music="kazot.mp3",DanceName="None",Url="None",Id=86634257330162,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Domino",Music="Domino.mp3",DanceName="Domino",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Domino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Liar Dancer",Music="Liar.mp3",DanceName="Liar",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Liar.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Mesmerizer",Music="Mesmerizer.mp3",DanceName="Mesmerizer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Box Swing",Music="Box.mp3",DanceName="BoxSwing",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Box%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Static 1",Music="Static.mp3",DanceName="Static",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Prism Shuffle",Music="Prism.mp3",DanceName="Prism",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Prism%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Headlock",Music="Headlock.mp3",DanceName="Headlock",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari",Music="TUCA DONKA.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Commercial Break",Music="Break.mp3",DanceName="Commercial",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Commercial.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Soda Pop",Music="Soda.mp3",DanceName="Soda",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Soda%20Pop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="XO",Music="XO.mp3",DanceName="None",Url="None",Id=89807443968447,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="L4U",Music="LoveForU.mp3",DanceName="L4U",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Love4U.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Assumptios Shuffle",Music="assum.mp3",DanceName="None",Url="None",Id=129275138998868,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Peashooter",Music="balls.mp3",DanceName="None",Url="None",Id=124616782933406,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Distraction",Music="Distraction.mp3",DanceName="Distraction",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Distraction.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Very Hot",Music="ItBurns.mp3",DanceName="ItBurns",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/It%20Burns.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Chronoshift",Music="chronoshift.mp3",DanceName="Chronoshift",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chronoshift.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Keep Up",Music="KeepUp.mp3",DanceName="Keep",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Boombox",Music="Boombox.mp3",DanceName="None",Url="None",Id=92629504992703,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="BloodPop",Music="bloodpop.mp3",DanceName="None",Url="None",Id=82472212108809,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Sit",Music="Sit.mp3",DanceName="Sit",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sit.lua",Id="None",Offset=0,WalkSpeed=0,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Left Right",Music="leftright.mp3",DanceName="None",Url="None",Id=107261816578577,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Heavy Love",Music="heavylove.mp3",DanceName="None",Url="None",Id=101332118847458,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Million",Music="Million.mp3",DanceName="None",Url="None",Id=109123683211464,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Billie Jean",Music="Bjean.mp3",DanceName="BillieJean",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BillieJean.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Billie Jean2",Music="Bjean.mp3",DanceName="BillieJean2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BillieJean2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Savor W",Music="Savor.mp3",DanceName="Savor",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Savor.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Yamero",Music="Yamero.mp3",DanceName="Yamero",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yamero.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Angel",Music="InternetAngel.mp3",DanceName="Angel",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Angel.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Club Penguin",Music="CLUB PENGUIN DANCE.mp3",DanceName="ClubPenguin",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Club%20Penguin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Runaway",Music="Runaway.mp3",DanceName="Runaway",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Runaway.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="MioHonda",Music="MioHonda.mp3",DanceName="MioHonda",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Miohonda.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Firework",Music="Firework.mp3",DanceName="Firework",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Firework.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="C14",Music="C14.mp3",DanceName="C14",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/C14.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Slickback",Music="Slickback.mp3",DanceName="Slickback",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Slickback.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Doodle",Music="Doodle.mp3",DanceName="Doodle",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doodle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Goated Dance",Music="Goat.mp3",DanceName="Goat",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Goat.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Bumblebee",Music="Bumblebee.mp3",DanceName="Bumblebee",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bumblebee.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Stock Shuffle",Music="Stock.mp3",DanceName="Stock",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Stock%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rat 2",Music="rat.mp3",DanceName="Rat2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Shuba Duck",Music="Shuba Duck.mp3",DanceName="Shuba",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shuba%20Duck.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Lemon Melon",Music="Lemon.mp3",DanceName="None",Url="None",Id=138510336377177,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Birdbrain",Music="Birdbrain2.mp3",DanceName="Birdbrain",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Birdbrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Fein",Music="Fein.mp3",DanceName="Fein",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Fein.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Popipo",Music="Popipo.mp3",DanceName="Popipo",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Popipo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Pickup",Music="Pickup.mp3",DanceName="Pickup",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pickup.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Silly Billy 1",Music="Billy.mp3",DanceName="Billy",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Sinful",Music="rotten.mp3",DanceName="None",Url="None",Id=89457637802764,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Spooky",Music="Spooky.mp3",DanceName="Spooky",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spooky.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="JK",Music="JK.mp3",DanceName="Limited",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Limited.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
+{Name="KJ",Music="Flexworks.mp3",DanceName="Flexworks",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flexworks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
+{Name="CrissCross",Music="CrissCross.mp3",DanceName="None",Url="None",Id=109275255555630,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Too Much Brain",Music="brain.mp3",DanceName="None",Url="None",Id=93547721311170,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Espresso",Music="espresso.mp3",DanceName="None",Url="None",Id=87342159331194,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rakuten",Music="rakuten.mp3",DanceName="None",Url="None",Id=121967347012647,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Torture",Music="tort.mp3",DanceName="None",Url="None",Id=99811468921857,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Unlockit",Music="Unlockit.mp3",DanceName="Unlockit",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Unlockit.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Smooth Moves",Music="SmoothMoves.mp3",DanceName="SmoothMoves",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/SmoothMoves.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Lagtrain",Music="Lagtrain.mp3",DanceName="Lagtrain",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Lagtrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Suki",Music="Suki.mp3",DanceName="Suki",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Suki.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Cafeteria",Music="Cafeteria.mp3",DanceName="Cafeteria",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cafeteria.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Dare",Music="Dare.mp3",DanceName="Dare",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Dare.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Tenna 1",Music="Tenna.mp3",DanceName="Tenna",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Insanity",Music="Insanity.mp3",DanceName="Insanity",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Insanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Tenna 2",Music="Tenna.mp3",DanceName="Tenna2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rambunctious",Music="Rambunctious.mp3",DanceName="Rambunctious",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rambunctious.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Side Shuffle",Music="Side Shuffle.mp3",DanceName="Sideshuffle",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Side%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Electro Swing",Music="Electro Swing.mp3",DanceName="Electro",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Electro%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="MioHonda Step",Music="MioHonda.mp3",DanceName="Step",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Step.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Apple Pen",Music="Apple Pen.mp3",DanceName="Applepen",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Apple%20Pen.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Crank That",Music="Crank.mp3",DanceName="Crankthat",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Crank%20That.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Take Down",Music="TakeDown.mp3",DanceName="TakeDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takedown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Going Down",Music="Down.mp3",DanceName="Down",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Going%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Spamton",Music="Spamton.mp3",DanceName="Spamton",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spamton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Kemusan",Music="Kemusan.mp3",DanceName="Kemusan",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Kemusan.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Im Ok",Music="ImOk.mp3",DanceName="ImOk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/ImOk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Medicine Teto (Igaku)",Music="Igaku2.mp3",DanceName="Igaku",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Igaku.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Headlock 2",Music="Headlock.mp3",DanceName="Headlock3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Guli",Music="Guli.mp3",DanceName="Guli",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Guli.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Results",Music="Results.mp3",DanceName="Results",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Results.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Static 2",Music="Static.mp3",DanceName="Static2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Silly Billy 2",Music="Billy.mp3",DanceName="Billy2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Yell 2",Music="Yell.mp3",DanceName="Yell",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Yell 3",Music="Yell1.mp3",DanceName="Yell1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Yell 1",Music="Yell2.mp3",DanceName="Yell2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Out of Touch",Music="Touch.mp3",DanceName="Touch",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Touch.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari (Lonely)",Music="Lonely.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rat 3",Music="rat.mp3",DanceName="None",Url="None",Id=117971041844492,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Uh",Music="whateverlike.mp3",DanceName="None",Url="None",Id=99152023738830,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="CyberBop",Music="CyberBop.mp3",DanceName="CyberBop",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CyberBop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Invincible",Music="Invincible.mp3",DanceName="Invincible",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Invincible.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Jumpstyle",Music="Jumpstyle.mp3",DanceName="Jumpstyle3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumsptyle3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="BreakDance",Music="BreakDance.mp3",DanceName="BreakDance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="BreakDance 2005",Music="BreakDance2005.mp3",DanceName="BreakDance2005",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance2005.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Requiem",Music="faster.ogg",DanceName="Requiem",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Requiem.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Metro Man",Music="Metro.mp3",DanceName="Metro",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Metro.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="CrackDown",Music="CrackDown.mp3",DanceName="CrackDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CrackDown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Wait",Music="Wait2.mp3",DanceName="Wait",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Wait.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Smug Dance",Music="Smug.mp3",DanceName="Smug",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Smug.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Takino",Music="Takino.mp3",DanceName="Takino",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Jumpstyle 1",Music="Jumpstyle.mp3",DanceName="Jumpstyle4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumpstyle4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Livesey Walk",Music="Livesey.mp3",DanceName="Livesey",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Livesey.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Mesmerizer 1",Music="Mesmerizer.mp3",DanceName="Mesmerizer1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Pokedance",Music="Pokedance.mp3",DanceName="Pokedance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pokedance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Keep Up 1",Music="KeepUp.mp3",DanceName="KeepUp1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Get Down",Music="GetDown.mp3",DanceName="GetDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Get%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Spoken For",Music="SpokenFor.mp3",DanceName="SpokenFor",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spoken%20For.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Everybody Gangnam",Music="EVG.mp3",DanceName="EverybodyGangnam",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/EverybodyGangnam.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Low Cortisol",Music="cortisol.mp3",DanceName="cortisol",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/cortisol.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Domino 2",Music="Domino.mp3",DanceName="Domino2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Domino2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Looping The Rooms",Music="Looping.mp3",DanceName="Looping",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Cry For Me",Music="Cry For Me.mp3",DanceName="Cry For Me",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cry%20For%20Me.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="With Friends",Music="Withfriends.mp3",DanceName="With Friends",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/With%20Friends.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+
+{Name="Funny",Music="Funny.mp3",DanceName="Funny",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Funny.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="CivillianYell",Music="CivillianYell.mp3",DanceName="CivillianYell",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CivillianYell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Looping The Rooms 2",Music="Looping 2.mp3",DanceName="Looping 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari 3 (Lonely)",Music="Lonely.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Hakari 3",Music="TUCA DONKA.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Skeleton",Music="Sellywarcry.mp3",DanceName="Skeleton",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Skeleton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Someone Ships",Music="Idk.mp3",DanceName="Idk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Idk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Golden Dandelion",Music="TsSoGolden.mp3",DanceName="TsSoGolden",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/TsSoGolden.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Retry Now",Music="RetryNow.mp3",DanceName="Retry Now",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Retry%20Now.lua",Id="None",Offset=0,WalkSpeed=14,Looped=false,UseSoundPos=true,Alpha=.1},
+
+
+{Name="Low Cortisol 2",Music="cortisol.mp3",DanceName="cortisol2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/cortisol2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Metro Man 2",Music="Metro.mp3",DanceName="Metroman2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Metroman2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Medicine Teto (Igaku) 2",Music="Igaku2.mp3",DanceName="Igaku2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Igaku2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari 4",Music="TUCA DONKA.mp3",DanceName="Hakari 4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari%204.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Looping The Rooms 3",Music="Looping.mp3",DanceName="Looping 3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Microwave",Music="Microwave.mp3",DanceName="Microwave",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Microwave.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Lil Buddy Was Sick",Music="Lilbuddy.mp3",DanceName="LilBuddy",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LilBuddy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Low Quality",Music="LowQuality.mp3",DanceName="LowQuality",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LowQuality.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Looping The Rooms 4",Music="Looping 2.mp3",DanceName="Looping4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Funny 2",Music="Funny2.mp3",DanceName="Funny2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Funny2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+{Name="California Girls",Music="California.mp3",DanceName="California Girls",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/California%20Girls.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+{Name="Doomer",Music="Doomer.mp3",DanceName="Doomer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doomer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+{Name="Chegou 3",Music="Chegou 3.mp3",DanceName="Chegou 3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chegou%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Hikari",Music="Hikari.mp3",DanceName="Hikari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hikari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+--{Name="KJ 2",Music="Flexworks.mp3",DanceName="KJ 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/KJ%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+--{Name="Jun",Music="NMG.mp3",DanceName="Jun",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/JUN.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+{Name="Minos Prime",Music="Prime.mp3",DanceName="Minos Prime",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Minos%20Prime.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Default Dance",Music="Fortnite.mp3",DanceName="Default Dance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Default%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Omni Man",Music="omni.mp3",DanceName="omni",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/omni.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.015},
+{Name="Unlockit SEWH",Music="Unlockit2.mp3",DanceName="Unlockit2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Unlockit2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Birdbrain Laggy",Music="BirdbrainAlt.mp3",DanceName="Birdbrainv2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Birdbrainv2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Doomer Alt",Music="Doomer.mp3",DanceName="DoomerAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/DoomerAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+
+{Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
+{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Niche Baby",Music="ai niche baby.mp3",DanceName="ai niche baby",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/ai%20niche%20baby.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Konton Boogie",Music="konton boogie.mp3",DanceName="konton boogie",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/konton%20boogie.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Go mufasa",Music="go mufasa.mp3",DanceName="go mufasa",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/go%20mufasa.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Butcher Vanity",Music="butcher vanity.mp3",DanceName="butcher vanity",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/butcher%20vanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hit the jackpot",Music="Hit the jackpot.mp3",DanceName="Hit the jackpot",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hit%20the%20jackpot.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Rodeo",Music="Rodeo.mp3",DanceName="Rodeo",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rodeo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Epical",Music="Epical.mp3",DanceName="Epical",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Epical.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Doom Mc Bringer",Music="Doom Mc Bringer.mp3",DanceName="Doom Mc Bringer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doom%20Mc%20Bringer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hai Yorokonde",Music="Hai Yorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Rickroll",Music="Rickroll.mp3",DanceName="Rickroll",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rickroll.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Montagem Xonada",Music="Xonada.mp3",DanceName="Xonada",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Xonada.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Encore",Music="Encore.mp3",DanceName="Encore",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Encore.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Chegou 3 Remake",Music="Chegou 3.mp3",DanceName="Chegou 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chegou%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Akage",Music="Akage.mp3",DanceName="Akage",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Akage.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Japanese Meme",Music="Japan.mp3",DanceName="Japanese Meme",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Japanese%20Meme.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Number",Music="Number.mp3",DanceName="Number",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Number.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Macarena",Music="Macarena.mp3",DanceName="macarena",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/macarena.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Bang Bang Bang",Music="banging.mp3",DanceName="bang",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/bang.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Lagtrain Alt",Music="Lagtrain.mp3",DanceName="LagtrainAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LagtrainAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Tetoris",Music="Tetoris.mp3",DanceName="Tetoris",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tetoris.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="PP music",Music="Pp music.mp3",DanceName="PPmusic",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/PPmusic.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Toothless",Music="Toothless.mp3",DanceName="Toothless",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Toothless.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Name This",Music="Name This.mp3",DanceName="Name This Dance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Name%20This%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Rat 4",Music="Rat.mp3",DanceName="Rat4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Encore 1",Music="Encore.mp3",DanceName="Encore 1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Encore%201.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
+{Name="Shucks Mid Scene",Music="Angry Shucks.mp3",DanceName="Shucks Mid Scene",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shucks%20Mid%20Scene.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=10},
+
+}
+
+local ControlsList={
+{Page=1,Key='Q',Dance='Rat 1'},
+{Page=1,Key='E',Dance='Boogie'},
+{Page=1,Key='R',Dance='Assumptions'},
+{Page=1,Key='T',Dance='Egypt'},
+{Page=1,Key='Y',Dance='Flop'},
+{Page=1,Key='U',Dance='Caramell'},
+{Page=1,Key='F',Dance='Heel Toe Hop'},
+{Page=1,Key='G',Dance='Gangnam'},
+{Page=1,Key='P',Dance='Bomb Monkey'},
+{Page=1,Key='J',Dance='Starlit'},
+{Page=1,Key='K',Dance='DR'},
+{Page=1,Key='L',Dance='Griddy'},
+{Page=1,Key='Z',Dance='Luxurious'},
+{Page=1,Key='X',Dance='Kazot'},
+{Page=1,Key='H',Dance='Domino'},
+{Page=1,Key='V',Dance='Liar'},
+{Page=1,Key='C',Dance='Mesmerizer'},
+{Page=1,Key='N',Dance='Box Swing'},
+{Page=1,Key=',',Dance='Static'},
+{Page=1,Key='[',Dance='Prism'},
+{Page=1,Key=']',Dance='Headlock'},
+{Page=1,Key='B',Dance='Hakari'},
+{Page=1,Key='-',Dance='Commercial'},
+{Page=2,Key='Q',Dance='XO'},
+{Page=2,Key='E',Dance='Soda'},
+{Page=2,Key='R',Dance='L4U'},
+{Page=2,Key='T',Dance='Assumptions'},
+{Page=2,Key='Y',Dance='Peashooter'},
+{Page=2,Key='H',Dance='Distraction'},
+{Page=2,Key='G',Dance='ItBurns'},
+{Page=2,Key='F',Dance='Chronoshift'},
+{Page=2,Key='J',Dance='Keep Up'},
+{Page=2,Key='K',Dance='Boombox'},
+{Page=2,Key='U',Dance='Bloodpop'},
+{Page=2,Key='N',Dance='Sit'},
+{Page=2,Key='Z',Dance='Two'},
+{Page=2,Key='X',Dance='Heavylove'},
+{Page=2,Key='C',Dance='Million'},
+{Page=2,Key='V',Dance='BJ'},
+{Page=2,Key='B',Dance='Savor'},
+{Page=2,Key='P',Dance='Yamero'},
+{Page=2,Key=',',Dance='Angel'},
+{Page=2,Key='-',Dance='Club'},
+{Page=2,Key='[',Dance='Runaway'},
+{Page=2,Key=']',Dance='MioHonda'},
+{Page=2,Key='L',Dance='Firework'},
+{Page=3,Key='Q',Dance='C14'},
+{Page=3,Key='E',Dance='Slickback'},
+{Page=3,Key='R',Dance='Doodle'},
+{Page=3,Key='T',Dance='Goat'},
+{Page=3,Key='Y',Dance='Bumblebee'},
+{Page=3,Key='U',Dance='Stock'},
+{Page=3,Key='P',Dance='Rat 2'},
+{Page=3,Key='F',Dance='Shuba Duck'},
+{Page=3,Key='G',Dance='Lemon'},
+{Page=3,Key='H',Dance='Birdbrain'},
+{Page=3,Key='J',Dance='Fein'},
+{Page=3,Key='K',Dance='Popipo'},
+{Page=3,Key='L',Dance='Pickup'},
+{Page=3,Key='Z',Dance='Yourself'},
+{Page=3,Key='X',Dance='Sinful'},
+{Page=3,Key='C',Dance='Spooky'},
+{Page=3,Key='V',Dance='JK'},
+{Page=3,Key='B',Dance='KJ'},
+{Page=3,Key='N',Dance='CrissCross'},
+{Page=3,Key=',',Dance='Brain'},
+{Page=3,Key='[',Dance='Espresso'},
+{Page=3,Key=']',Dance='Rakuten'},
+{Page=3,Key='-',Dance='Torture'},
+{Page=4,Key='Q',Dance='Unlockit'},
+{Page=4,Key='E',Dance='Smooth Moves'},
+{Page=4,Key='R',Dance='Lagtrain'},
+{Page=4,Key='T',Dance='Suki'},
+{Page=4,Key='Y',Dance='Cafeteria'},
+{Page=4,Key='U',Dance='Dare'},
+{Page=4,Key='P',Dance='Tenna 1'},
+{Page=4,Key='F',Dance='Insanity'},
+{Page=4,Key='G',Dance='Tenna 2'},
+{Page=4,Key='H',Dance='Rambunctious'},
+{Page=4,Key='J',Dance='Side Shuffle'},
+{Page=4,Key='K',Dance='Electo'},
+{Page=4,Key='L',Dance='Step'},
+{Page=4,Key='Z',Dance='Apple Pen'},
+{Page=4,Key='X',Dance='Crank That'},
+{Page=4,Key='C',Dance='TakeDown'},
+{Page=4,Key='V',Dance='Going Down'},
+{Page=4,Key='B',Dance='Spamton'},
+{Page=4,Key='N',Dance='Kemusan'},
+{Page=4,Key=',',Dance='Im Ok'},
+{Page=4,Key='-',Dance='Igaku'},
+{Page=4,Key='[',Dance='Headlock 2'},
+{Page=4,Key=']',Dance='Guli Guli'},
+{Page=5,Key='Q',Dance='Results'},
+{Page=5,Key='E',Dance='Static 2'},
+{Page=5,Key='R',Dance='Billy 2'},
+{Page=5,Key='T',Dance='Yell 2'},
+{Page=5,Key='Y',Dance='Yell 3'},
+{Page=5,Key='U',Dance='Yell 1'},
+{Page=5,Key='P',Dance='Touch'},
+{Page=5,Key='F',Dance='Lonely'},
+{Page=5,Key='G',Dance='Rat 3'},
+{Page=5,Key='H',Dance='Uh'},
+{Page=5,Key='J',Dance='CyberBop'},
+{Page=5,Key='K',Dance='Invincible'},
+{Page=5,Key='L',Dance='Jumpstyle'},
+{Page=5,Key='Z',Dance='BreakDance'},
+{Page=5,Key='X',Dance='BreakDance 2005'},
+{Page=5,Key='C',Dance='Requiem'},
+{Page=5,Key='V',Dance='Metro Man'},
+{Page=5,Key='B',Dance='Crack Down'},
+{Page=5,Key='N',Dance='Smug Dance'},
+{Page=5,Key=']',Dance='Wait'},
+{Page=5,Key='[',Dance='Jumpstyle 1'},
+{Page=5,Key='-',Dance='Keep Up 1'},
+{Page=5,Key=',',Dance='Livesey'},
+{Page=6,Key='Q',Dance='Mesmerizer 1'},
+{Page=6,Key='E',Dance='Pokedance'},
+{Page=6,Key='R',Dance='Takino'},
+{Page=6,Key='T',Dance='Spoken For'},
+{Page=6,Key='Y',Dance='Get Down'},
+{Page=6,Key='U',Dance='GEverybody Gangnam'},
+{Page=6,Key='P',Dance='low cortisol'},
+{Page=6,Key='F',Dance='retry niw'},
+{Page=6,Key='G',Dance='Cry For Me'},
+{Page=6,Key='H',Dance='looping the rooms 3'},
+}
+
+
+local ImportedKeyOrder={
+{Name="q",Display="Q"},{Name="e",Display="E"},{Name="r",Display="R"},{Name="t",Display="T"},
+{Name="y",Display="Y"},{Name="u",Display="U"},{Name="p",Display="P"},{Name="f",Display="F"},
+{Name="g",Display="G"},{Name="h",Display="H"},{Name="j",Display="J"},{Name="k",Display="K"},
+{Name="l",Display="L"},{Name="z",Display="Z"},{Name="x",Display="X"},{Name="c",Display="C"},
+{Name="v",Display="V"},{Name="b",Display="B"},{Name="n",Display="N"},{Name="minus",Display="-"},
+{Name="comma",Display=","},{Name="leftbracket",Display="["},{Name="rightbracket",Display="]"}
+}
+
+local ImportedBindings={}
+local ImportedStartPage=7
+for index,danceData in ipairs(ImportedTableOfDances) do
+local keyData=ImportedKeyOrder[((index-1)%#ImportedKeyOrder)+1]
+local dancePage=ImportedStartPage+math.floor((index-1)/#ImportedKeyOrder)
+ImportedBindings[dancePage]=ImportedBindings[dancePage] or {}
+ImportedBindings[dancePage][keyData.Name]=danceData
+table.insert(ControlsList,{Page=dancePage,Key=keyData.Display,Dance=danceData.Name})
+if danceData.Music and danceData.Music~="None" and not table.find(validAudioFiles,danceData.Music) then
+table.insert(validAudioFiles,danceData.Music)
+end
+end
+local MAX_DANCE_PAGE=ImportedStartPage+math.max(0,math.ceil(#ImportedTableOfDances/#ImportedKeyOrder)-1)
+
+local function PlayImportedDance(danceData,keyName)
+if not danceData then return false end
+if dancing then
+char.Humanoid.WalkSpeed=14*char:GetScale()
+stopanim()
+return true
+end
+stopanim()
+dancing=true
+Playsound.Volume=0
+task.wait(.005)
+char.Humanoid.WalkSpeed=(tonumber(danceData.WalkSpeed) or 14)*char:GetScale()
+sound69.PlaybackSpeed=1
+sound69.TimePosition=tonumber(danceData.Offset) or 0
+if danceData.Music and danceData.Music~="None" then
+sound69.SoundId=DanceAsset(danceData.Music)
+end
+Info(danceData.Name,keyName)
+local animation
+if danceData.Url and danceData.Url~="None" and danceData.DanceName and danceData.DanceName~="None" then
+animation=LoadDance(danceData.DanceName,danceData.Url)
+elseif danceData.Id and danceData.Id~="None" then
+animation=tonumber(danceData.Id) or danceData.Id
+end
+if sound69.SoundId and sound69.SoundId~="" then
+sound69:Play()
+end
+if animation then
+playanim(animation)
+else
+notify("Animation unavailable: "..tostring(danceData.Name))
+stopanim()
+end
+return true
+end
+
+local ControlsToggle=Instance.new("TextButton")
+ControlsToggle.Name="Controls"
+ControlsToggle.Parent=ScreenGui
+ControlsToggle.Size=UDim2.new(0,120,0,38)
+ControlsToggle.Position=UDim2.new(0,55,0.5,6)
+ControlsToggle.BackgroundColor3=Color3.fromRGB(64,64,64)
+ControlsToggle.BorderSizePixel=0
+ControlsToggle.Font=Enum.Font.Arcade
+ControlsToggle.Text="CONTROLS"
+ControlsToggle.TextColor3=Color3.new(1,1,1)
+ControlsToggle.TextScaled=true
+Instance.new("UICorner",ControlsToggle).CornerRadius=UDim.new(0,7)
+
+local ControlsPanel=Instance.new("Frame")
+ControlsPanel.Name="ControlsPanel"
+ControlsPanel.Parent=ScreenGui
+ControlsPanel.Size=UDim2.new(0,370,0,470)
+ControlsPanel.Position=UDim2.new(0,185,0.5,-235)
+ControlsPanel.BackgroundColor3=Color3.fromRGB(25,25,25)
+ControlsPanel.BorderSizePixel=0
+ControlsPanel.Visible=false
+ControlsPanel.Active=true
+ControlsPanel.Draggable=true
+Instance.new("UICorner",ControlsPanel).CornerRadius=UDim.new(0,9)
+local ControlsStroke=Instance.new("UIStroke",ControlsPanel)
+ControlsStroke.Thickness=2
+ControlsStroke.Transparency=.45
+
+local ControlsTitle=Instance.new("TextLabel")
+ControlsTitle.Parent=ControlsPanel
+ControlsTitle.Size=UDim2.new(1,-50,0,40)
+ControlsTitle.Position=UDim2.new(0,12,0,2)
+ControlsTitle.BackgroundTransparency=1
+ControlsTitle.Font=Enum.Font.Arcade
+ControlsTitle.Text="DANCE CONTROLS"
+ControlsTitle.TextColor3=Color3.new(1,1,1)
+ControlsTitle.TextScaled=true
+
+local ControlsClose=Instance.new("TextButton")
+ControlsClose.Parent=ControlsPanel
+ControlsClose.Size=UDim2.new(0,36,0,36)
+ControlsClose.Position=UDim2.new(1,-40,0,4)
+ControlsClose.BackgroundColor3=Color3.fromRGB(55,55,55)
+ControlsClose.BorderSizePixel=0
+ControlsClose.Font=Enum.Font.Arcade
+ControlsClose.Text="X"
+ControlsClose.TextColor3=Color3.new(1,1,1)
+ControlsClose.TextScaled=true
+Instance.new("UICorner",ControlsClose).CornerRadius=UDim.new(0,6)
+
+local ControlsSearch=Instance.new("TextBox")
+ControlsSearch.Parent=ControlsPanel
+ControlsSearch.Size=UDim2.new(1,-24,0,34)
+ControlsSearch.Position=UDim2.new(0,12,0,46)
+ControlsSearch.BackgroundColor3=Color3.fromRGB(45,45,45)
+ControlsSearch.BorderSizePixel=0
+ControlsSearch.ClearTextOnFocus=false
+ControlsSearch.Font=Enum.Font.Arcade
+ControlsSearch.PlaceholderText="Search dance, page, or key"
+ControlsSearch.Text=""
+ControlsSearch.TextColor3=Color3.new(1,1,1)
+ControlsSearch.PlaceholderColor3=Color3.fromRGB(170,170,170)
+ControlsSearch.TextSize=12
+Instance.new("UICorner",ControlsSearch).CornerRadius=UDim.new(0,6)
+
+local Predownload=Instance.new("TextButton")
+Predownload.Parent=ControlsPanel
+Predownload.Size=UDim2.new(1,-24,0,36)
+Predownload.Position=UDim2.new(0,12,0,86)
+Predownload.BackgroundColor3=Color3.fromRGB(55,55,55)
+Predownload.BorderSizePixel=0
+Predownload.Font=Enum.Font.Arcade
+Predownload.Text="PREDOWNLOAD ALL"
+Predownload.TextColor3=Color3.new(1,1,1)
+Predownload.TextScaled=true
+Instance.new("UICorner",Predownload).CornerRadius=UDim.new(0,6)
+
+local ControlsListFrame=Instance.new("ScrollingFrame")
+ControlsListFrame.Parent=ControlsPanel
+ControlsListFrame.Size=UDim2.new(1,-24,1,-134)
+ControlsListFrame.Position=UDim2.new(0,12,0,128)
+ControlsListFrame.BackgroundTransparency=1
+ControlsListFrame.BorderSizePixel=0
+ControlsListFrame.ScrollBarThickness=6
+ControlsListFrame.AutomaticCanvasSize=Enum.AutomaticSize.Y
+ControlsListFrame.CanvasSize=UDim2.new()
+local ControlsLayout=Instance.new("UIListLayout",ControlsListFrame)
+ControlsLayout.Padding=UDim.new(0,4)
+ControlsLayout.SortOrder=Enum.SortOrder.LayoutOrder
+
+local ControlRows={}
+for index,entry in ipairs(ControlsList) do
+local row=Instance.new("TextLabel")
+row.Parent=ControlsListFrame
+row.Size=UDim2.new(1,-4,0,30)
+row.BackgroundColor3=Color3.fromRGB(50,50,50)
+row.BorderSizePixel=0
+row.Font=Enum.Font.Arcade
+row.Text="PAGE "..entry.Page.."  |  "..entry.Key.."  |  "..entry.Dance
+row.TextColor3=Color3.new(1,1,1)
+row.TextSize=11
+row.TextXAlignment=Enum.TextXAlignment.Left
+row.TextWrapped=true
+row.LayoutOrder=index
+Instance.new("UICorner",row).CornerRadius=UDim.new(0,5)
+local padding=Instance.new("UIPadding",row)
+padding.PaddingLeft=UDim.new(0,8)
+ControlRows[#ControlRows+1]={Label=row,Entry=entry}
+end
+
+local function FilterControls()
+local query=string.lower(ControlsSearch.Text)
+for _,item in ipairs(ControlRows) do
+local haystack=string.lower(item.Entry.Dance.." page "..item.Entry.Page.." "..item.Entry.Key)
+item.Label.Visible=query=="" or string.find(haystack,query,1,true)~=nil
+end
+end
+ControlsSearch:GetPropertyChangedSignal("Text"):Connect(FilterControls)
+ControlsToggle.MouseButton1Click:Connect(function() ControlsPanel.Visible=not ControlsPanel.Visible end)
+ControlsClose.MouseButton1Click:Connect(function() ControlsPanel.Visible=false end)
+
+local Predownloading=false
+Predownload.MouseButton1Click:Connect(function()
+if Predownloading then return end
+Predownloading=true
+task.spawn(function()
+local uniqueAudio={}
+local uniqueDance={}
+local jobs=0
+for _,entry in ipairs(ImportedTableOfDances) do
+if entry.Music and entry.Music~="None" and not uniqueAudio[entry.Music] then uniqueAudio[entry.Music]=true jobs+=1 end
+if entry.Url and entry.Url~="None" and entry.DanceName and entry.DanceName~="None" and not uniqueDance[entry.DanceName] then uniqueDance[entry.DanceName]=entry.Url jobs+=1 end
+end
+local done=0
+local failed=0
+local function status() Predownload.Text="DOWNLOADING "..done.."/"..jobs end
+status()
+for file in pairs(uniqueAudio) do
+local filePath="KDV3/"..file
+local valid=false
+if isfile(filePath) then pcall(function() valid=#readfile(filePath)>1 end) end
+if not valid then
+local data=DownloadAudioData(file)
+if data then
+local wrote=pcall(function() writefile(filePath,data) end)
+if not wrote then failed+=1 end
+else failed+=1 end
+end
+done+=1 status() task.wait()
+end
+for danceName,url in pairs(uniqueDance) do
+local ok,result=pcall(function() return LoadDance(danceName,url) end)
+if not ok or not result then failed+=1 end
+done+=1 status() task.wait()
+end
+Predownload.Text=failed==0 and "DOWNLOAD COMPLETE" or "DONE - "..failed.." FAILED"
+notify("Predownload finished: "..done.." files, "..failed.." failed")
+task.wait(4)
+Predownload.Text="PREDOWNLOAD ALL"
+Predownloading=false
+end)
+end)
+
 local ran=math.random(1,8)
 if ran==1 then 
 Playsound.SoundId = DanceAsset("Sphere.mp3")
@@ -1440,8 +2090,20 @@ INPUTLOOP = uis.InputBegan:Connect(function(k,chatting)
 if char.Humanoid.Sit == true then return end
 if chatting then return end 
 local k = string.lower(string.gsub(tostring(k.KeyCode),"Enum.KeyCode.",""))
+if mode>=ImportedStartPage and k~="m" and k~="equals" and k~="leftcontrol" then
+local pageBindings=ImportedBindings[mode]
+local danceData=pageBindings and pageBindings[k]
+if danceData then
+local displayKey=k
+for _,keyData in ipairs(ImportedKeyOrder) do
+if keyData.Name==k then displayKey=keyData.Display break end
+end
+PlayImportedDance(danceData,displayKey)
+return
+end
+end
 if mode == 1 then 
-if k == "one" then 
+if k == "q" then 
 if dancing == false then 
 stopanim()
 dancing = true
@@ -1602,7 +2264,7 @@ writefile("KDV3/Takino.mp3",game:HttpGet("https://github.com/Solary-3/Scripts/bl
 end 
 sound69.SoundId = getcustomasset("KDV3/Monkey.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("BombMonkey", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bomb Monkey.lua")
+local dance=LoadDance("BombMonkey", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bomb%20Monkey.lua")
 Info("Bomb Monkey","P")
 sound69:Play()
 if dance then
@@ -1755,7 +2417,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Box.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("BoxSwing", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Box Swing.lua")
+local dance=LoadDance("BoxSwing", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Box%20Swing.lua")
 sound69:Play()
 Info("Box Swing","N")
 if dance then
@@ -1792,7 +2454,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Prism.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Prism", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Prism Shuffle.lua")
+local dance=LoadDance("Prism", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Prism%20Shuffle.lua")
 sound69:Play()
 Info("Prism","[")
 if dance then
@@ -1882,7 +2544,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Soda.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Soda", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Soda Pop.lua")
+local dance=LoadDance("Soda", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Soda%20Pop.lua")
 sound69:Play()
 Info("Soda","E")
 if dance then
@@ -1966,7 +2628,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("ItBurns.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/It Burns.lua")
+local dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/It%20Burns.lua")
 sound69:Play()
 Info("ItBurns","G")
 if dance then
@@ -2003,7 +2665,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Keep Up", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep Up.lua")
+local dance=LoadDance("Keep Up", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up.lua")
 sound69:Play()
 Info("Keep Up","J")
 coolparticles.Parent = char.Torso
@@ -2182,7 +2844,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CLUB PENGUIN DANCE.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Club Penguin.lua")
+local dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Club%20Penguin.lua")
 sound69:Play()
 Info("Club","-")
 if dance then
@@ -2338,7 +3000,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Stock.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Stock", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Stock Shuffle.lua")
+local dance=LoadDance("Stock", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Stock%20Shuffle.lua")
 sound69:Play()
 Info("Stock","U")
 if dance then
@@ -2378,7 +3040,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Shuba Duck.mp3")
 timeposcur = sound69.TimePosition 
 local dance=LoadDance("Shuba",
-"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shuba Duck.lua")
+"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shuba%20Duck.lua")
 sound69:Play()
 Info("Shuba Duck","F")
  if dance then
@@ -2772,7 +3434,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Tenna.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna 2.lua")
+local dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna%202.lua")
 sound69:Play()
 Info("Tenna 2","G")
 if dance then
@@ -2806,7 +3468,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Side Shuffle.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Side Shuffle.lua")
+local dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Side%20Shuffle.lua")
 sound69:Play()
 Info("Side Shuffle","J")
 if dance then
@@ -2823,7 +3485,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Electro Swing.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Electro", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Electro Swing.lua")
+local dance=LoadDance("Electro", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Electro%20Swing.lua")
 sound69:Play()
 Info("Electo","K")
 if dance then
@@ -2858,7 +3520,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Apple Pen.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Applepen", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Apple Pen.lua")
+local dance=LoadDance("Applepen", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Apple%20Pen.lua")
 sound69:Play()
 Info("Apple Pen","Z")
 if dance then 
@@ -2875,7 +3537,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Crank.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Crank That.lua")
+local dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Crank%20That.lua")
 sound69:Play()
 Info("Crank That","X")
 if dance then
@@ -2909,7 +3571,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Down.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Down", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Going Down.lua")
+local dance=LoadDance("Down", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Going%20Down.lua")
 sound69:Play()
 Info("Going Down","V")
 if dance then
@@ -3400,7 +4062,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-local dance=LoadDance("Keep Up1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep Up1.lua")
+local dance=LoadDance("Keep Up1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up1.lua")
 sound69:Play()
 Info("Keep Up 1","-")
 if dance then
@@ -3494,7 +4156,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("SpokenFor.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("SpokenFor", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spoken For.lua")
+local dance=LoadDance("SpokenFor", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spoken%20For.lua")
 sound69:Play()
 Info("Spoken For","T")
 if dance then
@@ -3511,7 +4173,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("GetDown.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("GetDown", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Get Down.lua")
+local dance=LoadDance("GetDown", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Get%20Down.lua")
 sound69:Play()
 Info("Get Down","Y")
 if dance then
@@ -3581,7 +4243,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Cry For Me.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Cry For Me", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cry For Me.lua")
+local dance=LoadDance("Cry For Me", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cry%20For%20Me.lua")
 sound69:Play()
 Info("Cry For Me","G")
 if dance then
@@ -3599,7 +4261,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Looping.mp3")
 timeposcur = sound69.TimePosition 
-local dance=LoadDance("Looping 3", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping 3.lua")
+local dance=LoadDance("Looping 3", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%203.lua")
 sound69:Play()
 Info("looping the rooms 3","h")
 if dance then
@@ -3624,56 +4286,16 @@ if k == "leftcontrol" then
 sprinting = not sprinting
 end
 if k == "m" then
-if mode== 5 then
-mode=6
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 6"
-})
-Page.Text="6"
-elseif mode == 4 then 
-mode = 5 
-Page.Text="5"
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 5"
-})
-elseif mode == 3 then 
-mode = 4
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 4"
-})
-Page.Text="4"
-elseif mode == 2 then
-mode = 3 
-
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 3"
-})
-Page.Text="3"
-elseif mode == 1 then
-mode = 2 
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 2"
-})
-Page.Text="2"
-elseif mode == 6 then 
-mode = 1
-game:GetService("StarterGui"):SetCore("SendNotification", {
-Title = "Krystal Dance V3";
-Duration = 5;
-Text = "Page 1"
-})
-Page.Text="1"
+mode=mode+1
+if mode>MAX_DANCE_PAGE then
+mode=1
 end
+Page.Text=tostring(mode)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+Title="Krystal Dance V3";
+Duration=5;
+Text="Page "..tostring(mode)
+})
 end
 end)
 

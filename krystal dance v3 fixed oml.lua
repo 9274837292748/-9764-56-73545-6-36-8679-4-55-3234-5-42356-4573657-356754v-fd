@@ -37,8 +37,6 @@ local Stop1 = Instance.new("TextButton",ui)
 local ced = Instance.new("TextLabel")
 local Show =Instance.new("TextButton")
 local corner=Instance.new("UICorner",ui)
---local DANCEINFO=Instance.new("TextButton",ui)
---local Enable =Instance.new("TextButton",ui)
 local corner1=Instance.new("UICorner",Run1)
 corner2=Instance.new("UICorner",Stop1)
 corner3=Instance.new("UICorner",Show)
@@ -97,19 +95,7 @@ REANIMATE.TextColor3 = Color3.new(1,1,1)
 REANIMATE.TextScaled = true
 REANIMATE.TextSize = 10
 REANIMATE.TextWrapped = true
---[[
-DANCEINFO.Name = "F20 FR"
-DANCEINFO.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
-DANCEINFO.BorderSizePixel = 0
-DANCEINFO.Position = UDim2.new(0.5, 0, .350, 0)
-DANCEINFO.Size = UDim2.new(0.5, 0, 0, 45)
-DANCEINFO.Font = "Arcade"
-DANCEINFO.Text = "Click Me!"
-DANCEINFO.TextColor3 = Color3.new(1,1,1)
-DANCEINFO.TextScaled = false
-DANCEINFO.TextSize = 15
-DANCEINFO.TextWrapped = false
-]]
+
 Run1.Name = "Stick"
 Run1.Parent = ui
 Run1.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
@@ -123,21 +109,7 @@ Run1.TextColor3 = Color3.new(1,1,1)
 Run1.TextScaled = true
 Run1.TextSize = 10
 Run1.TextWrapped = true
---[[
-Enable.Name = "Stick"
-Enable.Parent = ui
-Enable.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
-Enable.BackgroundTransparency = 0
-Enable.BorderSizePixel = 0
-Enable.Position = UDim2.new(1, 0, .35, 0)
-Enable.Size = UDim2.new(0.5, 0, 0, 45)
-Enable.Font = Enum.Font.Sarpanch
-Enable.Text = "Enabled"
-Enable.TextColor3 = Color3.new(1,1,1)
-Enable.TextScaled = true
-Enable.TextSize = 10
-Enable.TextWrapped = true
-]]
+
 Stop1.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
 Stop1.Position=UDim2.new(0.50, 0, 0.629999971, 0)
 Stop1.Size = UDim2.new(0.5, 0, 0, 45)
@@ -424,50 +396,92 @@ Enable.Text="Enabled"
 end
 end)]]
 local Place = game.placeId
-local REANIMATION=false
+local REANIMATION = false
+local REANIMATED = false
+local REANIMATED_CHARACTER = nil
+
+local function IsReanimated()
+local character = game:GetService("Players").LocalPlayer.Character
+
+if not REANIMATED then
+return false
+end
+
+if not character or character ~= REANIMATED_CHARACTER or not character.Parent then
+REANIMATED = false
+REANIMATED_CHARACTER = nil
+return false
+end
+
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+if not humanoid or humanoid.Health <= 0 then
+REANIMATED = false
+REANIMATED_CHARACTER = nil
+return false
+end
+
+return true
+end
+
 local function Backup()
---// BY MrY7zz
-REANIMATION=true
-if not game.IsLoaded then
+if REANIMATION then
+return false
+end
+
+if IsReanimated() then
+return true
+end
+
+REANIMATION = true
+
+if not game:IsLoaded() then
 game.Loaded:Wait()
 end
 
---// Check configdoc.md for settings documentation (CHECK THE DESCRIPTION OF THIS POST)
+local ok, err = pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jskfhggjxu/My-Script/refs/heads/main/Cool-Reanimate.lua"))()
+end)
 
---// Below are the settings
--- SETTINGS --
-local settings = _G
+REANIMATION = false
 
-settings["Use default animations"] = true
-settings["Fake character transparency level"] = 1
-settings["Disable character scripts"] = true
-settings["Fake character should collide"] = true
-settings["Parent real character to fake character"] = false
-settings["Respawn character"] = true
-settings["Instant respawn"] = false
-settings["Hide HumanoidRootPart"] = false
-settings["PermaDeath fake character"] = true
-settings["R15 Reanimate"] = false
-settings["Click Fling"] = false
-settings["Hide RootPart Distance"] = CFrame.new(255, 255, 0)
-
-settings["Names to exclude from transparency"] = {
---[=[ example:
-["HumanoidRootPart"] = true,
-["Left Arm"] = true
-]=]
-}
---// Settings end
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xyrevex/stuff/refs/heads/main/currentangle/workaround2"))()
-REANIMATION=false 
+if not ok then
+REANIMATED = false
+REANIMATED_CHARACTER = nil
+warn("[KDV3] Cool-Reanimate failed:", err)
+notify("Reanimate failed - check console")
+return false
 end
+
+task.wait(0.35)
+
+local character = game:GetService("Players").LocalPlayer.Character
+local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+
+if not character or not character.Parent or not humanoid then
+REANIMATED = false
+REANIMATED_CHARACTER = nil
+notify("Reanimate did not create a usable rig")
+return false
+end
+
+REANIMATED = true
+REANIMATED_CHARACTER = character
+return true
+end
+
 REANIMATE.MouseButton1Click:Connect(function()
-if REANIMATION then return notify([[Reanimating]]) end
-Backup()
-repeat task.wait() until ws:FindFirstChild(game.Players.LocalPlayer.Name.."_Fake")
-REANIMATION=false
+if REANIMATION then
+return notify("Reanimating")
+end
+
+if IsReanimated() then
+return notify("Already reanimated")
+end
+
+if Backup() then
 Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
+notify("Reanimated")
+end
 end)
 
 function respawn()
@@ -522,22 +536,82 @@ end
 --THIS SHIT IS CASE SENSITIVE CUH, ONE SINGLE MISTAKE WILL MESS THINGS UP
 -- VVVVVVVV
 local danceCache = {}
-local function GetDanceSource(url)
-local attempts = {url}
+local ASTRA_STORAGE_RAW = "https://raw.githubusercontent.com/AstraOutlight/storage/main/"
+
+local function EncodeDancePath(value)
+return (tostring(value):gsub("([^%w%-_%.~])", function(char)
+return string.format("%%%02X", string.byte(char))
+end))
+end
+
+local function IsUsableDanceSource(source)
+if type(source) ~= "string" or #source == 0 then
+return false
+end
+
+local lowered = string.lower(source:sub(1, 256))
+if lowered:find("404: not found", 1, true)
+or lowered:find("<!doctype", 1, true)
+or lowered:find("<html", 1, true) then
+return false
+end
+
+return true
+end
+
+local function GetDanceSource(danceName, url)
+local attempts = {}
+local seen = {}
+
+local function addAttempt(candidate)
+if candidate and candidate ~= "" and not seen[candidate] then
+seen[candidate] = true
+table.insert(attempts, candidate)
+end
+end
+
+local names = {
+tostring(danceName or ""),
+string.lower(tostring(danceName or ""))
+}
+
+for _,name in ipairs(names) do
+if name ~= "" then
+addAttempt(ASTRA_STORAGE_RAW .. EncodeDancePath(name))
+if not string.lower(name):match("%.lua$") then
+addAttempt(ASTRA_STORAGE_RAW .. EncodeDancePath(name .. ".lua"))
+end
+end
+end
+
+if url and url ~= "" and url ~= "None" then
+addAttempt(url)
+
 local decoded = string.gsub(url, "%%20", " ")
 local encoded = string.gsub(url, " ", "%%20")
-if decoded ~= url then table.insert(attempts, decoded) end
-if encoded ~= url and encoded ~= decoded then table.insert(attempts, encoded) end
-local lastError
+if decoded ~= url then addAttempt(decoded) end
+if encoded ~= url and encoded ~= decoded then addAttempt(encoded) end
+end
+
+local lastError = "dance not found"
+
 for _,attempt in ipairs(attempts) do
 local success,result = pcall(function()
 return game:HttpGet(attempt)
 end)
-if success and type(result) == "string" and #result > 0 then
-return result
+
+if success and IsUsableDanceSource(result) then
+local loader = loadstring(result)
+if loader then
+return result, attempt
 end
-lastError = result
 end
+
+if not success then
+lastError = tostring(result)
+end
+end
+
 error(lastError or "Failed to download dance")
 end
 
@@ -564,7 +638,7 @@ end
 end
 notify("Downloading dance: "..Name)
 local success, danceData, source = pcall(function()
-local downloaded = GetDanceSource(ScriptUrl)
+local downloaded = GetDanceSource(Name, ScriptUrl)
 local loader, loadError = loadstring(downloaded)
 if not loader then error(loadError) end
 return loader(), downloaded
@@ -684,6 +758,10 @@ end
 end
 for _, name in ipairs(names) do
 local encoded = EncodeUrlComponent(name)
+
+addUrl("https://raw.githubusercontent.com/AstraOutlight/storage/main/" .. encoded)
+addUrl("https://github.com/AstraOutlight/storage/raw/refs/heads/main/" .. encoded)
+
 addUrl("https://github.com/Solary-3/Scripts/raw/refs/heads/Audios-1/" .. encoded)
 addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/Audios-1/" .. encoded)
 addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/Audios-1/" .. encoded)
@@ -917,7 +995,7 @@ Run1.MouseButton1Click:Connect(function()
 if REANIMATION then return notify("Reanimating please wait") end
 if RUNNING then return notify("SCRIPT IS RUNNING!!") end
 
-if( ws:FindFirstChild(game.Players.LocalPlayer.Name.."_Fake")) then
+if IsReanimated() then
 Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
 RUNNING = true
 
@@ -1021,7 +1099,6 @@ Text3.LineJoinMode = Enum.LineJoinMode.Miter
 
 
 
--- Krystal Dance V3, Made by Hemi (es muy janky)
 local lol = math.random(1,30)
 if lol == 2 then 
 lol = true 
@@ -1092,9 +1169,9 @@ local idle = false
 local char=game:GetService("Players").LocalPlayer.Character
 local RunService = game:GetService("RunService")
 local hum=char:FindFirstChildOfClass("Humanoid")
-local h=char.Head
-local t=char.Torso
-local hrp=char.HumanoidRootPart 
+local h=char:WaitForChild("Head")
+local t=char:WaitForChild("Torso")
+local hrp=char:WaitForChild("HumanoidRootPart") 
 if char:FindFirstChild("Animate") then
 char.Animate.Enabled = false
 end
@@ -1332,7 +1409,6 @@ if not self.IsPlaying then return end
 
 local pos
 
--- 🔊 HARD SYNC TO MUSIC IF PROVIDED
 pos = (os.clock() - startClock) * (self.Speed or 1) + startOffset
 
 if pos > self.Length then
@@ -1380,15 +1456,27 @@ end
 local animplayer = makeanimlibrary()
 local currentanim = nil
 local iscurrentadance = nil
-local rigTable = animplayer.AutoGetMotor6D(char, "Motor6D")
-local function playanim(id, speed, isadance, custominstance)
+
+local function GetAnimationRig()
+local currentCharacter = game:GetService("Players").LocalPlayer.Character
+if not currentCharacter then
+return nil, nil
+end
+
+local motors = animplayer.AutoGetMotor6D(currentCharacter, "Motor6D")
+return currentCharacter, motors
+end
+
+local char, rigTable = GetAnimationRig()
+
+local function playanim(id, speed, isadance, custominstance, looped)
 local asset
 
 if typeof(id) == "Instance" then
 asset = id
 elseif type(id) == "string" and full:FindFirstChild(id) then
 asset = full:FindFirstChild(id)
-elseif type(id) == "string" and full.DanceLookup and full.DanceLookup:FindFirstChild(id) then
+elseif type(id) == "string" and full:FindFirstChild("DanceLookup") and full.DanceLookup:FindFirstChild(id) then
 asset = full:FindFirstChild(full.DanceLookup[id].Value)
 elseif custominstance then
 asset = custominstance
@@ -1396,44 +1484,58 @@ else
 asset = is:LoadLocalAsset(id)
 end
 
-if isadance then
-if iscurrentadance then
-if currentanim then
-if not iscurrentadance then
-iscurrentadance = true
-local keyframeTable = animplayer.GenerateKeyframe(asset)
-currentanim = animplayer.new(keyframeTable, asset, nil, settings, "Motor6D")
-currentanim.Speed = speed or 1
-
-currentanim.Looped = true
-currentanim:Play(0)
-else
-currentanim:Stop()
+if not asset then
+warn("[KDV3] Animation asset was not found:", tostring(id))
+return
 end
-else
-iscurrentadance = true
-local keyframeTable = animplayer.KeyFrameSequanceToTable(asset)
 
-currentanim = animplayer.new(keyframeTable, asset, nil, nil, "Motor6D")
+local currentCharacter, currentRig = GetAnimationRig()
 
-currentanim.Speed = speed or 1
-currentanim.Looped = true
-currentanim:Play(0)
+if not currentCharacter or not currentRig then
+warn("[KDV3] Cool-Reanimate animation rig is unavailable")
+return
 end
-end
-else
-iscurrentadance = false
+
+char = currentCharacter
+rigTable = currentRig
+
 if currentanim then
 currentanim:Stop()
+currentanim = nil
 end
-local keyframeTable = animplayer.KeyFrameSequanceToTable(asset)
 
-currentanim = animplayer.new(rigTable, asset, nil, nil, "Motor6D")
-
+currentanim = animplayer.new(rigTable, asset, nil, "Motor6D")
+currentanim.Speed = speed or 1
+if looped == nil then
 currentanim.Looped = true
-currentanim:Play(0)
+else
+currentanim.Looped = looped
 end
+currentanim:Play()
+
+iscurrentadance = isadance == true
 end
+
+local JUMP_ANIMATION_URL = "https://raw.githubusercontent.com/AstraOutlight/storage/main/jump"
+local FALL_ANIMATION_URL = "https://raw.githubusercontent.com/AstraOutlight/storage/main/fall"
+
+local jumpAnimation = nil
+local fallAnimation = nil
+
+local function GetJumpAnimation()
+if not jumpAnimation then
+jumpAnimation = LoadDance("jump", JUMP_ANIMATION_URL)
+end
+return jumpAnimation
+end
+
+local function GetFallAnimation()
+if not fallAnimation then
+fallAnimation = LoadDance("fall", FALL_ANIMATION_URL)
+end
+return fallAnimation
+end
+
 local function choose()
 local choice = math.random(1, 3)
 if choice == 1 then
@@ -1655,9 +1757,7 @@ local ImportedTableOfDances={
 {Name="Chegou 3",Music="Chegou 3.mp3",DanceName="Chegou 3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chegou%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Hikari",Music="Hikari.mp3",DanceName="Hikari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hikari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
---{Name="KJ 2",Music="Flexworks.mp3",DanceName="KJ 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/KJ%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
---{Name="Jun",Music="NMG.mp3",DanceName="Jun",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/JUN.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
 {Name="Minos Prime",Music="Prime.mp3",DanceName="Minos Prime",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Minos%20Prime.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Default Dance",Music="Fortnite.mp3",DanceName="Default Dance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Default%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -1692,7 +1792,11 @@ local ImportedTableOfDances={
 
 {Name="Macarena",Music="Macarena.mp3",DanceName="macarena",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/macarena.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Bang Bang Bang",Music="banging.mp3",DanceName="bang",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/bang.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Bang Bang Bang",Music="bangbangbang.mp3",DanceName="bangbangbang",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/bangbangbang.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Alter Ego",Music="alterego.mp3",DanceName="alterego",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/alterego.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Dai Dai Dai Kirai",Music="daidaidaikirai.mp3",DanceName="daidaidaikirai",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/daidaidaikirai.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Split Dance",Music="splitdance.mp3",DanceName="splitdance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/splitdance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Trust me!",Music="trustme.mp3",DanceName="trustmeloop",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/trustmeloop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Lagtrain Alt",Music="Lagtrain.mp3",DanceName="LagtrainAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LagtrainAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
 {Name="Tetoris",Music="Tetoris.mp3",DanceName="Tetoris",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tetoris.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -1733,7 +1837,7 @@ local ControlsList={
 {Page=2,Key='Q',Dance='XO'},
 {Page=2,Key='E',Dance='Soda'},
 {Page=2,Key='R',Dance='L4U'},
-{Page=2,Key='T',Dance='Assumptions'},
+{Page=2,Key='T',Dance='Assumptions Shuffle'},
 {Page=2,Key='Y',Dance='Peashooter'},
 {Page=2,Key='H',Dance='Distraction'},
 {Page=2,Key='G',Dance='ItBurns'},
@@ -1846,7 +1950,25 @@ local ImportedKeyOrder={
 
 local ImportedBindings={}
 local ImportedStartPage=7
-for index,danceData in ipairs(ImportedTableOfDances) do
+
+local SeenDanceNames={}
+for _,control in ipairs(ControlsList) do
+if control.Dance then
+local normalized=string.lower((tostring(control.Dance):gsub("^%s+",""):gsub("%s+$","")))
+SeenDanceNames[normalized]=true
+end
+end
+
+local UniqueImportedDances={}
+for _,danceData in ipairs(ImportedTableOfDances) do
+local normalized=string.lower((tostring(danceData.Name or ""):gsub("^%s+",""):gsub("%s+$","")))
+if normalized~="" and not SeenDanceNames[normalized] then
+SeenDanceNames[normalized]=true
+table.insert(UniqueImportedDances,danceData)
+end
+end
+
+for index,danceData in ipairs(UniqueImportedDances) do
 local keyData=ImportedKeyOrder[((index-1)%#ImportedKeyOrder)+1]
 local dancePage=ImportedStartPage+math.floor((index-1)/#ImportedKeyOrder)
 ImportedBindings[dancePage]=ImportedBindings[dancePage] or {}
@@ -1856,7 +1978,8 @@ if danceData.Music and danceData.Music~="None" and not table.find(validAudioFile
 table.insert(validAudioFiles,danceData.Music)
 end
 end
-local MAX_DANCE_PAGE=ImportedStartPage+math.max(0,math.ceil(#ImportedTableOfDances/#ImportedKeyOrder)-1)
+
+local MAX_DANCE_PAGE=ImportedStartPage+math.max(0,math.ceil(#UniqueImportedDances/#ImportedKeyOrder)-1)
 
 local function PlayImportedDance(danceData,keyName)
 if not danceData then return false end
@@ -2581,7 +2704,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("assum.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-Info("Assumptions","t")
+Info("Assumptions Shuffle","T")
 playanim(129275138998868) -- uuid. 15705077587
 else
 stopanim()
@@ -3223,7 +3346,6 @@ sound69.SoundId = DanceAsset("CrissCross.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
 sound69:Play()
---Dance_48=LoadDance("CrissCross", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CrissCross.lua")
 Info("CrissCross","N")
 playanim(109275255555630) -- uuid. 136962185637891
 else
@@ -4252,7 +4374,6 @@ end-- uuid. 71723925114737
 else
 stopanim()
 end
---LOOPING 3 aka the best one out of 4 tho it highkey needs its own audio and blah blah blah
 elseif k == "h" then
 if dancing == false then
 stopanim()
@@ -4307,8 +4428,12 @@ end)
 
 
 local uh=math.random(1,2)
+local airborneAnimation = false
+local airborneToken = 0
+local lastJumpStarted = 0
+
 STATES=char.Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
-if char.Humanoid.Sit == false then 
+if char.Humanoid.Sit == false and not airborneAnimation then 
 if char.Humanoid.MoveDirection == Vector3.new(0,0,0) and dancing == false and idle == false then
 walking = false
 idle = true
@@ -4369,6 +4494,102 @@ stopanim()
 char.Humanoid:Move(Vector3.new(0,0,-1),true)
 char.Humanoid:Move(Vector3.new(0,0,-1),true)
 char.Humanoid:Move(Vector3.new(0,0,-1),true)
+end
+end)
+
+local function ResumeGroundAnimation()
+if dancing or char.Humanoid.Sit then
+return
+end
+
+if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then
+walking = false
+idle = true
+
+local idleDance = LoadDance(
+"Pixelation",
+"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pixelation.lua"
+)
+
+if idleDance then
+playanim(idleDance, 2.2, false)
+end
+else
+walking = true
+idle = false
+
+if sprinting then
+char.Humanoid.WalkSpeed = 24 * char:GetScale()
+
+local sprintDance = LoadDance(
+"Sprint",
+"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sprint.lua"
+)
+
+if sprintDance then
+playanim(sprintDance, 2.2, false)
+end
+else
+char.Humanoid.WalkSpeed = 14 * char:GetScale()
+playanim(130213485744288, 1, false, walkanim)
+end
+end
+end
+
+JUMP_FALL_STATES = char.Humanoid.StateChanged:Connect(function(_, newState)
+if dancing then
+airborneAnimation = false
+return
+end
+
+if newState == Enum.HumanoidStateType.Jumping then
+airborneToken += 1
+local token = airborneToken
+airborneAnimation = true
+lastJumpStarted = os.clock()
+
+local jumpDance = GetJumpAnimation()
+if jumpDance and token == airborneToken then
+playanim(jumpDance, 1, false, nil, false)
+end
+
+elseif newState == Enum.HumanoidStateType.Freefall then
+airborneAnimation = true
+airborneToken += 1
+local token = airborneToken
+
+local elapsed = os.clock() - lastJumpStarted
+local delayTime = 0
+
+if lastJumpStarted > 0 and elapsed < 0.32 then
+delayTime = 0.32 - elapsed
+end
+
+task.delay(delayTime, function()
+if token ~= airborneToken or dancing then
+return
+end
+
+if char.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall then
+return
+end
+
+local fallDance = GetFallAnimation()
+if fallDance then
+playanim(fallDance, 1, false, nil, true)
+end
+end)
+
+elseif newState == Enum.HumanoidStateType.Landed
+or newState == Enum.HumanoidStateType.Running
+or newState == Enum.HumanoidStateType.RunningNoPhysics then
+
+if airborneAnimation then
+airborneToken += 1
+airborneAnimation = false
+lastJumpStarted = 0
+task.defer(ResumeGroundAnimation)
+end
 end
 end)
 
@@ -4452,7 +4673,7 @@ local g = 0
 local b = 0
 local stage = 1
 UPDATE=RunService.Heartbeat:Connect(function(deltaTime: number)
-if not ws:FindFirstChild(game.Players.LocalPlayer.Name.."_Fake") then 
+if not IsReanimated() then 
 UPDATE:Disconnect()
 UPDATE = nil
 RUNNING = false

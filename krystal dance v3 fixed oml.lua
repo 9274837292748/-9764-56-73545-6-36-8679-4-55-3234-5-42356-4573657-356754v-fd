@@ -762,9 +762,9 @@ local encoded = EncodeUrlComponent(name)
 addUrl("https://raw.githubusercontent.com/AstraOutlight/storage/main/" .. encoded)
 addUrl("https://github.com/AstraOutlight/storage/raw/refs/heads/main/" .. encoded)
 
-addUrl("https://github.com/Solary-3/Scripts/raw/refs/heads/Audios-1/" .. encoded)
-addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/Audios-1/" .. encoded)
-addUrl("https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/Audios-1/" .. encoded)
+addUrl("https://raw.githubusercontent.com/AstraOutlight/storage/main/" .. encoded)
+addUrl("https://raw.githubusercontent.com/AstraOutlight/storage/main/" .. encoded)
+addUrl("https://raw.githubusercontent.com/AstraOutlight/storage/main/" .. encoded)
 addUrl("https://github.com/Solary-3/Scripts/blob/Audios-1/" .. encoded .. "?raw=true")
 end
 return urls
@@ -1598,215 +1598,215 @@ end
 
 
 local ImportedTableOfDances={
-{Name="Rat 1",Music="rat.mp3",DanceName="Rat1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rat 1",Music="rat.mp3",DanceName="Rat1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Boogie Down",Music="FunkedUp.mp3",DanceName="None",Url="None",Id=122471664395501,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Assumptions",Music="Assumptions.mp3",DanceName="Assumptions",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Assumptions.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Egypt",Music="Egypt.mp3",DanceName="Egypt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Egypt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Flop",Music="DO THE FLOP.mp3",DanceName="Flop",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Assumptions",Music="Assumptions.mp3",DanceName="Assumptions",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Assumptions.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Egypt",Music="Egypt.mp3",DanceName="Egypt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Egypt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Flop",Music="DO THE FLOP.mp3",DanceName="Flop",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Flop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="CaramellDansen",Music="caramell.mp3",DanceName="Nonw",Url="None",Id=114964447248296,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Heel Toe Hop",Music="Heel.mp3",DanceName="Heel",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/HeelToeHop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Heel Toe Hop",Music="Heel.mp3",DanceName="Heel",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/HeelToeHop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Gangnam",Music="gangnamm.mp3",DanceName="None",Url="None",Id=133530633475679,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Bomb Monkey",Music="Monkey.mp3",DanceName="BombMonkey",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bomb%20Monkey.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Bomb Monkey",Music="Monkey.mp3",DanceName="BombMonkey",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bomb%20Monkey.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Starlit",Music="dancingin.mp3",DanceName="None",Url="None",Id=136139381223407,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Swag Walk",Music="dr.wav",DanceName="None",Url="None",Id=110403709064010,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Griddy",Music="griddy.mp3",DanceName="None",Url="None",Id=114928062507098,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Luxurious",Music="lux.ogg",DanceName="None",Url="None",Id=94534967284996,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Kazotsky",Music="kazot.mp3",DanceName="None",Url="None",Id=86634257330162,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Domino",Music="Domino.mp3",DanceName="Domino",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Domino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Liar Dancer",Music="Liar.mp3",DanceName="Liar",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Liar.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Mesmerizer",Music="Mesmerizer.mp3",DanceName="Mesmerizer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Box Swing",Music="Box.mp3",DanceName="BoxSwing",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Box%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Static 1",Music="Static.mp3",DanceName="Static",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Prism Shuffle",Music="Prism.mp3",DanceName="Prism",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Prism%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Headlock",Music="Headlock.mp3",DanceName="Headlock",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hakari",Music="TUCA DONKA.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Commercial Break",Music="Break.mp3",DanceName="Commercial",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Commercial.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Soda Pop",Music="Soda.mp3",DanceName="Soda",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Soda%20Pop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Domino",Music="Domino.mp3",DanceName="Domino",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Domino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Liar Dancer",Music="Liar.mp3",DanceName="Liar",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Liar.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Mesmerizer",Music="Mesmerizer.mp3",DanceName="Mesmerizer",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Box Swing",Music="Box.mp3",DanceName="BoxSwing",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Box%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Static 1",Music="Static.mp3",DanceName="Static",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Static.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Prism Shuffle",Music="Prism.mp3",DanceName="Prism",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Prism%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Headlock",Music="Headlock.mp3",DanceName="Headlock",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Headlock.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari",Music="TUCA DONKA.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Commercial Break",Music="Break.mp3",DanceName="Commercial",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Commercial.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Soda Pop",Music="Soda.mp3",DanceName="Soda",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Soda%20Pop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="XO",Music="XO.mp3",DanceName="None",Url="None",Id=89807443968447,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="L4U",Music="LoveForU.mp3",DanceName="L4U",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Love4U.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="L4U",Music="LoveForU.mp3",DanceName="L4U",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Love4U.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Assumptios Shuffle",Music="assum.mp3",DanceName="None",Url="None",Id=129275138998868,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Peashooter",Music="balls.mp3",DanceName="None",Url="None",Id=124616782933406,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Distraction",Music="Distraction.mp3",DanceName="Distraction",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Distraction.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Very Hot",Music="ItBurns.mp3",DanceName="ItBurns",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/It%20Burns.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Chronoshift",Music="chronoshift.mp3",DanceName="Chronoshift",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chronoshift.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Keep Up",Music="KeepUp.mp3",DanceName="Keep",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Distraction",Music="Distraction.mp3",DanceName="Distraction",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Distraction.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Very Hot",Music="ItBurns.mp3",DanceName="ItBurns",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/It%20Burns.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Chronoshift",Music="chronoshift.mp3",DanceName="Chronoshift",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Chronoshift.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Keep Up",Music="KeepUp.mp3",DanceName="Keep",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Boombox",Music="Boombox.mp3",DanceName="None",Url="None",Id=92629504992703,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="BloodPop",Music="bloodpop.mp3",DanceName="None",Url="None",Id=82472212108809,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Sit",Music="Sit.mp3",DanceName="Sit",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sit.lua",Id="None",Offset=0,WalkSpeed=0,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Sit",Music="Sit.mp3",DanceName="Sit",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Sit.lua",Id="None",Offset=0,WalkSpeed=0,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Left Right",Music="leftright.mp3",DanceName="None",Url="None",Id=107261816578577,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Heavy Love",Music="heavylove.mp3",DanceName="None",Url="None",Id=101332118847458,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Million",Music="Million.mp3",DanceName="None",Url="None",Id=109123683211464,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Billie Jean",Music="Bjean.mp3",DanceName="BillieJean",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BillieJean.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Billie Jean2",Music="Bjean.mp3",DanceName="BillieJean2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BillieJean2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Savor W",Music="Savor.mp3",DanceName="Savor",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Savor.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Yamero",Music="Yamero.mp3",DanceName="Yamero",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yamero.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Angel",Music="InternetAngel.mp3",DanceName="Angel",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Angel.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Club Penguin",Music="CLUB PENGUIN DANCE.mp3",DanceName="ClubPenguin",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Club%20Penguin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Runaway",Music="Runaway.mp3",DanceName="Runaway",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Runaway.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="MioHonda",Music="MioHonda.mp3",DanceName="MioHonda",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Miohonda.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Firework",Music="Firework.mp3",DanceName="Firework",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Firework.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="C14",Music="C14.mp3",DanceName="C14",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/C14.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Slickback",Music="Slickback.mp3",DanceName="Slickback",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Slickback.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Doodle",Music="Doodle.mp3",DanceName="Doodle",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doodle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Goated Dance",Music="Goat.mp3",DanceName="Goat",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Goat.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Bumblebee",Music="Bumblebee.mp3",DanceName="Bumblebee",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bumblebee.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Stock Shuffle",Music="Stock.mp3",DanceName="Stock",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Stock%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Rat 2",Music="rat.mp3",DanceName="Rat2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Shuba Duck",Music="Shuba Duck.mp3",DanceName="Shuba",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shuba%20Duck.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Billie Jean",Music="Bjean.mp3",DanceName="BillieJean",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/BillieJean.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Billie Jean2",Music="Bjean.mp3",DanceName="BillieJean2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/BillieJean2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Savor W",Music="Savor.mp3",DanceName="Savor",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Savor.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Yamero",Music="Yamero.mp3",DanceName="Yamero",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Yamero.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Angel",Music="InternetAngel.mp3",DanceName="Angel",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Angel.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Club Penguin",Music="CLUB PENGUIN DANCE.mp3",DanceName="ClubPenguin",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Club%20Penguin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Runaway",Music="Runaway.mp3",DanceName="Runaway",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Runaway.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="MioHonda",Music="MioHonda.mp3",DanceName="MioHonda",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Miohonda.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Firework",Music="Firework.mp3",DanceName="Firework",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Firework.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="C14",Music="C14.mp3",DanceName="C14",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/C14.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Slickback",Music="Slickback.mp3",DanceName="Slickback",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Slickback.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Doodle",Music="Doodle.mp3",DanceName="Doodle",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Doodle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Goated Dance",Music="Goat.mp3",DanceName="Goat",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Goat.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Bumblebee",Music="Bumblebee.mp3",DanceName="Bumblebee",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bumblebee.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Stock Shuffle",Music="Stock.mp3",DanceName="Stock",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Stock%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rat 2",Music="rat.mp3",DanceName="Rat2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Shuba Duck",Music="Shuba Duck.mp3",DanceName="Shuba",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Shuba%20Duck.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Lemon Melon",Music="Lemon.mp3",DanceName="None",Url="None",Id=138510336377177,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Birdbrain",Music="Birdbrain2.mp3",DanceName="Birdbrain",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Birdbrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Fein",Music="Fein.mp3",DanceName="Fein",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Fein.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Popipo",Music="Popipo.mp3",DanceName="Popipo",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Popipo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Pickup",Music="Pickup.mp3",DanceName="Pickup",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pickup.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Silly Billy 1",Music="Billy.mp3",DanceName="Billy",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Birdbrain",Music="Birdbrain2.mp3",DanceName="Birdbrain",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Birdbrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Fein",Music="Fein.mp3",DanceName="Fein",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Fein.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Popipo",Music="Popipo.mp3",DanceName="Popipo",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Popipo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Pickup",Music="Pickup.mp3",DanceName="Pickup",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Pickup.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Silly Billy 1",Music="Billy.mp3",DanceName="Billy",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Sinful",Music="rotten.mp3",DanceName="None",Url="None",Id=89457637802764,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Spooky",Music="Spooky.mp3",DanceName="Spooky",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spooky.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="JK",Music="JK.mp3",DanceName="Limited",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Limited.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
-{Name="KJ",Music="Flexworks.mp3",DanceName="Flexworks",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flexworks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
+{Name="Spooky",Music="Spooky.mp3",DanceName="Spooky",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Spooky.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="JK",Music="JK.mp3",DanceName="Limited",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Limited.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
+{Name="KJ",Music="Flexworks.mp3",DanceName="Flexworks",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Flexworks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=1},
 {Name="CrissCross",Music="CrissCross.mp3",DanceName="None",Url="None",Id=109275255555630,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Too Much Brain",Music="brain.mp3",DanceName="None",Url="None",Id=93547721311170,Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Espresso",Music="espresso.mp3",DanceName="None",Url="None",Id=87342159331194,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Rakuten",Music="rakuten.mp3",DanceName="None",Url="None",Id=121967347012647,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Torture",Music="tort.mp3",DanceName="None",Url="None",Id=99811468921857,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Unlockit",Music="Unlockit.mp3",DanceName="Unlockit",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Unlockit.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Smooth Moves",Music="SmoothMoves.mp3",DanceName="SmoothMoves",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/SmoothMoves.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Lagtrain",Music="Lagtrain.mp3",DanceName="Lagtrain",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Lagtrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Suki",Music="Suki.mp3",DanceName="Suki",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Suki.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Cafeteria",Music="Cafeteria.mp3",DanceName="Cafeteria",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cafeteria.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Dare",Music="Dare.mp3",DanceName="Dare",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Dare.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Tenna 1",Music="Tenna.mp3",DanceName="Tenna",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Insanity",Music="Insanity.mp3",DanceName="Insanity",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Insanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Tenna 2",Music="Tenna.mp3",DanceName="Tenna2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Rambunctious",Music="Rambunctious.mp3",DanceName="Rambunctious",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rambunctious.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Side Shuffle",Music="Side Shuffle.mp3",DanceName="Sideshuffle",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Side%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Electro Swing",Music="Electro Swing.mp3",DanceName="Electro",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Electro%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="MioHonda Step",Music="MioHonda.mp3",DanceName="Step",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Step.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Apple Pen",Music="Apple Pen.mp3",DanceName="Applepen",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Apple%20Pen.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Crank That",Music="Crank.mp3",DanceName="Crankthat",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Crank%20That.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Take Down",Music="TakeDown.mp3",DanceName="TakeDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takedown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Going Down",Music="Down.mp3",DanceName="Down",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Going%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Spamton",Music="Spamton.mp3",DanceName="Spamton",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spamton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Kemusan",Music="Kemusan.mp3",DanceName="Kemusan",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Kemusan.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Im Ok",Music="ImOk.mp3",DanceName="ImOk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/ImOk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Medicine Teto (Igaku)",Music="Igaku2.mp3",DanceName="Igaku",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Igaku.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Headlock 2",Music="Headlock.mp3",DanceName="Headlock3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Guli",Music="Guli.mp3",DanceName="Guli",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Guli.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Results",Music="Results.mp3",DanceName="Results",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Results.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Static 2",Music="Static.mp3",DanceName="Static2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Silly Billy 2",Music="Billy.mp3",DanceName="Billy2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Yell 2",Music="Yell.mp3",DanceName="Yell",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Yell 3",Music="Yell1.mp3",DanceName="Yell1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Yell 1",Music="Yell2.mp3",DanceName="Yell2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Out of Touch",Music="Touch.mp3",DanceName="Touch",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Touch.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hakari (Lonely)",Music="Lonely.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Unlockit",Music="Unlockit.mp3",DanceName="Unlockit",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Unlockit.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Smooth Moves",Music="SmoothMoves.mp3",DanceName="SmoothMoves",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/SmoothMoves.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Lagtrain",Music="Lagtrain.mp3",DanceName="Lagtrain",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Lagtrain.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Suki",Music="Suki.mp3",DanceName="Suki",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Suki.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Cafeteria",Music="Cafeteria.mp3",DanceName="Cafeteria",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Cafeteria.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Dare",Music="Dare.mp3",DanceName="Dare",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Dare.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Tenna 1",Music="Tenna.mp3",DanceName="Tenna",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Insanity",Music="Insanity.mp3",DanceName="Insanity",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Insanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Tenna 2",Music="Tenna.mp3",DanceName="Tenna2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Rambunctious",Music="Rambunctious.mp3",DanceName="Rambunctious",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rambunctious.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Side Shuffle",Music="Side Shuffle.mp3",DanceName="Sideshuffle",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Side%20Shuffle.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Electro Swing",Music="Electro Swing.mp3",DanceName="Electro",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Electro%20Swing.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="MioHonda Step",Music="MioHonda.mp3",DanceName="Step",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Step.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Apple Pen",Music="Apple Pen.mp3",DanceName="Applepen",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Apple%20Pen.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Crank That",Music="Crank.mp3",DanceName="Crankthat",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Crank%20That.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Take Down",Music="TakeDown.mp3",DanceName="TakeDown",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Takedown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Going Down",Music="Down.mp3",DanceName="Down",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Going%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Spamton",Music="Spamton.mp3",DanceName="Spamton",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Spamton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Kemusan",Music="Kemusan.mp3",DanceName="Kemusan",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Kemusan.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Im Ok",Music="ImOk.mp3",DanceName="ImOk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/ImOk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Medicine Teto (Igaku)",Music="Igaku2.mp3",DanceName="Igaku",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Igaku.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Headlock 2",Music="Headlock.mp3",DanceName="Headlock3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Headlock3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Guli",Music="Guli.mp3",DanceName="Guli",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Guli.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Results",Music="Results.mp3",DanceName="Results",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Results.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Static 2",Music="Static.mp3",DanceName="Static2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Static2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Silly Billy 2",Music="Billy.mp3",DanceName="Billy2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Yell 2",Music="Yell.mp3",DanceName="Yell",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Yell 3",Music="Yell1.mp3",DanceName="Yell1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Yell 1",Music="Yell2.mp3",DanceName="Yell2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Out of Touch",Music="Touch.mp3",DanceName="Touch",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Touch.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari (Lonely)",Music="Lonely.mp3",DanceName="Hakari",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Rat 3",Music="rat.mp3",DanceName="None",Url="None",Id=117971041844492,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Uh",Music="whateverlike.mp3",DanceName="None",Url="None",Id=99152023738830,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="CyberBop",Music="CyberBop.mp3",DanceName="CyberBop",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CyberBop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Invincible",Music="Invincible.mp3",DanceName="Invincible",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Invincible.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Jumpstyle",Music="Jumpstyle.mp3",DanceName="Jumpstyle3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumsptyle3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="BreakDance",Music="BreakDance.mp3",DanceName="BreakDance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="BreakDance 2005",Music="BreakDance2005.mp3",DanceName="BreakDance2005",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance2005.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Requiem",Music="faster.ogg",DanceName="Requiem",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Requiem.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Metro Man",Music="Metro.mp3",DanceName="Metro",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Metro.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="CrackDown",Music="CrackDown.mp3",DanceName="CrackDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CrackDown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Wait",Music="Wait2.mp3",DanceName="Wait",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Wait.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Smug Dance",Music="Smug.mp3",DanceName="Smug",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Smug.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Takino",Music="Takino.mp3",DanceName="Takino",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Jumpstyle 1",Music="Jumpstyle.mp3",DanceName="Jumpstyle4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumpstyle4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Livesey Walk",Music="Livesey.mp3",DanceName="Livesey",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Livesey.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Mesmerizer 1",Music="Mesmerizer.mp3",DanceName="Mesmerizer1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Pokedance",Music="Pokedance.mp3",DanceName="Pokedance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pokedance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Keep Up 1",Music="KeepUp.mp3",DanceName="KeepUp1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Get Down",Music="GetDown.mp3",DanceName="GetDown",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Get%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Spoken For",Music="SpokenFor.mp3",DanceName="SpokenFor",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spoken%20For.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Everybody Gangnam",Music="EVG.mp3",DanceName="EverybodyGangnam",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/EverybodyGangnam.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Low Cortisol",Music="cortisol.mp3",DanceName="cortisol",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/cortisol.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Domino 2",Music="Domino.mp3",DanceName="Domino2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Domino2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Looping The Rooms",Music="Looping.mp3",DanceName="Looping",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Cry For Me",Music="Cry For Me.mp3",DanceName="Cry For Me",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cry%20For%20Me.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="With Friends",Music="Withfriends.mp3",DanceName="With Friends",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/With%20Friends.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="CyberBop",Music="CyberBop.mp3",DanceName="CyberBop",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/CyberBop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Invincible",Music="Invincible.mp3",DanceName="Invincible",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Invincible.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Jumpstyle",Music="Jumpstyle.mp3",DanceName="Jumpstyle3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumsptyle3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="BreakDance",Music="BreakDance.mp3",DanceName="BreakDance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="BreakDance 2005",Music="BreakDance2005.mp3",DanceName="BreakDance2005",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance2005.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Requiem",Music="faster.ogg",DanceName="Requiem",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Requiem.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Metro Man",Music="Metro.mp3",DanceName="Metro",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Metro.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="CrackDown",Music="CrackDown.mp3",DanceName="CrackDown",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/CrackDown.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Wait",Music="Wait2.mp3",DanceName="Wait",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Wait.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Smug Dance",Music="Smug.mp3",DanceName="Smug",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Smug.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Takino",Music="Takino.mp3",DanceName="Takino",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Takino.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Jumpstyle 1",Music="Jumpstyle.mp3",DanceName="Jumpstyle4",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumpstyle4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Livesey Walk",Music="Livesey.mp3",DanceName="Livesey",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Livesey.lua",Id="None",Offset=0,WalkSpeed=4,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Mesmerizer 1",Music="Mesmerizer.mp3",DanceName="Mesmerizer1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Pokedance",Music="Pokedance.mp3",DanceName="Pokedance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Pokedance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Keep Up 1",Music="KeepUp.mp3",DanceName="KeepUp1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Get Down",Music="GetDown.mp3",DanceName="GetDown",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Get%20Down.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Spoken For",Music="SpokenFor.mp3",DanceName="SpokenFor",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Spoken%20For.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Everybody Gangnam",Music="EVG.mp3",DanceName="EverybodyGangnam",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/EverybodyGangnam.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Low Cortisol",Music="cortisol.mp3",DanceName="cortisol",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/cortisol.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Domino 2",Music="Domino.mp3",DanceName="Domino2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Domino2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Looping The Rooms",Music="Looping.mp3",DanceName="Looping",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Cry For Me",Music="Cry For Me.mp3",DanceName="Cry For Me",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Cry%20For%20Me.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="With Friends",Music="Withfriends.mp3",DanceName="With Friends",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/With%20Friends.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
 
-{Name="Funny",Music="Funny.mp3",DanceName="Funny",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Funny.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="CivillianYell",Music="CivillianYell.mp3",DanceName="CivillianYell",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CivillianYell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Looping The Rooms 2",Music="Looping 2.mp3",DanceName="Looping 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hakari 3 (Lonely)",Music="Lonely.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Hakari 3",Music="TUCA DONKA.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Skeleton",Music="Sellywarcry.mp3",DanceName="Skeleton",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Skeleton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Someone Ships",Music="Idk.mp3",DanceName="Idk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Idk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Golden Dandelion",Music="TsSoGolden.mp3",DanceName="TsSoGolden",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/TsSoGolden.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Retry Now",Music="RetryNow.mp3",DanceName="Retry Now",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Retry%20Now.lua",Id="None",Offset=0,WalkSpeed=14,Looped=false,UseSoundPos=true,Alpha=.1},
+{Name="Funny",Music="Funny.mp3",DanceName="Funny",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Funny.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="CivillianYell",Music="CivillianYell.mp3",DanceName="CivillianYell",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/CivillianYell.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Looping The Rooms 2",Music="Looping 2.mp3",DanceName="Looping 2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari 3 (Lonely)",Music="Lonely.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Hakari 3",Music="TUCA DONKA.mp3",DanceName="Hakari3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari3.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Skeleton",Music="Sellywarcry.mp3",DanceName="Skeleton",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Skeleton.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Someone Ships",Music="Idk.mp3",DanceName="Idk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Idk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Golden Dandelion",Music="TsSoGolden.mp3",DanceName="TsSoGolden",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/TsSoGolden.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Retry Now",Music="RetryNow.mp3",DanceName="Retry Now",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Retry%20Now.lua",Id="None",Offset=0,WalkSpeed=14,Looped=false,UseSoundPos=true,Alpha=.1},
 
 
-{Name="Low Cortisol 2",Music="cortisol.mp3",DanceName="cortisol2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/cortisol2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Metro Man 2",Music="Metro.mp3",DanceName="Metroman2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Metroman2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Medicine Teto (Igaku) 2",Music="Igaku2.mp3",DanceName="Igaku2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Igaku2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hakari 4",Music="TUCA DONKA.mp3",DanceName="Hakari 4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari%204.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Looping The Rooms 3",Music="Looping.mp3",DanceName="Looping 3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Microwave",Music="Microwave.mp3",DanceName="Microwave",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Microwave.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Lil Buddy Was Sick",Music="Lilbuddy.mp3",DanceName="LilBuddy",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LilBuddy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Low Quality",Music="LowQuality.mp3",DanceName="LowQuality",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LowQuality.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Low Cortisol 2",Music="cortisol.mp3",DanceName="cortisol2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/cortisol2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Metro Man 2",Music="Metro.mp3",DanceName="Metroman2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Metroman2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Medicine Teto (Igaku) 2",Music="Igaku2.mp3",DanceName="Igaku2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Igaku2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hakari 4",Music="TUCA DONKA.mp3",DanceName="Hakari 4",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari%204.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Looping The Rooms 3",Music="Looping.mp3",DanceName="Looping 3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Microwave",Music="Microwave.mp3",DanceName="Microwave",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Microwave.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Lil Buddy Was Sick",Music="Lilbuddy.mp3",DanceName="LilBuddy",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/LilBuddy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Low Quality",Music="LowQuality.mp3",DanceName="LowQuality",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/LowQuality.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Looping The Rooms 4",Music="Looping 2.mp3",DanceName="Looping4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Funny 2",Music="Funny2.mp3",DanceName="Funny2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Funny2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Looping The Rooms 4",Music="Looping 2.mp3",DanceName="Looping4",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Funny 2",Music="Funny2.mp3",DanceName="Funny2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Funny2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
-{Name="California Girls",Music="California.mp3",DanceName="California Girls",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/California%20Girls.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="California Girls",Music="California.mp3",DanceName="California Girls",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/California%20Girls.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
-{Name="Doomer",Music="Doomer.mp3",DanceName="Doomer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doomer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Doomer",Music="Doomer.mp3",DanceName="Doomer",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Doomer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
-{Name="Chegou 3",Music="Chegou 3.mp3",DanceName="Chegou 3",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chegou%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
-{Name="Hikari",Music="Hikari.mp3",DanceName="Hikari",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hikari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Chegou 3",Music="Chegou 3.mp3",DanceName="Chegou 3",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Chegou%203.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Hikari",Music="Hikari.mp3",DanceName="Hikari",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hikari.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
 
 
-{Name="Minos Prime",Music="Prime.mp3",DanceName="Minos Prime",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Minos%20Prime.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Default Dance",Music="Fortnite.mp3",DanceName="Default Dance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Default%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Omni Man",Music="omni.mp3",DanceName="omni",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/omni.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.015},
-{Name="Unlockit SEWH",Music="Unlockit2.mp3",DanceName="Unlockit2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Unlockit2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Birdbrain Laggy",Music="BirdbrainAlt.mp3",DanceName="Birdbrainv2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Birdbrainv2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Doomer Alt",Music="Doomer.mp3",DanceName="DoomerAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/DoomerAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Minos Prime",Music="Prime.mp3",DanceName="Minos Prime",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Minos%20Prime.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Default Dance",Music="Fortnite.mp3",DanceName="Default Dance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Default%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Omni Man",Music="omni.mp3",DanceName="omni",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/omni.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.015},
+{Name="Unlockit SEWH",Music="Unlockit2.mp3",DanceName="Unlockit2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Unlockit2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Birdbrain Laggy",Music="BirdbrainAlt.mp3",DanceName="Birdbrainv2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Birdbrainv2.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Doomer Alt",Music="Doomer.mp3",DanceName="DoomerAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/DoomerAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 
-{Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
-{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Niche Baby",Music="ai niche baby.mp3",DanceName="ai niche baby",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/ai%20niche%20baby.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Konton Boogie",Music="konton boogie.mp3",DanceName="konton boogie",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/konton%20boogie.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Go mufasa",Music="go mufasa.mp3",DanceName="go mufasa",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/go%20mufasa.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Butcher Vanity",Music="butcher vanity.mp3",DanceName="butcher vanity",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/butcher%20vanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hit the jackpot",Music="Hit the jackpot.mp3",DanceName="Hit the jackpot",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hit%20the%20jackpot.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
+{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Niche Baby",Music="ai niche baby.mp3",DanceName="ai niche baby",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/ai%20niche%20baby.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Konton Boogie",Music="konton boogie.mp3",DanceName="konton boogie",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/konton%20boogie.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Go mufasa",Music="go mufasa.mp3",DanceName="go mufasa",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/go%20mufasa.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Butcher Vanity",Music="butcher vanity.mp3",DanceName="butcher vanity",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/butcher%20vanity.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hit the jackpot",Music="Hit the jackpot.mp3",DanceName="Hit the jackpot",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hit%20the%20jackpot.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Rodeo",Music="Rodeo.mp3",DanceName="Rodeo",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rodeo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Epical",Music="Epical.mp3",DanceName="Epical",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Epical.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Doom Mc Bringer",Music="Doom Mc Bringer.mp3",DanceName="Doom Mc Bringer",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doom%20Mc%20Bringer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hai Yorokonde",Music="Hai Yorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Rickroll",Music="Rickroll.mp3",DanceName="Rickroll",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rickroll.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Montagem Xonada",Music="Xonada.mp3",DanceName="Xonada",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Xonada.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Encore",Music="Encore.mp3",DanceName="Encore",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Encore.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Chegou 3 Remake",Music="Chegou 3.mp3",DanceName="Chegou 2",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chegou%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Akage",Music="Akage.mp3",DanceName="Akage",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Akage.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Japanese Meme",Music="Japan.mp3",DanceName="Japanese Meme",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Japanese%20Meme.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Number",Music="Number.mp3",DanceName="Number",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Number.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Rodeo",Music="Rodeo.mp3",DanceName="Rodeo",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rodeo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Epical",Music="Epical.mp3",DanceName="Epical",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Epical.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Doom Mc Bringer",Music="Doom Mc Bringer.mp3",DanceName="Doom Mc Bringer",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Doom%20Mc%20Bringer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hai Yorokonde",Music="Hai Yorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Rickroll",Music="Rickroll.mp3",DanceName="Rickroll",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rickroll.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Montagem Xonada",Music="Xonada.mp3",DanceName="Xonada",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Xonada.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Encore",Music="Encore.mp3",DanceName="Encore",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Encore.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Chegou 3 Remake",Music="Chegou 3.mp3",DanceName="Chegou 2",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Chegou%202.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Akage",Music="Akage.mp3",DanceName="Akage",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Akage.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Japanese Meme",Music="Japan.mp3",DanceName="Japanese Meme",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Japanese%20Meme.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Number",Music="Number.mp3",DanceName="Number",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Number.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Macarena",Music="Macarena.mp3",DanceName="macarena",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/macarena.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Macarena",Music="Macarena.mp3",DanceName="macarena",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/macarena.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
 {Name="Bang Bang Bang",Music="bangbangbang.mp3",DanceName="bangbangbang",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/bangbangbang.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Alter Ego",Music="alterego.mp3",DanceName="alterego",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/alterego.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Dai Dai Dai Kirai",Music="daidaidaikirai.mp3",DanceName="daidaidaikirai",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/daidaidaikirai.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Split Dance",Music="splitdance.mp3",DanceName="splitdance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/splitdance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Trust me!",Music="trustme.mp3",DanceName="trustmeloop",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/trustmeloop.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Lagtrain Alt",Music="Lagtrain.mp3",DanceName="LagtrainAlt",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/LagtrainAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Lagtrain Alt",Music="Lagtrain.mp3",DanceName="LagtrainAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/LagtrainAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Tetoris",Music="Tetoris.mp3",DanceName="Tetoris",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tetoris.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="PP music",Music="Pp music.mp3",DanceName="PPmusic",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/PPmusic.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Toothless",Music="Toothless.mp3",DanceName="Toothless",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Toothless.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Name This",Music="Name This.mp3",DanceName="Name This Dance",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Name%20This%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Rat 4",Music="Rat.mp3",DanceName="Rat4",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Encore 1",Music="Encore.mp3",DanceName="Encore 1",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Encore%201.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Tetoris",Music="Tetoris.mp3",DanceName="Tetoris",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Tetoris.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="PP music",Music="Pp music.mp3",DanceName="PPmusic",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/PPmusic.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Toothless",Music="Toothless.mp3",DanceName="Toothless",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Toothless.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Name This",Music="Name This.mp3",DanceName="Name This Dance",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Name%20This%20Dance.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Rat 4",Music="Rat.mp3",DanceName="Rat4",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat4.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Encore 1",Music="Encore.mp3",DanceName="Encore 1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Encore%201.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
-{Name="Shucks Mid Scene",Music="Angry Shucks.mp3",DanceName="Shucks Mid Scene",Url="https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shucks%20Mid%20Scene.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=10},
+{Name="Shucks Mid Scene",Music="Angry Shucks.mp3",DanceName="Shucks Mid Scene",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Shucks%20Mid%20Scene.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=10},
 
 }
 
@@ -2701,7 +2701,7 @@ else
 sound69.SoundId = DanceAsset("rat.mp3")
 end
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Rat1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat1.lua")
+dance=LoadDance("Rat1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat1.lua")
 Info("Rat 1","Q")
 sound69:Play()
 if dance then
@@ -2736,7 +2736,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Assumptions.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Assumptions", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Assumptions.lua")
+dance=LoadDance("Assumptions", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Assumptions.lua")
 sound69:Play()
 Info("Assumptions","R")
 if dance then
@@ -2756,7 +2756,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Egypt.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Egypt", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Egypt.lua")
+dance=LoadDance("Egypt", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Egypt.lua")
 sound69:Play()
 Info("Egypt","T")
 if dance then
@@ -2776,7 +2776,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("DO THE FLOP.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Flop", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flop.lua")
+dance=LoadDance("Flop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Flop.lua")
 sound69:Play()
 Info("Flop","Y")
 if dance then 
@@ -2813,7 +2813,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Heel.mp3")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 timeposcur = sound69.TimePosition 
-dance=LoadDance("HeelToeHop", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/HeelToeHop.lua")
+dance=LoadDance("HeelToeHop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/HeelToeHop.lua")
 sound69:Play()
 Info("Heel Toe Hop","F")
 if dance then
@@ -2849,7 +2849,7 @@ writefile("KDV3/Takino.mp3",game:HttpGet("https://github.com/Solary-3/Scripts/bl
 end 
 sound69.SoundId = getcustomasset("KDV3/Monkey.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("BombMonkey", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bomb%20Monkey.lua")
+dance=LoadDance("BombMonkey", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Bomb%20Monkey.lua")
 Info("Bomb Monkey","P")
 sound69:Play()
 if dance then
@@ -2947,7 +2947,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Domino.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Domino", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Domino.lua")
+dance=LoadDance("Domino", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Domino.lua")
 sound69:Play()
 Info("Domino","H")
 if dance then 
@@ -2965,7 +2965,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Liar.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Liar", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Liar.lua")
+dance=LoadDance("Liar", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Liar.lua")
 sound69:Play()
 Info("Liar","V")
 if dance then
@@ -2984,7 +2984,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Mesmerizer.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Mesmerizer", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer.lua")
+dance=LoadDance("Mesmerizer", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer.lua")
 sound69:Play()
 Info("Mesmerizer","C")
 if dance then
@@ -3002,7 +3002,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Box.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("BoxSwing", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Box%20Swing.lua")
+dance=LoadDance("BoxSwing", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Box%20Swing.lua")
 sound69:Play()
 Info("Box Swing","N")
 if dance then
@@ -3021,7 +3021,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Static.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Static", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static.lua")
+dance=LoadDance("Static", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Static.lua")
 sound69:Play()
 Info("Static",",")
 if dance then 
@@ -3039,7 +3039,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Prism.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Prism", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Prism%20Shuffle.lua")
+dance=LoadDance("Prism", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Prism%20Shuffle.lua")
 sound69:Play()
 Info("Prism","[")
 if dance then
@@ -3057,7 +3057,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Headlock.mp3")
 sound69.TimePosition=0
-dance=LoadDance("Headlock", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock.lua")
+dance=LoadDance("Headlock", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Headlock.lua")
 sound69:Play()
 Info("Headlock","]")
 if dance then
@@ -3075,7 +3075,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("TUCA DONKA.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Hakari", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua")
+dance=LoadDance("Hakari", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua")
 sound69:Play()
 Info("Hakari","B")
 if dance then 
@@ -3093,7 +3093,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Break.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Commercial", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Commercial.lua")
+dance=LoadDance("Commercial", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Commercial.lua")
 sound69:Play()
 Info("Commercial","-")
 if dance then
@@ -3129,7 +3129,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Soda.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Soda", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Soda%20Pop.lua")
+dance=LoadDance("Soda", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Soda%20Pop.lua")
 sound69:Play()
 Info("Soda","E")
 if dance then
@@ -3147,7 +3147,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("LoveForU.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("L4U", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Love4U.lua")
+dance=LoadDance("L4U", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Love4U.lua")
 sound69:Play()
 Info("L4U","R")
 if dance then
@@ -3195,7 +3195,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Distraction.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Distraction", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Distraction.lua")
+dance=LoadDance("Distraction", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Distraction.lua")
 sound69:Play()
 Info("Distraction","H")
 if dance then 
@@ -3213,7 +3213,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("ItBurns.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/It%20Burns.lua")
+dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/AstraOutlight/storage/main/It%20Burns.lua")
 sound69:Play()
 Info("ItBurns","G")
 if dance then
@@ -3231,7 +3231,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("chronoshift.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Chronoshift", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Chronoshift.lua")
+dance=LoadDance("Chronoshift", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Chronoshift.lua")
 sound69:Play()
 Info("Chronoshift","F")
 if dance then 
@@ -3250,7 +3250,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
 sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Keep Up", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up.lua")
+dance=LoadDance("Keep Up", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up.lua")
 sound69:Play()
 Info("Keep Up","J")
 coolparticles.Parent = char.Torso
@@ -3299,7 +3299,7 @@ dancing = true
 Playsound.Volume=0
 sound69.SoundId = DanceAsset("Sit.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Sit", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sit.lua")
+dance=LoadDance("Sit", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Sit.lua")
 sound69:Play()
 char.Humanoid.WalkSpeed = 0*char:GetScale()
 Info("Sit","N")
@@ -3361,7 +3361,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Bjean.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("BillieJean", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BillieJean.lua")
+dance=LoadDance("BillieJean", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BillieJean.lua")
 sound69:Play()
 Info("BJ","V")
 if dance then
@@ -3378,7 +3378,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Savor.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Savor", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Savor.lua")
+dance=LoadDance("Savor", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Savor.lua")
 sound69:Play()
 Info("Savor","B")
 if dance then 
@@ -3395,7 +3395,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yamero.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Yamero", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yamero.lua")
+dance=LoadDance("Yamero", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yamero.lua")
 sound69:Play()
 Info("Yamero","P")
 if dance then
@@ -3412,7 +3412,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("InternetAngel.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Angel", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Angel.lua")
+dance=LoadDance("Angel", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Angel.lua")
 sound69:Play()
 Info("Angel",",")
 if dance then
@@ -3429,7 +3429,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CLUB PENGUIN DANCE.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Club%20Penguin.lua")
+dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Club%20Penguin.lua")
 sound69:Play()
 Info("Club","-")
 if dance then
@@ -3446,7 +3446,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Runaway.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Runaway", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Runaway.lua")
+dance=LoadDance("Runaway", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Runaway.lua")
 sound69:Play()
 Info("Runaway","[")
 if dance then
@@ -3463,7 +3463,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("MioHonda.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Miohonda", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Miohonda.lua")
+dance=LoadDance("Miohonda", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Miohonda.lua")
 sound69:Play()
 Info("MioHonda","]")
 if dance then
@@ -3480,7 +3480,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Firework.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Firework", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Firework.lua")
+dance=LoadDance("Firework", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Firework.lua")
 sound69:Play()
 Info("Firework","L")
 if dance then
@@ -3500,7 +3500,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("C14.mp3")
 timeposcur = sound69.TimePosition
-dance=LoadDance("C14", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/C14.lua")
+dance=LoadDance("C14", "https://raw.githubusercontent.com/AstraOutlight/storage/main/C14.lua")
 sound69:Play()
 Info("C14","Q")
 if dance then 
@@ -3517,7 +3517,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Slickback.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Slickback", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Slickback.lua")
+dance=LoadDance("Slickback", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Slickback.lua")
 sound69:Play()
 Info("Slickback","E")
 if dance then
@@ -3534,7 +3534,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Doodle.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Doodle", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Doodle.lua")
+dance=LoadDance("Doodle", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Doodle.lua")
 sound69:Play()
 Info("Doodle","R")
 if dance then
@@ -3551,7 +3551,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Goat.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Goat", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Goat.lua")
+dance=LoadDance("Goat", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Goat.lua")
 sound69:Play()
 Info("Goat","T")
 if dance then
@@ -3568,7 +3568,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Bumblebee.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Bumblebee", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Bumblebee.lua")
+dance=LoadDance("Bumblebee", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Bumblebee.lua")
 sound69:Play()
 Info("Bumblebee","Y")
 if dance then
@@ -3585,7 +3585,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Stock.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Stock", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Stock%20Shuffle.lua")
+dance=LoadDance("Stock", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Stock%20Shuffle.lua")
 sound69:Play()
 Info("Stock","U")
 if dance then
@@ -3607,7 +3607,7 @@ else
 sound69.SoundId = DanceAsset("rat.mp3")
 end
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Rat2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rat2.lua")
+dance=LoadDance("Rat2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat2.lua")
 sound69:Play()
 Info("Rat 2","P")
 if dance then
@@ -3625,7 +3625,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Shuba Duck.mp3")
 timeposcur = sound69.TimePosition 
 dance=LoadDance("Shuba",
-"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Shuba%20Duck.lua")
+"https://raw.githubusercontent.com/AstraOutlight/storage/main/Shuba%20Duck.lua")
 sound69:Play()
 Info("Shuba Duck","F")
  if dance then
@@ -3656,7 +3656,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Birdbrain2.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Birdbrain", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Birdbrain.lua")
+dance=LoadDance("Birdbrain", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Birdbrain.lua")
 Info("Birdbrain","H")
 sound69:Play()
 if dance then
@@ -3673,7 +3673,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Fein.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Fein", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Fein.lua")
+dance=LoadDance("Fein", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Fein.lua")
 sound69:Play()
 Info("Fein","J")
 if dance then
@@ -3690,7 +3690,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Popipo.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Popipo", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Popipo.lua")
+dance=LoadDance("Popipo", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Popipo.lua")
 sound69:Play()
 Info("Popipo","K")
 if dance then
@@ -3707,7 +3707,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Pickup.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Pickup", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pickup.lua")
+dance=LoadDance("Pickup", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pickup.lua")
 sound69:Play()
 Info("Pickup","L")
 if dance then
@@ -3724,7 +3724,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Billy.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Billy", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy.lua")
+dance=LoadDance("Billy", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy.lua")
 sound69:Play()
 Info("Yourself","Z")
 if dance then
@@ -3755,7 +3755,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Spooky.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Spooky", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spooky.lua")
+dance=LoadDance("Spooky", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spooky.lua")
 sound69:Play()
 Info("Spooky","C")
 if dance then
@@ -3772,7 +3772,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("JK.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Limited", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Limited.lua")
+dance=LoadDance("Limited", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Limited.lua")
 sound69:Play()
 Info("JK","V")
 if dance then
@@ -3789,7 +3789,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Flexworks.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Flexworks", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Flexworks.lua")
+dance=LoadDance("Flexworks", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Flexworks.lua")
 sound69:Play()
 Info("KJ","B")
 if dance then
@@ -3882,7 +3882,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Unlockit.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Unlockit", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Unlockit.lua")
+dance=LoadDance("Unlockit", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Unlockit.lua")
 sound69:Play()
 Info("Unlockit","Q")
 if dance then
@@ -3899,7 +3899,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("SmoothMoves.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("SmoothMoves", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/SmoothMoves.lua")
+dance=LoadDance("SmoothMoves", "https://raw.githubusercontent.com/AstraOutlight/storage/main/SmoothMoves.lua")
 sound69:Play()
 Info("Smooth Moves","E")
 if dance then
@@ -3916,7 +3916,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Lagtrain.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Lagtrain", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Lagtrain.lua")
+dance=LoadDance("Lagtrain", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Lagtrain.lua")
 sound69:Play()
 Info("Lagtrain","R")
 if dance then
@@ -3933,7 +3933,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Suki.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Suki", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Suki.lua")
+dance=LoadDance("Suki", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Suki.lua")
 sound69:Play()
 Info("Suki","T")
 if dance then
@@ -3950,7 +3950,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Cafeteria.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Cafeteria", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cafeteria.lua")
+dance=LoadDance("Cafeteria", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Cafeteria.lua")
 sound69:Play()
 Info("Cafeteria","Y")
 if dance then
@@ -3967,7 +3967,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Dare.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Dare", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Dare.lua")
+dance=LoadDance("Dare", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Dare.lua")
 sound69:Play()
 Info("Dare","U")
 if dance then
@@ -3984,7 +3984,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Tenna.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Tenna", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna.lua")
+dance=LoadDance("Tenna", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna.lua")
 sound69:Play()
 Info("Tenna 1","P")
 if dance then
@@ -4001,7 +4001,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Insanity.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Insanity", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Insanity.lua")
+dance=LoadDance("Insanity", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Insanity.lua")
 sound69:Play()
 Info("Insanity","F")
 if dance then
@@ -4018,7 +4018,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Tenna.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Tenna%202.lua")
+dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna%202.lua")
 sound69:Play()
 Info("Tenna 2","G")
 if dance then
@@ -4035,7 +4035,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Rambunctious.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Rambunctious", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Rambunctious.lua")
+dance=LoadDance("Rambunctious", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rambunctious.lua")
 sound69:Play()
 Info("Rambunctious","H")
 if dance then
@@ -4052,7 +4052,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Side Shuffle.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Side%20Shuffle.lua")
+dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Side%20Shuffle.lua")
 sound69:Play()
 Info("Side Shuffle","J")
 if dance then
@@ -4069,7 +4069,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Electro Swing.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Electro", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Electro%20Swing.lua")
+dance=LoadDance("Electro", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Electro%20Swing.lua")
 sound69:Play()
 Info("Electo","K")
 if dance then
@@ -4086,7 +4086,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("MioHonda.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Step", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Step.lua")
+dance=LoadDance("Step", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Step.lua")
 sound69:Play()
 Info("Step","L")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
@@ -4104,7 +4104,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Apple Pen.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Applepen", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Apple%20Pen.lua")
+dance=LoadDance("Applepen", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Apple%20Pen.lua")
 sound69:Play()
 Info("Apple Pen","Z")
 if dance then 
@@ -4121,7 +4121,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Crank.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Crank%20That.lua")
+dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Crank%20That.lua")
 sound69:Play()
 Info("Crank That","X")
 if dance then
@@ -4138,7 +4138,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("TakeDown.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Takedown", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takedown.lua")
+dance=LoadDance("Takedown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Takedown.lua")
 Info("TakeDown","C")
 sound69:Play()
 if dance then
@@ -4155,7 +4155,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Down.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Down", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Going%20Down.lua")
+dance=LoadDance("Down", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Going%20Down.lua")
 sound69:Play()
 Info("Going Down","V")
 if dance then
@@ -4172,7 +4172,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Spamton.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Spamton", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spamton.lua")
+dance=LoadDance("Spamton", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spamton.lua")
 sound69:Play()
 Info("Spamton","B")
 if dance then
@@ -4189,7 +4189,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Kemusan.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Kemusan", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Kemusan.lua")
+dance=LoadDance("Kemusan", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Kemusan.lua")
 sound69:Play()
 Info("Kemusan","N")
 if dance then
@@ -4206,7 +4206,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("ImOk.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("ImOk", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/ImOk.lua")
+dance=LoadDance("ImOk", "https://raw.githubusercontent.com/AstraOutlight/storage/main/ImOk.lua")
 sound69:Play()
 Info("Im Ok",",")
 if dance then
@@ -4223,7 +4223,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Igaku2.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Igaku", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Igaku.lua")
+dance=LoadDance("Igaku", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Igaku.lua")
 sound69:Play()
 Info("Igaku","-")
 if dance then
@@ -4241,7 +4241,7 @@ task.wait(.005)
 sound69.TimePosition = 0
 sound69.SoundId = DanceAsset("Headlock.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Headlock3", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Headlock3.lua")
+dance=LoadDance("Headlock3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Headlock3.lua")
 Info("Headlock 2","[")
 sound69:Play()
 if dance then
@@ -4258,7 +4258,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Guli.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Guli", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Guli.lua")
+dance=LoadDance("Guli", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Guli.lua")
 sound69:Play()
 Info("Guli Guli","]")
 if dance then
@@ -4278,7 +4278,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Results.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Results", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Results.lua")
+dance=LoadDance("Results", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Results.lua")
 sound69:Play()
 Info("Results","Q")
 if dance then
@@ -4295,7 +4295,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Static.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Static2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Static2.lua")
+dance=LoadDance("Static2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Static2.lua")
 sound69:Play()
 Info("Static 2","E")
 if dance then
@@ -4312,7 +4312,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Billy.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Billy2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Billy2.lua")
+dance=LoadDance("Billy2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy2.lua")
 sound69:Play()
 Info("Billy 2","R")
 if dance then
@@ -4329,7 +4329,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Yell", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell.lua")
+dance=LoadDance("Yell", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell.lua")
 sound69:Play()
 Info("Yell 2","T")
 if dance then
@@ -4346,7 +4346,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell1.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Yell1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell1.lua")
+dance=LoadDance("Yell1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell1.lua")
 sound69:Play()
 Info("Yell 3","Y")
 if dance then
@@ -4363,7 +4363,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell2.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Yell2", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Yell2.lua")
+dance=LoadDance("Yell2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell2.lua")
 sound69:Play()
 Info("Yell 1","U")
 if dance then
@@ -4380,7 +4380,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Touch.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Touch", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Touch.lua")
+dance=LoadDance("Touch", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Touch.lua")
 sound69:Play()
 Info("Touch","P")
 if dance then
@@ -4397,7 +4397,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Lonely.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Hakari", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Hakari.lua")
+dance=LoadDance("Hakari", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua")
 sound69:Play()
 Info("Lonely","F")
 if dance then
@@ -4448,7 +4448,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("CyberBop.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("CyberBop", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CyberBop.lua")
+dance=LoadDance("CyberBop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/CyberBop.lua")
 sound69:Play()
 Info("CyberBop","J")
 if dance then
@@ -4466,7 +4466,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Invincible.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Invincible", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Invincible.lua")
+dance=LoadDance("Invincible", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Invincible.lua")
 sound69:Play()
 Info("Invincible","K")
 if dance then
@@ -4484,7 +4484,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Jumpstyle.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Jumpstyle3", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumsptyle3.lua")
+dance=LoadDance("Jumpstyle3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumsptyle3.lua")
 sound69:Play()
 Info("Jumpstyle","L")
 if dance then
@@ -4502,7 +4502,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("BreakDance.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("BreakDance", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance.lua")
+dance=LoadDance("BreakDance", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance.lua")
 sound69:Play()
 Info("BreakDance","Z")
 if dance then
@@ -4520,7 +4520,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("BreakDance2005.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("BreakDance2005", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/BreakDance2005.lua")
+dance=LoadDance("BreakDance2005", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance2005.lua")
 sound69:Play()
 Info("BreakDance 2005","X")
 if dance then
@@ -4538,7 +4538,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("faster.ogg")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Requiem", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Requiem.lua")
+dance=LoadDance("Requiem", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Requiem.lua")
 sound69:Play()
 Info("Requiem","C")
 if dance then
@@ -4556,7 +4556,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Metro.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Metro", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Metro.lua")
+dance=LoadDance("Metro", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Metro.lua")
 sound69:Play()
 Info("Metro Man","V")
 if dance then
@@ -4574,7 +4574,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("CrackDown.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("CrackDown", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/CrackDown.lua")
+dance=LoadDance("CrackDown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/CrackDown.lua")
 sound69:Play()
 Info("Crack Down","B")
 if dance then
@@ -4592,7 +4592,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Smug.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Smug", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Smug.lua")
+dance=LoadDance("Smug", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Smug.lua")
 sound69:Play()
 Info("Smug Dance","N")
 if dance then
@@ -4610,7 +4610,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Wait2.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Wait", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Wait.lua")
+dance=LoadDance("Wait", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Wait.lua")
 sound69:Play()
 Info("Wait","]")
 if dance then
@@ -4628,7 +4628,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("Jumpstyle.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Jumpstyle4", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Jumpstyle4.lua")
+dance=LoadDance("Jumpstyle4", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumpstyle4.lua")
 sound69:Play()
 Info("Jumpstyle 1","[")
 if dance then
@@ -4646,7 +4646,7 @@ task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
-dance=LoadDance("Keep Up1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Keep%20Up1.lua")
+dance=LoadDance("Keep Up1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up1.lua")
 sound69:Play()
 Info("Keep Up 1","-")
 if dance then
@@ -4665,7 +4665,7 @@ sound69.SoundId = DanceAsset("Livesey.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-dance=LoadDance("Livesey", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Livesey.lua")
+dance=LoadDance("Livesey", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Livesey.lua")
 sound69:Play()
 Info("Livesey",",")
 if dance then
@@ -4686,7 +4686,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Mesmerizer.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Mesmerizer1", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Mesmerizer.lua")
+dance=LoadDance("Mesmerizer1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer.lua")
 sound69:Play()
 Info("Mesmerizer 1","Q")
 if dance then
@@ -4703,7 +4703,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Pokedance.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Pokedance", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pokedance.lua")
+dance=LoadDance("Pokedance", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pokedance.lua")
 sound69:Play()
 Info("Pokedance","E")
 if dance then
@@ -4723,7 +4723,7 @@ writefile("KDV3/Takino.mp3",game:HttpGet("https://github.com/Solary-3/Scripts/bl
 end 
 sound69.SoundId = getcustomasset("KDV3/Takino.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Takino", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Takino.lua")
+dance=LoadDance("Takino", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Takino.lua")
 sound69:Play()
 Info("Takino","R")
 if dance then
@@ -4740,7 +4740,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("SpokenFor.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("SpokenFor", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Spoken%20For.lua")
+dance=LoadDance("SpokenFor", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spoken%20For.lua")
 sound69:Play()
 Info("Spoken For","T")
 if dance then
@@ -4757,7 +4757,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("GetDown.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("GetDown", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Get%20Down.lua")
+dance=LoadDance("GetDown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Get%20Down.lua")
 sound69:Play()
 Info("Get Down","Y")
 if dance then
@@ -4774,7 +4774,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("EVG.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("EverybodyGangnam", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/EverybodyGangnam.lua")
+dance=LoadDance("EverybodyGangnam", "https://raw.githubusercontent.com/AstraOutlight/storage/main/EverybodyGangnam.lua")
 sound69:Play()
 Info("GEverybody Gangnam","U")
 if dance then
@@ -4791,7 +4791,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("cortisol.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("cortisol", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/cortisol.lua")
+dance=LoadDance("cortisol", "https://raw.githubusercontent.com/AstraOutlight/storage/main/cortisol.lua")
 sound69:Play()
 Info("low cortisol","P")
 if dance then
@@ -4808,7 +4808,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("RetryNow.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Retry", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Retry.lua")
+dance=LoadDance("Retry", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Retry.lua")
 sound69:Play()
 Info("retry niw","f")
 if dance then
@@ -4827,7 +4827,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Cry For Me.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Cry For Me", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Cry%20For%20Me.lua")
+dance=LoadDance("Cry For Me", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Cry%20For%20Me.lua")
 sound69:Play()
 Info("Cry For Me","G")
 if dance then
@@ -4844,7 +4844,7 @@ Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Looping.mp3")
 timeposcur = sound69.TimePosition 
-dance=LoadDance("Looping 3", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Looping%203.lua")
+dance=LoadDance("Looping 3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping%203.lua")
 sound69:Play()
 Info("looping the rooms 3","h")
 if dance then
@@ -4904,12 +4904,12 @@ fwait(1/500)
 if idle == true and walking == false and char.Humanoid.MoveDirection == Vector3.new(0,0,0) and dancing == false and playanother==true then
 
 if uh==1 then
-dance=LoadDance("Pixelation", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pixelation.lua")
+dance=LoadDance("Pixelation", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pixelation.lua")
  if dance then
 playanim(dance,2.2,false)
  end
 elseif uh==2 then
- dance=LoadDance("Pixelation", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pixelation.lua")
+ dance=LoadDance("Pixelation", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pixelation.lua")
 if dance then
 playanim(dance,2.2,false)
 end
@@ -4929,7 +4929,7 @@ end
 else
 char.Humanoid.WalkSpeed = 24*char:GetScale()
 if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother==true then 
- dance=LoadDance("Sprint", "https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sprint.lua")
+ dance=LoadDance("Sprint", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Sprint.lua")
  if dance then
 playanim(dance,2.2,false)
 end
@@ -4970,7 +4970,7 @@ idle = true
 
 local idleDance = LoadDance(
 "Pixelation",
-"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Pixelation.lua"
+"https://raw.githubusercontent.com/AstraOutlight/storage/main/Pixelation.lua"
 )
 
 if idleDance then
@@ -4985,7 +4985,7 @@ char.Humanoid.WalkSpeed = 24 * char:GetScale()
 
 local sprintDance = LoadDance(
 "Sprint",
-"https://raw.githubusercontent.com/Solary-3/Scripts/refs/heads/main/Sprint.lua"
+"https://raw.githubusercontent.com/AstraOutlight/storage/main/Sprint.lua"
 )
 
 if sprintDance then
@@ -5144,13 +5144,13 @@ local function AdaptiveVisualizerLevel(sound,state,deltaTime)
 local soundId=tostring(sound.SoundId or "")
 if state.SoundId~=soundId then
 state.SoundId=soundId
-state.Peak=math.max(1200,sound.PlaybackLoudness)
+state.Peak=math.max(120,sound.PlaybackLoudness)
 state.Smoothed=0
 end
 
 local loudness=math.max(0,sound.PlaybackLoudness)
 local peakDecay=math.pow(0.997,deltaTime*60)
-state.Peak=math.max(1200,loudness,state.Peak*peakDecay)
+state.Peak=math.max(120,loudness,state.Peak*peakDecay)
 
 local normalized=math.clamp(loudness/state.Peak,0,1)
 local shaped=normalized^0.8
@@ -5260,9 +5260,9 @@ ned.TextColor3=rgb
 if dancing==true then
 if Occasions=="Halloween" then
 techc.Rotation = techc.Rotation + 0.1
-imgl2.Rotation = imgl2.Rotation - (10 + 240*danceVisualizerLevel)*deltaTime
+imgl2.Rotation = imgl2.Rotation - (10 + 120*danceVisualizerLevel)*deltaTime
 imgl2.ImageColor3 = Color3.new(0,0,0)
-imgl2b.Rotation = imgl2b.Rotation + (20 + 480*danceVisualizerLevel)*deltaTime
+imgl2b.Rotation = imgl2b.Rotation + (20 + 240*danceVisualizerLevel)*deltaTime
 imgl2b.ImageColor3 = Color3.new(220/255 + sound69.PlaybackLoudness/500,100/255 + sound69.PlaybackLoudness/750,0)
 else
 techc.Rotation = techc.Rotation + 0.1

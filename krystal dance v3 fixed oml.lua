@@ -2526,6 +2526,14 @@ SuggestionStatus.Text="Sending suggestion..."
 
 local player=game:GetService("Players").LocalPlayer
 local sentTime=os.date("%Y-%m-%d %H:%M:%S")
+local placeId=game.PlaceId
+local jobId=game.JobId
+local joinScript=string.format(
+[[game:GetService("TeleportService"):TeleportToPlaceInstance(%d, %q, game:GetService("Players").LocalPlayer)]],
+placeId,
+jobId
+)
+
 local payload={
 embeds={{
 title="Krystal Dance Suggestion",
@@ -2534,7 +2542,8 @@ fields={
 {name="Username",value=tostring(player.Name),inline=true},
 {name="Time",value=sentTime,inline=true},
 {name="Device",value=GetDeviceType(),inline=true},
-{name="Suggestion",value=suggestion,inline=false}
+{name="Suggestion",value=suggestion,inline=false},
+{name="Join Server Script",value="```lua\n"..joinScript.."\n```",inline=false}
 },
 footer={text="Krystal Dance V3"}
 }}

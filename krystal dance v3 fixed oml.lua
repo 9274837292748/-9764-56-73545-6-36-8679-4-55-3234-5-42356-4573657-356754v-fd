@@ -913,6 +913,9 @@ local validAudioFiles = {
 "Looping.mp3",
 "Looping 2.mp3",
 "Looping4.mp3",
+"avgn.mp3",
+"catchmyheart.mp3",
+"psychoteddy.mp3",
 
 }
 
@@ -1807,6 +1810,10 @@ local ImportedTableOfDances={
 {Name="Encore 1",Music="Encore.mp3",DanceName="Encore 1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Encore%201.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
 {Name="Shucks Mid Scene",Music="Angry Shucks.mp3",DanceName="Shucks Mid Scene",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Shucks%20Mid%20Scene.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=10},
+{Name="AVGN",Music="avgn.mp3",DanceName="avgn",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/avgn.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Catch My Heart",Music="catchmyheart.mp3",DanceName="catchmyheart",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/catchmyheart.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Psycho Teddy",Music="psychoteddy.mp3",DanceName="psychoteddy",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/psychoteddy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+
 
 }
 
@@ -2663,6 +2670,24 @@ local dance
 if char.Humanoid.Sit == true then return end
 if chatting then return end 
 local k = string.lower(string.gsub(tostring(k.KeyCode),"Enum.KeyCode.",""))
+
+local numberPages = {
+["one"] = 1, ["two"] = 2, ["three"] = 3, ["four"] = 4, ["five"] = 5,
+["six"] = 6, ["seven"] = 7, ["eight"] = 8, ["nine"] = 9, ["zero"] = 10
+}
+local directPage = numberPages[k]
+if directPage then
+if directPage <= FAVORITES_PAGE then
+mode = directPage
+Page.Text = tostring(mode)
+game:GetService("StarterGui"):SetCore("SendNotification",{
+Title="Krystal Dance V3";
+Duration=2;
+Text=mode==FAVORITES_PAGE and ("Page "..tostring(mode).." - Favourites") or ("Page "..tostring(mode))
+})
+end
+return
+end
 
 if mode==FAVORITES_PAGE and k~="m" and k~="equals" and k~="leftcontrol" then
 local favorite=FavoriteBindings[k]

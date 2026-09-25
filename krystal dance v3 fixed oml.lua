@@ -1,5 +1,5 @@
 
-if isfolder and not isfolder("KDV3") then 
+if isfolder and not isfolder("KDV3") then
 makefolder("KDV3")
 end
 local Occasions="Halloween"
@@ -162,8 +162,8 @@ CurrentPage.Name=[[CurrentPage]]
 
 Page.Text=[[1]]
 Page.Font=[[Arcade]]
-Page.BackgroundTransparency=1 
-Page.TextSize=18 
+Page.BackgroundTransparency=1
+Page.TextSize=18
 Page.TextColor3=Color3.new(255,255,255)
 Page.Size=UDim2.new(0.2, 0, 0.33333, 0)
 Page.Position=UDim2.new(0.22857, 0, 0.11111, 0)
@@ -173,16 +173,16 @@ CurrentKey.Text=[[Key:]]
 CurrentKey.Font=[[Arcade]]
 CurrentKey.Size=UDim2.new(0.2, 0, 0.33333, 0)
 CurrentKey.TextColor3=Color3.new(255,255,255)
-CurrentKey.BackgroundTransparency=1 
+CurrentKey.BackgroundTransparency=1
 CurrentKey.Position=UDim2.new(0.53571, 0, 0.12963, 0)
-CurrentKey.TextSize=11 
+CurrentKey.TextSize=11
 CurrentKey.Name=[[CurrentKey]]
 
 Key.Text=[[None]]
 Key.Font=[[Arcade]]
-Key.BackgroundTransparency=1 
+Key.BackgroundTransparency=1
 Key.TextColor3=Color3.new(255,255,255)
-Key.TextSize=18 
+Key.TextSize=18
 Key.Size=UDim2.new(0.2, 0, 0.33333, 0)
 Key.Position=UDim2.new(0.75, 0, 0.11111, 0)
 Key.Name=[[Mode]]
@@ -191,14 +191,14 @@ DanceInfo.Text=[[Dance:]]
 DanceInfo.Font=[[Arcade]]
 DanceInfo.BackgroundTransparency=1
 DanceInfo.TextColor3=Color3.new(255,255,255)
-DanceInfo.TextSize=11 
+DanceInfo.TextSize=11
 DanceInfo.Size=UDim2.new(0.2, 0, 0.3, 0)
 DanceInfo.Position=UDim2.new(0, 0, 0.55556, 0)
 DanceInfo.Name=[[PressedKey]]
 
 Dance.Text=[[None]]
 Dance.Font=[[Arcade]]
-Dance.BackgroundTransparency=1 
+Dance.BackgroundTransparency=1
 Dance.TextSize=10.5
 Dance.TextColor3=Color3.new(255,255,255)
 Dance.Size=UDim2.new(0.2, 0, 0.33333, 0)
@@ -207,12 +207,12 @@ Dance.Position=UDim2.new(0.310, 0, 0.55556, 0)
 Credits.Text=[[Love By Xyris]]
 Credits.Font=[[Fantasy]]
 Credits.TextColor3=Color3.new(255,255,255)
-Credits.BackgroundTransparency=1 
+Credits.BackgroundTransparency=1
 Credits.TextSize=11
 Credits.Size=UDim2.new(0.4, 0, 0.37037, 0)
 Credits.Position=UDim2.new(0, 125, 0.56, 0);
 Credits.Name=[[Credits]]
-ui.Visible=true 
+ui.Visible=true
 local originalUIPosition = ui.Position
 local isTweening = false
 Show.MouseButton1Click:Connect(function()
@@ -299,6 +299,73 @@ end
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 local delfile = delfile or function(path)
 if isfile and isfile(path) then
 pcall(function()
@@ -315,8 +382,18 @@ end
 
 
 
-local ALLOWPROTECTION=true 
+local ALLOWPROTECTION=true
 local ALLOWPROTECTION1=false
+
+
+
+
+
+
+
+
+
+
 
 local Place = game.placeId
 local REANIMATION = false
@@ -455,6 +532,8 @@ end
 getmetatable(is).__namecall = function(_, id)
 return loadlocalasset(id)
 end
+
+
 
 local danceCache = {}
 local ASTRA_STORAGE_RAW = "https://raw.githubusercontent.com/AstraOutlight/storage/main/"
@@ -596,12 +675,12 @@ end
 return dance
 end
 
-local timeposcur = 0 
+local timeposcur = 0
 local ss=game:GetService("RunService")
-if ss:FindFirstChild("BGM") then 
+if ss:FindFirstChild("BGM") then
 ss.BGM:Destroy()
 end
-if ss:FindFirstChild("Dance") then 
+if ss:FindFirstChild("Dance") then
 ss.Dance:Destroy()
 end
 local sound69 = Instance.new("Sound",ss)
@@ -621,7 +700,7 @@ end)
 local customasset = function(id)
 if exploit ~= "CaetSploit" then
 idwithoutthatbit= string.gsub(id,"KDV3/","")
-if not isfile(id) then 
+if not isfile(id) then
  writefile(id,game:HttpGet("https://github.com/Solary-3/Scripts/tree/Audios-1"..idwithoutthatbit))
 end
  repeat task.wait() until isfile(id)
@@ -840,6 +919,7 @@ local validAudioFiles = {
 
 }
 
+
 local function DanceAsset(file)
 local filePath = "KDV3/"..file
 if isfile(filePath) then
@@ -853,7 +933,7 @@ delfile(filePath)
 end
 end
 
-if not isfile(filePath) then 
+if not isfile(filePath) then
 notify("Downloading Audio: " .. file)
 local data, source = DownloadAudioData(file)
 if not data then
@@ -899,13 +979,14 @@ end
 local char=game:GetService("Players").LocalPlayer.Character
 local Character =char
 local Humanoid = Character:WaitForChild("Humanoid")
-local mode = 1 
+local mode = 1
 local INPUTLOOP =nil
 local STATES =nil
 local SITTING=nil
 local UPDATE=nil
-local sprinting = false 
+local sprinting = false
 local uis = game:GetService("UserInputService")
+
 
 
 
@@ -1003,6 +1084,7 @@ ned.TextColor3 = Color3.new(1,0,0)
 ned.TextStrokeColor3 = Color3.new(0,0,0)
 ned.TextScaled = true
 ned.TextStrokeTransparency = 0
+
 ned.Text = ""
 ned.TextSize = 24
 ned.Rotation = 1
@@ -1021,15 +1103,15 @@ Text3.LineJoinMode = Enum.LineJoinMode.Miter
 
 
 local lol = math.random(1,30)
-if lol == 2 then 
-lol = true 
+if lol == 2 then
+lol = true
 end
-local idleanim = is:LoadLocalAsset("rbxassetid://74204337812128") 
+local idleanim = is:LoadLocalAsset("rbxassetid://74204337812128")
 local walkanim = is:LoadLocalAsset("rbxassetid://73688515498572")
 local randompart = Instance.new("Part",game:GetService("RunService"))
 local coolparticles = game:GetObjects("rbxassetid://87299663038091")[1].ParticleAttachment
 coolparticles.Parent = randompart
-local playbacktrack = true 
+local playbacktrack = true
 local script = Instance.new("LocalScript")
 real = true
 local mrandom=math.random
@@ -1053,13 +1135,13 @@ local s;
 local animid;
 local plr;
 local legitjustran = false
-local loopsplaying=0 
-local rst 
-local switch=false 
+local loopsplaying=0
+local rst
+local switch=false
 local lst
-local rht 
-local lht 
-local nt 
+local rht
+local lht
+local nt
 local rjt
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local cframe;
@@ -1092,7 +1174,7 @@ local RunService = game:GetService("RunService")
 local hum=char:FindFirstChildOfClass("Humanoid")
 local h=char:WaitForChild("Head")
 local t=char:WaitForChild("Torso")
-local hrp=char:WaitForChild("HumanoidRootPart") 
+local hrp=char:WaitForChild("HumanoidRootPart")
 if char:FindFirstChild("Animate") then
 char.Animate.Enabled = false
 end
@@ -1473,13 +1555,13 @@ local function stopanim()
  Info("None","None")
  loopsplaying = math.max(0, loopsplaying - 1)
  local SavedTime = Playsound.TimePosition
- playanother = true 
+ playanother = true
  if dancing then
  Playsound.PlaybackSpeed = 1
  if playbacktrack == true then
  Playsound.Volume = 0
  Playsound:Stop()
- else 
+ else
  Playsound.Volume = .75
  Playsound:Stop()
  end
@@ -1494,13 +1576,13 @@ nt:Cancel()
 rjt:Cancel()
  end)
  sound69.Volume=1
- if dancing == true then 
+ if dancing == true then
  dancing = false
- idle = true 
+ idle = true
  char.Humanoid:Move(Vector3.new(0,0,-1),true)
- walking = false 
+ walking = false
  wait(.065)
- 
+
  if playbacktrack and not dancing then
  sound69:Stop()
  sound69.Volume=0
@@ -1508,8 +1590,8 @@ rjt:Cancel()
  Playsound.TimePosition = SavedTime
  Playsound.Volume = .75
  end
- 
- if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother == true then 
+
+ if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother == true then
  task.spawn(function()
  playanim(74204337812128, 1, false)
  end)
@@ -1876,17 +1958,65 @@ local ImportedKeyOrder={
 local ImportedBindings={}
 local ImportedStartPage=7
 
+
+
+
+local function NormalizeDuplicateDanceName(value)
+return string.lower((tostring(value or ""):gsub("[^%w]","")))
+end
+
+
+local ExistingDanceAliases={
+["boogiedown"]="boogie",
+["caramelldansen"]="caramell",
+["swagwalk"]="dr",
+["kazotsky"]="kazot",
+["liardancer"]="liar",
+["static1"]="static",
+["prismshuffle"]="prism",
+["commercialbreak"]="commercial",
+["sodapop"]="soda",
+["assumptiosshuffle"]="assumptionsshuffle",
+["veryhot"]="itburns",
+["leftright"]="two",
+["billiejean"]="bj",
+["sillybilly1"]="yourself",
+["miohondastep"]="step",
+["sillybilly2"]="billy2",
+["hakarilonely"]="lonely",
+["savorw"]="savor",
+["clubpenguin"]="club",
+["goateddance"]="goat",
+["stockshuffle"]="stock",
+["lemonmelon"]="lemon",
+["toomuchbrain"]="brain",
+["electroswing"]="electo",
+["medicinetetoigaku"]="igaku",
+["guli"]="guliguli",
+["outoftouch"]="touch",
+["liveseywalk"]="livesey",
+["everybodygangnam"]="geverybodygangnam",
+["retrynow"]="retryniw"
+}
+
+local function CanonicalDuplicateDanceName(value)
+local normalized=NormalizeDuplicateDanceName(value)
+return ExistingDanceAliases[normalized] or normalized
+end
+
 local SeenDanceNames={}
 for _,control in ipairs(ControlsList) do
 if control.Dance then
-local normalized=string.lower((tostring(control.Dance):gsub("^%s+",""):gsub("%s+$","")))
+local normalized=CanonicalDuplicateDanceName(control.Dance)
+if normalized~="" then
 SeenDanceNames[normalized]=true
+end
 end
 end
 
 local UniqueImportedDances={}
 for _,danceData in ipairs(ImportedTableOfDances) do
-local normalized=string.lower((tostring(danceData.Name or ""):gsub("^%s+",""):gsub("%s+$","")))
+local normalized=CanonicalDuplicateDanceName(danceData.Name)
 if normalized~="" and not SeenDanceNames[normalized] then
 SeenDanceNames[normalized]=true
 table.insert(UniqueImportedDances,danceData)
@@ -2274,14 +2404,18 @@ notify("Removed favourite: "..entry.Dance)
 end
 end
 
+
 row.MouseButton2Click:Connect(toggleThisFavorite)
 favoriteButton.Activated:Connect(toggleThisFavorite)
+
+
 
 row.Activated:Connect(function()
     if entry.Data then
         PlayImportedDance(entry.Data, tostring(entry.Key))
         return
     end
+
 
     local keyCode=GetControlKeyCode(entry.Key)
     if not keyCode then
@@ -2299,6 +2433,7 @@ row.Activated:Connect(function()
         task.wait()
         VirtualInputManager:SendKeyEvent(false,keyCode,false,game)
         task.wait(.05)
+
         if mode==(tonumber(entry.Page) or 1) then
             Page.Text=tostring(mode)
         else
@@ -2458,6 +2593,8 @@ end
 
 local SUGGESTION_WEBHOOK="https://discord.com/api/webhooks/1546413809676320790/sed0y1xFszCcR9BYIbWN76Z2Qt5_A-7TEZZ4lzpRQqir7O2pI3Dd_cAsvHprTKq3Zoi4"
 local SendingSuggestion=false
+
+
 
 local DiscordPromptDismissed=false
 local DISCORD_INVITE="https://discord.gg/FUJWTqGPyH"
@@ -2689,21 +2826,21 @@ end)
 end)
 
 local ran=math.random(1,8)
-if ran==1 then 
+if ran==1 then
 Playsound.SoundId = DanceAsset("Sphere.mp3")
 elseif ran==2 then
 Playsound.SoundId = DanceAsset("Shiawase.mp3")
-elseif ran==3 then 
+elseif ran==3 then
 Playsound.SoundId = DanceAsset("TANOC.mp3")
-elseif ran==4 then 
+elseif ran==4 then
 Playsound.SoundId = DanceAsset("Tf2.mp3")
-elseif ran==5 then 
+elseif ran==5 then
 Playsound.SoundId = DanceAsset("Slash.mp3")
-elseif ran==6 then 
+elseif ran==6 then
 Playsound.SoundId = DanceAsset("God only knows.mp3")
-elseif ran==7 then 
+elseif ran==7 then
 Playsound.SoundId = DanceAsset("Matchmaker.mp3")
-elseif ran==8 then 
+elseif ran==8 then
 Playsound.SoundId = DanceAsset("Spooky 2.mp3")
 end
 Playsound.TimePosition =0
@@ -2720,7 +2857,7 @@ Playsound:Play()
 INPUTLOOP = uis.InputBegan:Connect(function(k,chatting)
 local dance
 if char.Humanoid.Sit == true then return end
-if chatting then return end 
+if chatting then return end
 local k = string.lower(string.gsub(tostring(k.KeyCode),"Enum.KeyCode.",""))
 
 local numberPages = {
@@ -2773,9 +2910,9 @@ PlayImportedDance(danceData,displayKey)
 return
 end
 end
-if mode == 1 then 
-if k == "q" then 
-if dancing == false then 
+if mode == 1 then
+if k == "q" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
@@ -2786,25 +2923,25 @@ sound69.SoundId = DanceAsset("Matchmaker.mp3")
 else
 sound69.SoundId = DanceAsset("rat.mp3")
 end
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Rat1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat1.lua")
 Info("Rat 1","Q")
 sound69:Play()
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "e" then 
-if dancing == false then 
+elseif k == "e" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("FunkedUp.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Boogie","E")
 playanim(122471664395501)
@@ -2813,15 +2950,15 @@ stopanim()
 sound69.PlaybackSpeed = 1
 
 end
-elseif k == "r" then 
-if dancing == false then 
+elseif k == "r" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Assumptions.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Assumptions", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Assumptions.lua")
 sound69:Play()
 Info("Assumptions","R")
@@ -2833,39 +2970,19 @@ stopanim()
 sound69.PlaybackSpeed = 1
 
 end
-elseif k == "t" then 
-if dancing == false then 
+elseif k == "t" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Egypt.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Egypt", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Egypt.lua")
 sound69:Play()
 Info("Egypt","T")
 if dance then
-playanim(dance) 
-end
-else
-stopanim()
-sound69.PlaybackSpeed = 1
-
-end
-elseif k == "y" then 
-if dancing == false then 
-stopanim()
-dancing = true
-Playsound.Volume=0
-task.wait(.005)
-sound69.SoundId = DanceAsset("DO THE FLOP.mp3")
-sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
-dance=LoadDance("Flop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Flop.lua")
-sound69:Play()
-Info("Flop","Y")
-if dance then 
 playanim(dance)
 end
 else
@@ -2873,32 +2990,52 @@ stopanim()
 sound69.PlaybackSpeed = 1
 
 end
-elseif k == "u" then 
-if dancing == false then 
+elseif k == "y" then
+if dancing == false then
+stopanim()
+dancing = true
+Playsound.Volume=0
+task.wait(.005)
+sound69.SoundId = DanceAsset("DO THE FLOP.mp3")
+sound69.PlaybackSpeed = 1
+timeposcur = sound69.TimePosition
+dance=LoadDance("Flop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Flop.lua")
+sound69:Play()
+Info("Flop","Y")
+if dance then
+playanim(dance)
+end
+else
+stopanim()
+sound69.PlaybackSpeed = 1
+
+end
+elseif k == "u" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("caramell.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Caramell","U")
-playanim(114964447248296) 
+playanim(114964447248296)
 else
 stopanim()
 sound69.PlaybackSpeed = 1
 
 end
-elseif k == "f" then 
-if dancing == false then 
+elseif k == "f" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Heel.mp3")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("HeelToeHop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/HeelToeHop.lua")
 sound69:Play()
 Info("Heel Toe Hop","F")
@@ -2909,32 +3046,32 @@ else
 stopanim()
 
 end
-elseif k == "g" then 
-if dancing == false then 
+elseif k == "g" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("gangnamm.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Gangnam","G")
-playanim(133530633475679) 
+playanim(133530633475679)
 else
 stopanim()
 
 end
-elseif k == "p" then 
-if dancing == false then 
+elseif k == "p" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
-if isfile and not isfile("KDV3/Monkey.mp3") then 
+if isfile and not isfile("KDV3/Monkey.mp3") then
 writefile("KDV3/Takino.mp3",game:HttpGet("https://github.com/Solary-3/Scripts/blob/Audios-1/Monkey.mp3?raw=true"))
-end 
+end
 sound69.SoundId = getcustomasset("KDV3/Monkey.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("BombMonkey", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Bomb%20Monkey.lua")
 Info("Bomb Monkey","P")
 sound69:Play()
@@ -2945,63 +3082,63 @@ else
 stopanim()
 
 end
-elseif k == "j" then 
-if dancing == false then 
+elseif k == "j" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("dancingin.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Starlit","J")
-playanim(136139381223407) 
+playanim(136139381223407)
 else
 stopanim()
 
 end
-elseif k == "k" then 
-if dancing == false then 
+elseif k == "k" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("dr.wav")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("DR","K")
-playanim(110403709064010,2) 
+playanim(110403709064010,2)
 else
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 stopanim()
 
 end
-elseif k == "l" then 
-if dancing == false then 
+elseif k == "l" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("griddy.mp3")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Griddy","L")
-playanim(114928062507098) 
+playanim(114928062507098)
 else
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 stopanim()
 
 end
-elseif k == "z" then 
-if dancing == false then 
+elseif k == "z" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("lux.ogg")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Luxurious","Z")
 playanim(94534967284996)
@@ -3010,84 +3147,84 @@ else
 stopanim()
 
 end
-elseif k == "x" then 
-if dancing == false then 
+elseif k == "x" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("kazot.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Kazot","X")
-playanim(86634257330162,1) 
+playanim(86634257330162,1)
 else
 stopanim()
 
 end
-elseif k == "h" then 
-if dancing == false then 
+elseif k == "h" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Domino.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Domino", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Domino.lua")
 sound69:Play()
 Info("Domino","H")
-if dance then 
-playanim(dance) 
+if dance then
+playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "v" then 
-if dancing == false then 
+elseif k == "v" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Liar.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Liar", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Liar.lua")
 sound69:Play()
 Info("Liar","V")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 
 end
 
-elseif k == "c" then 
-if dancing == false then 
+elseif k == "c" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Mesmerizer.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Mesmerizer", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer.lua")
 sound69:Play()
 Info("Mesmerizer","C")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "n" then 
-if dancing == false then 
+elseif k == "n" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Box.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("BoxSwing", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Box%20Swing.lua")
 sound69:Play()
 Info("Box Swing","N")
@@ -3099,32 +3236,32 @@ stopanim()
 
 end
 
-elseif k == "comma" then 
-if dancing == false then 
+elseif k == "comma" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Static.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Static", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Static.lua")
 sound69:Play()
 Info("Static",",")
-if dance then 
-playanim(dance) 
+if dance then
+playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "leftbracket" then 
-if dancing == false then 
+elseif k == "leftbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Prism.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Prism", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Prism%20Shuffle.lua")
 sound69:Play()
 Info("Prism","[")
@@ -3135,8 +3272,8 @@ else
 stopanim()
 
 end
-elseif k == "rightbracket" then 
-if dancing == false then 
+elseif k == "rightbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
@@ -3153,32 +3290,32 @@ else
 stopanim()
 
 end
-elseif k == "b" then 
-if dancing == false then 
+elseif k == "b" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("TUCA DONKA.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Hakari", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua")
 sound69:Play()
 Info("Hakari","B")
-if dance then 
+if dance then
  playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "minus" then 
-if dancing == false then 
+elseif k == "minus" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Break.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Commercial", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Commercial.lua")
 sound69:Play()
 Info("Commercial","-")
@@ -3191,48 +3328,48 @@ stopanim()
 end
 end
 end
-if mode == 2 then 
-if k == "q" then 
-if dancing == false then 
+if mode == 2 then
+if k == "q" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("XO.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("XO","Q")
 playanim(89807443968447)
 else
 stopanim()
 
-end 
+end
 elseif k == "e" then
-if dancing == false then 
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Soda.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Soda", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Soda%20Pop.lua")
 sound69:Play()
 Info("Soda","E")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 
-end 
+end
 elseif k == "r" then
-if dancing == false then 
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("LoveForU.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("L4U", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Love4U.lua")
 sound69:Play()
 Info("L4U","R")
@@ -3242,120 +3379,120 @@ end
 else
 stopanim()
 
-end 
-elseif k == "t" then 
-if dancing == false then 
+end
+elseif k == "t" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("assum.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Assumptions Shuffle","T")
-playanim(129275138998868) 
+playanim(129275138998868)
 else
 stopanim()
 
 end
-elseif k == "y" then 
-if dancing == false then 
+elseif k == "y" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("balls.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Peashooter","Y")
-playanim(124616782933406) 
+playanim(124616782933406)
 else
 stopanim()
 
 end
-elseif k == "h" then 
-if dancing == false then 
+elseif k == "h" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Distraction.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Distraction", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Distraction.lua")
 sound69:Play()
 Info("Distraction","H")
-if dance then 
+if dance then
 playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "g" then 
-if dancing == false then 
+elseif k == "g" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("ItBurns.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/AstraOutlight/storage/main/It%20Burns.lua")
 sound69:Play()
 Info("ItBurns","G")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == [[f]] then 
-if dancing == false then 
+elseif k == [[f]] then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("chronoshift.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Chronoshift", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Chronoshift.lua")
 sound69:Play()
 Info("Chronoshift","F")
-if dance then 
-playanim(dance) 
+if dance then
+playanim(dance)
 end
 else
 stopanim()
 
 end
-elseif k == "j" then 
-if dancing == false then 
+elseif k == "j" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Keep Up", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up.lua")
 sound69:Play()
 Info("Keep Up","J")
 coolparticles.Parent = char.Torso
-if dance then 
-playanim(dance) 
+if dance then
+playanim(dance)
 end
 else
 stopanim()
 sound69.PlaybackSpeed = 1
 
 end
-elseif k == "k" then 
-if dancing == false then 
+elseif k == "k" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Boombox.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Boombox","K")
 playanim(92629504992703)
@@ -3363,123 +3500,124 @@ else
 stopanim()
 
 end
-elseif k == "u" then 
-if dancing == false then 
+elseif k == "u" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("bloodpop.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Bloodpop","U")
-playanim(82472212108809) 
+playanim(82472212108809)
 else
 stopanim()
 
 end
-elseif k == "n" then 
-if dancing == false then 
+elseif k == "n" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 sound69.SoundId = DanceAsset("Sit.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Sit", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Sit.lua")
 sound69:Play()
 char.Humanoid.WalkSpeed = 0*char:GetScale()
 Info("Sit","N")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "z" then 
-if dancing == false then 
+elseif k == "z" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("leftright.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Two","Z")
-playanim(107261816578577) 
+playanim(107261816578577)
 else
 stopanim()
 
 end
-elseif k == "x" then 
-if dancing == false then 
+elseif k == "x" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("heavylove.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Heavylove","X")
-playanim(101332118847458) 
+playanim(101332118847458)
 else
 stopanim()
 
 end
-elseif k == "c" then 
-if dancing == false then 
+elseif k == "c" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Million.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Million","C")
 playanim(109123683211464)
 else
 stopanim()
 end
-elseif k == "v" then 
-if dancing == false then 
+elseif k == "v" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Bjean.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("BillieJean", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BillieJean.lua")
 sound69:Play()
 Info("BJ","V")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "b" then 
-if dancing == false then 
+elseif k == "b" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Savor.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Savor", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Savor.lua")
 sound69:Play()
 Info("Savor","B")
-if dance then 
+if dance then
 playanim(dance)
+end
 else
 stopanim()
 end
-elseif k == "p" then 
-if dancing == false then 
+elseif k == "p" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yamero.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Yamero", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yamero.lua")
 sound69:Play()
 Info("Yamero","P")
@@ -3489,14 +3627,14 @@ end
 else
 stopanim()
 end
-elseif k == "comma" then 
-if dancing == false then 
+elseif k == "comma" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("InternetAngel.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Angel", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Angel.lua")
 sound69:Play()
 Info("Angel",",")
@@ -3506,31 +3644,31 @@ end
 else
 stopanim()
 end
-elseif k == "minus" then 
-if dancing == false then 
+elseif k == "minus" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CLUB PENGUIN DANCE.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Club%20Penguin.lua")
 sound69:Play()
 Info("Club","-")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "leftbracket" then 
-if dancing == false then 
+elseif k == "leftbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Runaway.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Runaway", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Runaway.lua")
 sound69:Play()
 Info("Runaway","[")
@@ -3540,31 +3678,31 @@ end
 else
 stopanim()
 end
-elseif k == "rightbracket" then 
-if dancing == false then 
+elseif k == "rightbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("MioHonda.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Miohonda", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Miohonda.lua")
 sound69:Play()
 Info("MioHonda","]")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "l" then 
-if dancing == false then 
+elseif k == "l" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Firework.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Firework", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Firework.lua")
 sound69:Play()
 Info("Firework","L")
@@ -3574,11 +3712,11 @@ end
 else
 stopanim()
 end
-end 
 end
-if mode == 3 then 
-if k == "q" then 
-if dancing == false then 
+end
+if mode == 3 then
+if k == "q" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
@@ -3588,20 +3726,20 @@ timeposcur = sound69.TimePosition
 dance=LoadDance("C14", "https://raw.githubusercontent.com/AstraOutlight/storage/main/C14.lua")
 sound69:Play()
 Info("C14","Q")
-if dance then 
+if dance then
 playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "e" then 
-if dancing == false then 
+elseif k == "e" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Slickback.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Slickback", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Slickback.lua")
 sound69:Play()
 Info("Slickback","E")
@@ -3611,31 +3749,31 @@ end
 else
 stopanim()
 end
-elseif k == "r" then 
-if dancing == false then 
+elseif k == "r" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Doodle.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Doodle", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Doodle.lua")
 sound69:Play()
 Info("Doodle","R")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "t" then 
-if dancing == false then 
+elseif k == "t" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Goat.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Goat", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Goat.lua")
 sound69:Play()
 Info("Goat","T")
@@ -3645,14 +3783,14 @@ end
 else
 stopanim()
 end
-elseif k == "y" then 
-if dancing == false then 
+elseif k == "y" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Bumblebee.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Bumblebee", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Bumblebee.lua")
 sound69:Play()
 Info("Bumblebee","Y")
@@ -3662,14 +3800,14 @@ end
 else
 stopanim()
 end
-elseif k == "u" then 
-if dancing == false then 
+elseif k == "u" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Stock.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Stock", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Stock%20Shuffle.lua")
 sound69:Play()
 Info("Stock","U")
@@ -3679,8 +3817,8 @@ end
 else
 stopanim()
 end
-elseif k == "p" then 
-if dancing == false then 
+elseif k == "p" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
@@ -3691,7 +3829,7 @@ sound69.SoundId = DanceAsset("Matchmaker.mp3")
 else
 sound69.SoundId = DanceAsset("rat.mp3")
 end
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Rat2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat2.lua")
 sound69:Play()
 Info("Rat 2","P")
@@ -3701,46 +3839,46 @@ end
 else
 stopanim()
 end
-elseif k == "f" then 
-if dancing == false then 
+elseif k == "f" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Shuba Duck.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Shuba",
 "https://raw.githubusercontent.com/AstraOutlight/storage/main/Shuba%20Duck.lua")
 sound69:Play()
 Info("Shuba Duck","F")
  if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "g" then 
-if dancing == false then 
+elseif k == "g" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Lemon.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Lemon","G")
 playanim(138510336377177,.8)
 else
 stopanim()
 end
-elseif k == "h" then 
-if dancing == false then 
+elseif k == "h" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Birdbrain2.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Birdbrain", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Birdbrain.lua")
 Info("Birdbrain","H")
 sound69:Play()
@@ -3750,14 +3888,14 @@ end
 else
 stopanim()
 end
-elseif k == "j" then 
-if dancing == false then 
+elseif k == "j" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Fein.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Fein", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Fein.lua")
 sound69:Play()
 Info("Fein","J")
@@ -3767,112 +3905,113 @@ end
 else
 stopanim()
 end
-elseif k == "k" then 
-if dancing == false then 
+elseif k == "k" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Popipo.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Popipo", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Popipo.lua")
 sound69:Play()
 Info("Popipo","K")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "l" then 
-if dancing == false then 
+elseif k == "l" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Pickup.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Pickup", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pickup.lua")
 sound69:Play()
 Info("Pickup","L")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "z" then 
-if dancing == false then 
+elseif k == "z" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Billy.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Billy", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy.lua")
 sound69:Play()
 Info("Yourself","Z")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "x" then 
-if dancing == false then 
+elseif k == "x" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("rotten.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Sinful","X")
 playanim(89457637802764,2)
 else
 stopanim()
 end
-elseif k == "c" then 
-if dancing == false then 
+elseif k == "c" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Spooky.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Spooky", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spooky.lua")
 sound69:Play()
 Info("Spooky","C")
 if dance then
 playanim(dance)
+end
 else
 stopanim()
 end
-elseif k == "v" then 
-if dancing == false then 
+elseif k == "v" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("JK.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Limited", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Limited.lua")
 sound69:Play()
 Info("JK","V")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "b" then 
-if dancing == false then 
+elseif k == "b" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Flexworks.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Flexworks", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Flexworks.lua")
 sound69:Play()
 Info("KJ","B")
@@ -3882,158 +4021,158 @@ end
 else
 stopanim()
 end
-elseif k == "n" then 
-if dancing == false then 
+elseif k == "n" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CrissCross.mp3")
 sound69.PlaybackSpeed = 1
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("CrissCross","N")
-playanim(109275255555630) 
+playanim(109275255555630)
 else
 stopanim()
 end
-elseif k == "comma" then 
-if dancing == false then 
+elseif k == "comma" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("brain.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Brain",",")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-playanim(93547721311170) 
+playanim(93547721311170)
 else
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 stopanim()
 end
-elseif k == "leftbracket" then 
-if dancing == false then 
+elseif k == "leftbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("espresso.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Espresso","[")
-playanim(87342159331194) 
+playanim(87342159331194)
 else
 stopanim()
 end
-elseif k == "rightbracket" then 
-if dancing == false then 
+elseif k == "rightbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("rakuten.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Rakuten","]")
-playanim(121967347012647) 
+playanim(121967347012647)
 else
 stopanim()
 end
-elseif k == "minus" then 
-if dancing == false then 
+elseif k == "minus" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("tort.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Torture","-")
 playanim(99811468921857)
 else
 stopanim()
 end
-end 
+end
 end
 if mode == 4 then
-if k == "q" then 
-if dancing == false then 
+if k == "q" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Unlockit.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Unlockit", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Unlockit.lua")
 sound69:Play()
 Info("Unlockit","Q")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "e" then 
-if dancing == false then 
+elseif k == "e" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("SmoothMoves.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("SmoothMoves", "https://raw.githubusercontent.com/AstraOutlight/storage/main/SmoothMoves.lua")
 sound69:Play()
 Info("Smooth Moves","E")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "r" then 
-if dancing == false then 
+elseif k == "r" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Lagtrain.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Lagtrain", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Lagtrain.lua")
 sound69:Play()
 Info("Lagtrain","R")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "t" then 
-if dancing == false then 
+elseif k == "t" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Suki.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Suki", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Suki.lua")
 sound69:Play()
 Info("Suki","T")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "y" then 
-if dancing == false then 
+elseif k == "y" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Cafeteria.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Cafeteria", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Cafeteria.lua")
 sound69:Play()
 Info("Cafeteria","Y")
@@ -4043,14 +4182,14 @@ end
 else
 stopanim()
 end
-elseif k == "u" then 
-if dancing == false then 
+elseif k == "u" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Dare.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Dare", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Dare.lua")
 sound69:Play()
 Info("Dare","U")
@@ -4060,48 +4199,48 @@ end
 else
 stopanim()
 end
-elseif k == "p" then 
-if dancing == false then 
+elseif k == "p" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Tenna.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Tenna", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna.lua")
 sound69:Play()
 Info("Tenna 1","P")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "f" then 
-if dancing == false then 
+elseif k == "f" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Insanity.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Insanity", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Insanity.lua")
 sound69:Play()
 Info("Insanity","F")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "g" then 
-if dancing == false then 
+elseif k == "g" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Tenna.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Tenna%202.lua")
 sound69:Play()
 Info("Tenna 2","G")
@@ -4111,243 +4250,243 @@ end
 else
 stopanim()
 end
-elseif k == "h" then 
-if dancing == false then 
+elseif k == "h" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Rambunctious.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Rambunctious", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Rambunctious.lua")
 sound69:Play()
 Info("Rambunctious","H")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "j" then 
-if dancing == false then 
+elseif k == "j" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Side Shuffle.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Side%20Shuffle.lua")
 sound69:Play()
 Info("Side Shuffle","J")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "k" then 
-if dancing == false then 
+elseif k == "k" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Electro Swing.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Electro", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Electro%20Swing.lua")
 sound69:Play()
 Info("Electo","K")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "l" then 
-if dancing == false then 
+elseif k == "l" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("MioHonda.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Step", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Step.lua")
 sound69:Play()
 Info("Step","L")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "z" then 
-if dancing == false then 
+elseif k == "z" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Apple Pen.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Applepen", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Apple%20Pen.lua")
 sound69:Play()
 Info("Apple Pen","Z")
-if dance then 
-playanim(dance) 
+if dance then
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "x" then 
-if dancing == false then 
+elseif k == "x" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Crank.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Crank%20That.lua")
 sound69:Play()
 Info("Crank That","X")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "c" then 
-if dancing == false then 
+elseif k == "c" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("TakeDown.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Takedown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Takedown.lua")
 Info("TakeDown","C")
 sound69:Play()
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "v" then 
-if dancing == false then 
+elseif k == "v" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Down.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Down", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Going%20Down.lua")
 sound69:Play()
 Info("Going Down","V")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "b" then 
-if dancing == false then 
+elseif k == "b" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Spamton.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Spamton", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spamton.lua")
 sound69:Play()
 Info("Spamton","B")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "n" then 
-if dancing == false then 
+elseif k == "n" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Kemusan.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Kemusan", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Kemusan.lua")
 sound69:Play()
 Info("Kemusan","N")
 if dance then
-playanim(dance) 
+playanim(dance)
 end
 else
 stopanim()
 end
-elseif k == "comma" then 
-if dancing == false then 
+elseif k == "comma" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("ImOk.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("ImOk", "https://raw.githubusercontent.com/AstraOutlight/storage/main/ImOk.lua")
 sound69:Play()
 Info("Im Ok",",")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
-elseif k == "minus" then 
-if dancing == false then 
+elseif k == "minus" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Igaku2.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Igaku", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Igaku.lua")
 sound69:Play()
 Info("Igaku","-")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
-elseif k == "leftbracket" then 
-if dancing == false then 
+elseif k == "leftbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.TimePosition = 0
 sound69.SoundId = DanceAsset("Headlock.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Headlock3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Headlock3.lua")
 Info("Headlock 2","[")
 sound69:Play()
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
-elseif k == "rightbracket" then 
-if dancing == false then 
+elseif k == "rightbracket" then
+if dancing == false then
 stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Guli.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Guli", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Guli.lua")
 sound69:Play()
 Info("Guli Guli","]")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4361,13 +4500,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Results.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Results", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Results.lua")
 sound69:Play()
 Info("Results","Q")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4378,13 +4517,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Static.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Static2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Static2.lua")
 sound69:Play()
 Info("Static 2","E")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4395,13 +4534,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Billy.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Billy2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Billy2.lua")
 sound69:Play()
 Info("Billy 2","R")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4412,13 +4551,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Yell", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell.lua")
 sound69:Play()
 Info("Yell 2","T")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4429,13 +4568,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell1.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Yell1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell1.lua")
 sound69:Play()
 Info("Yell 3","Y")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4446,13 +4585,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Yell2.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Yell2", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Yell2.lua")
 sound69:Play()
 Info("Yell 1","U")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4463,13 +4602,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Touch.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Touch", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Touch.lua")
 sound69:Play()
 Info("Touch","P")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4480,13 +4619,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Lonely.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Hakari", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Hakari.lua")
 sound69:Play()
 Info("Lonely","F")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4502,10 +4641,10 @@ sound69.SoundId = DanceAsset("Matchmaker.mp3")
 else
 sound69.SoundId = DanceAsset("rat.mp3")
 end
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Rat 3","G")
-playanim(117971041844492) 
+playanim(117971041844492)
 else
 stopanim()
 end
@@ -4516,10 +4655,10 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("whateverlike.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Uh","H")
-playanim(99152023738830) 
+playanim(99152023738830)
 else
 stopanim()
 end
@@ -4530,14 +4669,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CyberBop.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("CyberBop", "https://raw.githubusercontent.com/AstraOutlight/storage/main/CyberBop.lua")
 sound69:Play()
 Info("CyberBop","J")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4548,14 +4687,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Invincible.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Invincible", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Invincible.lua")
 sound69:Play()
 Info("Invincible","K")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4566,14 +4705,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Jumpstyle.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Jumpstyle3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumsptyle3.lua")
 sound69:Play()
 Info("Jumpstyle","L")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4584,14 +4723,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("BreakDance.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("BreakDance", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance.lua")
 sound69:Play()
 Info("BreakDance","Z")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4602,14 +4741,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("BreakDance2005.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("BreakDance2005", "https://raw.githubusercontent.com/AstraOutlight/storage/main/BreakDance2005.lua")
 sound69:Play()
 Info("BreakDance 2005","X")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4620,14 +4759,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("faster.ogg")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Requiem", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Requiem.lua")
 sound69:Play()
 Info("Requiem","C")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4638,14 +4777,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Metro.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Metro", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Metro.lua")
 sound69:Play()
 Info("Metro Man","V")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4656,14 +4795,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("CrackDown.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("CrackDown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/CrackDown.lua")
 sound69:Play()
 Info("Crack Down","B")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4674,14 +4813,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Smug.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Smug", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Smug.lua")
 sound69:Play()
 Info("Smug Dance","N")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4692,14 +4831,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Wait2.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Wait", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Wait.lua")
 sound69:Play()
 Info("Wait","]")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4710,14 +4849,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Jumpstyle.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Jumpstyle4", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Jumpstyle4.lua")
 sound69:Play()
 Info("Jumpstyle 1","[")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4728,14 +4867,14 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("KeepUp.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 dance=LoadDance("Keep Up1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Keep%20Up1.lua")
 sound69:Play()
 Info("Keep Up 1","-")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4746,22 +4885,22 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Livesey.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 sound69:Play()
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 dance=LoadDance("Livesey", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Livesey.lua")
 sound69:Play()
 Info("Livesey",",")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 stopanim()
 end
  end
 end
-if mode == 6 then 
+if mode == 6 then
 if k == "q" then
 if dancing == false then
 stopanim()
@@ -4769,13 +4908,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Mesmerizer.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Mesmerizer1", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Mesmerizer.lua")
 sound69:Play()
 Info("Mesmerizer 1","Q")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4786,13 +4925,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Pokedance.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Pokedance", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Pokedance.lua")
 sound69:Play()
 Info("Pokedance","E")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4802,17 +4941,17 @@ stopanim()
 dancing = true
 Playsound.Volume=0
 task.wait(.005)
-if isfile and not isfile("KDV3/Takino.mp3") then 
+if isfile and not isfile("KDV3/Takino.mp3") then
 writefile("KDV3/Takino.mp3",game:HttpGet("https://github.com/Solary-3/Scripts/blob/Audios-1/Takino.mp3?raw=true"))
-end 
+end
 sound69.SoundId = getcustomasset("KDV3/Takino.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Takino", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Takino.lua")
 sound69:Play()
 Info("Takino","R")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4823,13 +4962,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("SpokenFor.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("SpokenFor", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Spoken%20For.lua")
 sound69:Play()
 Info("Spoken For","T")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4840,13 +4979,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("GetDown.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("GetDown", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Get%20Down.lua")
 sound69:Play()
 Info("Get Down","Y")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4857,13 +4996,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("EVG.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("EverybodyGangnam", "https://raw.githubusercontent.com/AstraOutlight/storage/main/EverybodyGangnam.lua")
 sound69:Play()
 Info("GEverybody Gangnam","U")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4874,13 +5013,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("cortisol.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("cortisol", "https://raw.githubusercontent.com/AstraOutlight/storage/main/cortisol.lua")
 sound69:Play()
 Info("low cortisol","P")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4891,18 +5030,18 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("RetryNow.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Retry", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Retry.lua")
 sound69:Play()
 Info("retry niw","f")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
 
---CRY FOR ME
+
 elseif k == "g" then
 if dancing == false then
 stopanim()
@@ -4910,13 +5049,13 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Cry For Me.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Cry For Me", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Cry%20For%20Me.lua")
 sound69:Play()
 Info("Cry For Me","G")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
@@ -4927,21 +5066,21 @@ dancing = true
 Playsound.Volume=0
 task.wait(.005)
 sound69.SoundId = DanceAsset("Looping.mp3")
-timeposcur = sound69.TimePosition 
+timeposcur = sound69.TimePosition
 dance=LoadDance("Looping 3", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Looping%203.lua")
 sound69:Play()
 Info("looping the rooms 3","h")
 if dance then
-playanim(dance) 
-end-- uuid. 71723925114737
+playanim(dance)
+end
 else
 stopanim()
 end
 end
 end
-if k == "equals" then 
+if k == "equals" then
 switch=not switch
-if dancing==false then 
+if dancing==false then
 if switch then
 Playsound.Volume=.75
 else
@@ -4949,7 +5088,7 @@ Playsound.Volume=0
 end
 end
 end
-if k == "leftcontrol" then 
+if k == "leftcontrol" then
 sprinting = not sprinting
 end
 if k == "m" then
@@ -4979,7 +5118,7 @@ local airborneToken = 0
 local lastJumpStarted = 0
 
 STATES=char.Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()
-if char.Humanoid.Sit == false and not airborneAnimation then 
+if char.Humanoid.Sit == false and not airborneAnimation then
 if char.Humanoid.MoveDirection == Vector3.new(0,0,0) and dancing == false and idle == false then
 walking = false
 idle = true
@@ -4999,20 +5138,20 @@ playanim(dance,2.2,false)
 end
 end
 end
-elseif char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and walking == false then 
+elseif char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and walking == false then
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 walking = true
 idle = false
 stopanim()
 fwait(1/500)
-if sprinting == false then 
+if sprinting == false then
 char.Humanoid.WalkSpeed = 14*char:GetScale()
-if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother==true then 
+if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother==true then
 playanim(130213485744288,1,false,walkanim)
 end
 else
 char.Humanoid.WalkSpeed = 24*char:GetScale()
-if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother==true then 
+if walking == true and idle == false and char.Humanoid.MoveDirection ~= Vector3.new(0,0,0) and dancing == false and playanother==true then
  dance=LoadDance("Sprint", "https://raw.githubusercontent.com/AstraOutlight/storage/main/Sprint.lua")
  if dance then
 playanim(dance,2.2,false)
@@ -5024,16 +5163,16 @@ end
 end)
 SITTING=char.Humanoid:GetPropertyChangedSignal("Sit"):Connect(function()
 print("sit")
-if char.Humanoid.Sit == true then 
+if char.Humanoid.Sit == true then
 stopanim()
 
 math.randomseed(os.clock())
-if math.random(1,2) == 1 then 
+if math.random(1,2) == 1 then
 playanim(133312100962627,1,false)
-else 
+else
 playanim(122775909441631,1,false)
 end
-else 
+else
 stopanim()
 task.wait(.05)
 stopanim()
@@ -5163,7 +5302,7 @@ IsAllowedState = (find(AllowedStates, new) ~= nil)
 end)
 local oldC0N = Neck.C0
 local updatesPerSecond = 10
-local Character = char 
+local Character = char
 local Root = char.HumanoidRootPart
 introsound = Instance.new("Sound",Root)
 introsound.SoundId = "rbxassetid://236146895"
@@ -5201,14 +5340,14 @@ end))
 local nim= 0
 char.Humanoid.Died:Connect(function()
 sound69.PlaybackSpeed = 0
-sound69.Parent = nil 
+sound69.Parent = nil
 sound69.Volume = 0
 end)
 local hum = char.Humanoid
 local cf = CFrame.new
-local DIEDLOOP 
+local DIEDLOOP
 local HEADLOOP
-repeat 
+repeat
 char.Humanoid:Move(Vector3.new(0,0,-1),true)
 task.wait(1/60)
 nim=nim+1
@@ -5245,7 +5384,7 @@ return state.Smoothed
 end
 
 UPDATE=RunService.Heartbeat:Connect(function(deltaTime: number)
-if not IsReanimated() then 
+if not IsReanimated() then
 UPDATE:Disconnect()
 UPDATE = nil
 RUNNING = false
@@ -5286,20 +5425,20 @@ else
 end
 Neck.C0 = Neck.C0:Lerp(NeckOriginC0 * NeckCFrame, updatesPerSecond * deltaTime)
 end
-elseif dancing == true then 
+elseif dancing == true then
 Neck.C0 = oldC0N
 end
-if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then 
-walking = false 
-idle = true 
-else 
-walking = true 
-idle = false 
+if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then
+walking = false
+idle = true
+else
+walking = true
+idle = false
 end
 local danceVisualizerLevel=AdaptiveVisualizerLevel(sound69,VisualizerState.Dance,deltaTime)
 local bgmVisualizerLevel=AdaptiveVisualizerLevel(Playsound,VisualizerState.BGM,deltaTime)
 
--- Rgb Script
+
 if stage == 1 then
 g = g + 2.5
 if g >= 255 then
@@ -5340,7 +5479,7 @@ end
 local rgb=Color3.fromRGB(r,g,b)
 techc.ImageColor3=rgb
 ned.TextColor3=rgb
---Text3.TextColor3=rgb
+
 if dancing==true then
 if Occasions=="Halloween" then
 techc.Rotation = techc.Rotation + 0.1
@@ -5374,6 +5513,7 @@ imgl2b.Rotation = imgl2b.Rotation + (20 + 240*bgmVisualizerLevel)*deltaTime
 imgl2b.ImageColor3 = Color3.new(0,0.3 + Playsound.PlaybackLoudness/1500,0.6 + Playsound.PlaybackLoudness/1000)
 end
 end
+
 ned.Rotation = 0 - 2 * math.cos(sine / 24)
 ned.Position = UDim2.new(0.6,0 - 10 * math.cos(sine / 32),0.8,0 - 10 * math.cos(sine / 45))
 end)
@@ -5403,20 +5543,29 @@ Forcestop()
 Playsound:Stop()
 Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
 
+
+
+
+
+
+
+
+
+
 if UPDATE then
 UPDATE:Disconnect()
 UPDATE = nil
 end
 
-if STATES then 
+if STATES then
 STATES:Disconnect()
-STATES = nil 
+STATES = nil
 end
 
 if SITTING then
 SITTING:Disconnect()
 SITTING = nil
-end 
+end
 
 if INPUTLOOP then
 INPUTLOOP:Disconnect()
@@ -5435,9 +5584,9 @@ StopScript()
 game.ReplicatedStorage["01_server"]:FireServer("cmd", "-rs ")
 else
 wait(1)
---respawn()
+
 wait(1)
---respawn()
+
 end
 end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/AstraOutlight/my-scripts/refs/heads/main/namertag"))()

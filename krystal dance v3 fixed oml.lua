@@ -916,6 +916,11 @@ local validAudioFiles = {
 "avgn.mp3",
 "catchmyheart.mp3",
 "psychoteddy.mp3",
+"HaiYorokonde.mp3",
+"JungJustice.mp3",
+"Streetcat.mp3",
+"FUKKIRETA.mp3",
+"PonPon.mp3",
 
 }
 
@@ -1784,7 +1789,7 @@ local ImportedTableOfDances={
 {Name="Rodeo",Music="Rodeo.mp3",DanceName="Rodeo",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rodeo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Epical",Music="Epical.mp3",DanceName="Epical",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Epical.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Doom Mc Bringer",Music="Doom Mc Bringer.mp3",DanceName="Doom Mc Bringer",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Doom%20Mc%20Bringer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hai Yorokonde",Music="Hai Yorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hai Yorokonde",Music="HaiYorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Rickroll",Music="Rickroll.mp3",DanceName="Rickroll",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rickroll.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Montagem Xonada",Music="Xonada.mp3",DanceName="Xonada",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Xonada.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Encore",Music="Encore.mp3",DanceName="Encore",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Encore.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -1813,6 +1818,11 @@ local ImportedTableOfDances={
 {Name="AVGN",Music="avgn.mp3",DanceName="avgn",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/avgn.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Catch My Heart",Music="catchmyheart.mp3",DanceName="catchmyheart",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/catchmyheart.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Psycho Teddy",Music="psychoteddy.mp3",DanceName="psychoteddy",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/psychoteddy.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hai Yorokonde",Music="HaiYorokonde.mp3",DanceName="HaiYorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/HaiYorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Jung Justice",Music="JungJustice.mp3",DanceName="JungJustice",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/JungJustice.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Streetcat",Music="Streetcat.mp3",DanceName="Streetcat",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Streetcat.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="FUKKIRETA",Music="FUKKIRETA.mp3",DanceName="FUKKIRETA",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/FUKKIRETA.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Pon Pon",Music="PonPon.mp3",DanceName="PonPon",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/PonPon.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 
 
 }

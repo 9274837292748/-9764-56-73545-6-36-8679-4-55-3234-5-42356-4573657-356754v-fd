@@ -295,73 +295,6 @@ teleportToSavedSpot()
 end
 
 
---[[local CHECKF9=false
-DANCEINFO.MouseButton1Click:Connect(function()
-notify("Check Console!")
-Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
-if CHECKF9 then return end
-CHECKF9=true 
-DANCEINFO.Text="Check Console"
-print("------------------------------------------")
-print("Q - RAT DANCE, PAGE 2 - XO, PAGE 3 - C14, PAGE 4 - UNLOCKIT, PAGE 5 - RESULTS")
-print("------------------------------------------")
-print("E - BOOGIE, PAGE 2 - SODA POP, PAGE 3 - Slickback, PAGE 4 - SMOOTHMOVES, PAGE 5 - STATIC 2")
-print("------------------------------------------")
-print("R - ASSUMPTIONS, PAGE 2 - LOVE FOR YOU, PAGE 3 - DOODLE, PAGE 4 - LAGTRAIN, PAGE 5 - SILLY BILLY 2 ")
-print("------------------------------------------")
-print("T - EGYPT, PAGE 2 - ASSUMPTIONS SHUFFLE, PAGE 3 - GOAT, PAGE 4 - SUKI, PAGE 5 - SQUIDWARD YELL 2")
-print("------------------------------------------")
-print("Y - DO THR FLOP, PAGE 2 - PEASHOOTER, PAGE 3 - BUMBLEBEE, PAGE 4CAFETERIA, PAGE 5 - YELL 3")
-print("------------------------------------------")
-print("U - CARAMELLDANSEN, PAGE 2 - BLOODPOP, PAGE 3 - STOCK SHUFFLE, PAGE 4 - DARE, PAGE 5 - YELL 1")
-print("------------------------------------------")
-print("P - BOMB MONKEY, PAGE 2 - INTERNET YAMERO, PAGE 3 - RAT DANCE 2, PAGE 4 - TENNA, PAGE 5 - OUT OF TOUCH")
-print("------------------------------------------")
-print("F - HEEL TOE HOP, PAGE 2 - CHRONOSHIFT, PAGE 3 - SHUBA DUCK, PAGE 4 - INSANITY, PAGE 5 - LONELY")
-print("------------------------------------------")
-print("G - GANGNAM, PAGE 2 - IT BURNS, PAGE 3 - LEMON MELON COOKIE, PAGE 4 - TENNA 2")
-print("------------------------------------------")
-print("H - DOMINO, PAGE 2 - DISTRACTION DANCE, PAGE 3 - BIRDBRAIN, PAGE 4 - RAMBUNCTIOUS")
-print("------------------------------------------")
-print("J - STARLIT, PAGE 2 - KEEP UP, PAGE 3 - FEIN, PAGE 4 - SIDE SHUFFLE")
-print("------------------------------------------")
-print("K - WALK, PAGE 2 - BOOMBOX, PAGE 3 - POPIPO, PAGE 4 - ELECTRO SWING")
-print("------------------------------------------")
-print("L - GRIDDY, PAGE 2 - FIREWORK, PAGE 3 - PICKUP THE PHONE, PAGE 4 STEP")
-print("------------------------------------------")
-print("Z - LUX, PAGE 2 - TWO, PAGE 3 - SILLY BILLY, PAGE 4 - APPLE PEN")
-print("------------------------------------------")
-print("X - KAZOTSKY KICK, PAGE 2 - HEAVY LOVE, PAGE 3 - ROTTEN, PAGE 4 - CRANK THAT")
-print("------------------------------------------")
-print("C - MESMERIZER, PAGE 2 - MILLION, PAGE 3 - SPOOKY MONTH, PAGE 4 - TAKEDOWN")
-print("------------------------------------------")
-print("V - LIAR DANCER, PAGE 2 - BILLIE JEAN, PAGE 3 - LIMITED FLEXWORKS, PAGE 4 - GOING DOWN")
-print("------------------------------------------")
-print("B - HAKARI, PAGE 2 - SAVOR THE W, PAGE 3 - UNLIMITED FLEXWORKS, PAGE 4 - SPAMTON")
-print("------------------------------------------")
-print("N - BOX SWING, PAGE 2 - LAY, PAGE 3 - CRISSCROSS, PAGE 4 - KEMUSAN")
-print("------------------------------------------")
-print("M - CHANGE PAGES")
-print("------------------------------------------")
-print("MINUS OR '-' - COMMERCIAL BREAK, PAGE 2 - CLUB PENGUIN, PAGE 3 - TORT, PAGE 4 -IGAKU")
-print("------------------------------------------")
-print("COMMA OR ',' - STATIC, PAGE 2 - INTERNET YAMERO, PAGE 3 - BRAIN, PAGE 4 - IM OK")
-print("------------------------------------------")
-print("LEFTBRACKET OR '[' - EMOTIONAL PRISM, PAGE 2 - I WANNA RUNAWAY, PAGE 3 - ESPRESSO, PAGE 4 - HEADLOCK 2")
-print("------------------------------------------")
-print("RIGHTBRACKET OR ']' - HEADLOCK, PAGE 2 - MIO HONDA, PAGE 3 - RAKUTEN, PAGE 4 - LINGA GULI GULI")
-print("------------------------------------------")
-print("LEFTCONTROL OR 'LCTRL' - TOGGLE SPRINT")
-print("------------------------------------------")
-print("EQUALS OR '=' TOGGLE BACKGROUND MUSIC WHEN NOT DANCING")
-print("------------------------------------------")
-print("UPDATE:\n\t\t -- 1 New dance/s ")
-wait(1)
-DANCEINFO.Text="Click me!"
-CHECKF9=false
-end)
-]]
-
 
 
 
@@ -384,17 +317,7 @@ end
 
 local ALLOWPROTECTION=true 
 local ALLOWPROTECTION1=false
---[[
-Enable.MouseButton1Click:Connect(function()
-ALLOWPROTECTION1=not ALLOWPROTECTION1
-if ALLOWPROTECTION1 then 
-ALLOWPROTECTION=false
-Enable.Text="Disabled"
-else
-ALLOWPROTECTION=true 
-Enable.Text="Enabled"
-end
-end)]]
+
 local Place = game.placeId
 local REANIMATION = false
 local REANIMATED = false
@@ -533,8 +456,6 @@ getmetatable(is).__namecall = function(_, id)
 return loadlocalasset(id)
 end
 
---THIS SHIT IS CASE SENSITIVE CUH, ONE SINGLE MISTAKE WILL MESS THINGS UP
--- VVVVVVVV
 local danceCache = {}
 local ASTRA_STORAGE_RAW = "https://raw.githubusercontent.com/AstraOutlight/storage/main/"
 
@@ -919,7 +840,6 @@ local validAudioFiles = {
 
 }
 
---THIS SHIT IS CASE SENSITIVE CUH, ONE SINGLE MISTAKE WILL MESS THINGS UP
 local function DanceAsset(file)
 local filePath = "KDV3/"..file
 if isfile(filePath) then
@@ -989,7 +909,6 @@ local uis = game:GetService("UserInputService")
 
 
 
---coroutine.wrap(AsyncPreloadDances)()
 
 
 local RUNNING = false
@@ -1084,7 +1003,6 @@ ned.TextColor3 = Color3.new(1,0,0)
 ned.TextStrokeColor3 = Color3.new(0,0,0)
 ned.TextScaled = true
 ned.TextStrokeTransparency = 0
---ned.Text = "▣ PIXELATION ▣"
 ned.Text = ""
 ned.TextSize = 24
 ned.Rotation = 1
@@ -1106,8 +1024,8 @@ local lol = math.random(1,30)
 if lol == 2 then 
 lol = true 
 end
-local idleanim = is:LoadLocalAsset("rbxassetid://74204337812128") -- uuid. 136078657506707
-local walkanim = is:LoadLocalAsset("rbxassetid://73688515498572") -- uuid. 130213485744288
+local idleanim = is:LoadLocalAsset("rbxassetid://74204337812128") 
+local walkanim = is:LoadLocalAsset("rbxassetid://73688515498572")
 local randompart = Instance.new("Part",game:GetService("RunService"))
 local coolparticles = game:GetObjects("rbxassetid://87299663038091")[1].ParticleAttachment
 coolparticles.Parent = randompart
@@ -2311,7 +2229,7 @@ end
 for index,entry in ipairs(ControlsList) do
 local row=Instance.new("TextButton")
 row.Parent=ControlsListFrame
-row.Size=UDim2.new(1,-4,0,30)
+row.Size=UDim2.new(1,-4,0,44)
 row.BackgroundColor3=Color3.fromRGB(50,50,50)
 row.BorderSizePixel=0
 row.AutoButtonColor=false
@@ -2326,21 +2244,67 @@ Instance.new("UICorner",row).CornerRadius=UDim.new(0,5)
 local padding=Instance.new("UIPadding",row)
 padding.PaddingLeft=UDim.new(0,8)
 
-local item={Label=row,Entry=entry}
+local favoriteButton=Instance.new("TextButton")
+favoriteButton.Name="Favorite"
+favoriteButton.Parent=row
+favoriteButton.AnchorPoint=Vector2.new(1,0.5)
+favoriteButton.Position=UDim2.new(1,-5,0.5,0)
+favoriteButton.Size=UDim2.new(0,44,0,36)
+favoriteButton.BackgroundColor3=Color3.fromRGB(72,72,72)
+favoriteButton.BorderSizePixel=0
+favoriteButton.Font=Enum.Font.Arcade
+favoriteButton.Text="★"
+favoriteButton.TextColor3=Color3.new(1,1,1)
+favoriteButton.TextSize=15
+favoriteButton.ZIndex=row.ZIndex+1
+Instance.new("UICorner",favoriteButton).CornerRadius=UDim.new(0,5)
+
+local item={Label=row,Entry=entry,FavoriteButton=favoriteButton}
 ControlRows[#ControlRows+1]=item
 UpdateControlRow(item)
 
-row.MouseButton2Click:Connect(function()
+local function toggleThisFavorite()
 local state=ToggleFavorite(entry)
-if state==nil then
-return
-end
+if state==nil then return end
 RefreshControlRows()
 if state then
 notify("Favourited: "..entry.Dance)
 else
 notify("Removed favourite: "..entry.Dance)
 end
+end
+
+row.MouseButton2Click:Connect(toggleThisFavorite)
+favoriteButton.Activated:Connect(toggleThisFavorite)
+
+row.Activated:Connect(function()
+    if entry.Data then
+        PlayImportedDance(entry.Data, tostring(entry.Key))
+        return
+    end
+
+    local keyCode=GetControlKeyCode(entry.Key)
+    if not keyCode then
+        notify("Could not play: "..tostring(entry.Dance))
+        return
+    end
+
+    local oldMode=mode
+    mode=tonumber(entry.Page) or 1
+    Page.Text=tostring(mode)
+
+    task.spawn(function()
+        local VirtualInputManager=game:GetService("VirtualInputManager")
+        VirtualInputManager:SendKeyEvent(true,keyCode,false,game)
+        task.wait()
+        VirtualInputManager:SendKeyEvent(false,keyCode,false,game)
+        task.wait(.05)
+        if mode==(tonumber(entry.Page) or 1) then
+            Page.Text=tostring(mode)
+        else
+            Page.Text=tostring(oldMode)
+        end
+    end)
 end)
 end
 
@@ -2495,7 +2459,95 @@ end
 local SUGGESTION_WEBHOOK="https://discord.com/api/webhooks/1546413809676320790/sed0y1xFszCcR9BYIbWN76Z2Qt5_A-7TEZZ4lzpRQqir7O2pI3Dd_cAsvHprTKq3Zoi4"
 local SendingSuggestion=false
 
+local DiscordPromptDismissed=false
+local DISCORD_INVITE="https://discord.gg/FUJWTqGPyH"
+
+local DiscordPopup=Instance.new("Frame")
+DiscordPopup.Name="DiscordSuggestionPopup"
+DiscordPopup.Parent=ScreenGui
+DiscordPopup.Size=UDim2.new(0,360,0,190)
+DiscordPopup.Position=UDim2.new(0.5,-180,0.5,-95)
+DiscordPopup.BackgroundColor3=Color3.fromRGB(24,24,24)
+DiscordPopup.BorderSizePixel=0
+DiscordPopup.Visible=false
+DiscordPopup.Active=true
+DiscordPopup.ZIndex=20
+Instance.new("UICorner",DiscordPopup).CornerRadius=UDim.new(0,9)
+local DiscordPopupStroke=Instance.new("UIStroke",DiscordPopup)
+DiscordPopupStroke.Thickness=2
+DiscordPopupStroke.Transparency=.45
+
+local DiscordPopupTitle=Instance.new("TextLabel")
+DiscordPopupTitle.Parent=DiscordPopup
+DiscordPopupTitle.Size=UDim2.new(1,-24,0,55)
+DiscordPopupTitle.Position=UDim2.new(0,12,0,12)
+DiscordPopupTitle.BackgroundTransparency=1
+DiscordPopupTitle.Font=Enum.Font.Arcade
+DiscordPopupTitle.Text="Please join the discord server!"
+DiscordPopupTitle.TextColor3=Color3.new(1,1,1)
+DiscordPopupTitle.TextScaled=true
+DiscordPopupTitle.TextWrapped=true
+DiscordPopupTitle.ZIndex=21
+
+local DiscordCopyButton=Instance.new("TextButton")
+DiscordCopyButton.Parent=DiscordPopup
+DiscordCopyButton.Size=UDim2.new(1,-24,0,48)
+DiscordCopyButton.Position=UDim2.new(0,12,0,76)
+DiscordCopyButton.BackgroundColor3=Color3.fromRGB(64,64,64)
+DiscordCopyButton.BorderSizePixel=0
+DiscordCopyButton.Font=Enum.Font.Gotham
+DiscordCopyButton.Text=DISCORD_INVITE.."\nTap to copy"
+DiscordCopyButton.TextColor3=Color3.new(1,1,1)
+DiscordCopyButton.TextSize=14
+DiscordCopyButton.TextWrapped=true
+DiscordCopyButton.ZIndex=21
+Instance.new("UICorner",DiscordCopyButton).CornerRadius=UDim.new(0,7)
+
+local DiscordCloseButton=Instance.new("TextButton")
+DiscordCloseButton.Parent=DiscordPopup
+DiscordCloseButton.Size=UDim2.new(1,-24,0,42)
+DiscordCloseButton.Position=UDim2.new(0,12,1,-54)
+DiscordCloseButton.BackgroundColor3=Color3.fromRGB(55,55,55)
+DiscordCloseButton.BorderSizePixel=0
+DiscordCloseButton.Font=Enum.Font.Arcade
+DiscordCloseButton.Text="CLOSE"
+DiscordCloseButton.TextColor3=Color3.new(1,1,1)
+DiscordCloseButton.TextScaled=true
+DiscordCloseButton.ZIndex=21
+Instance.new("UICorner",DiscordCloseButton).CornerRadius=UDim.new(0,7)
+
+local function CopyDiscordInvite()
+local copyFunction=setclipboard or toclipboard
+if type(copyFunction)=="function" then
+local ok=pcall(copyFunction,DISCORD_INVITE)
+if ok then
+DiscordCopyButton.Text="COPIED!"
+task.delay(1.25,function()
+if DiscordCopyButton and DiscordCopyButton.Parent then
+DiscordCopyButton.Text=DISCORD_INVITE.."\nTap to copy"
+end
+end)
+return
+end
+end
+DiscordCopyButton.Text="Clipboard unsupported\n"..DISCORD_INVITE
+end
+
+DiscordCopyButton.MouseButton1Click:Connect(CopyDiscordInvite)
+
+DiscordCloseButton.MouseButton1Click:Connect(function()
+DiscordPopup.Visible=false
+DiscordPromptDismissed=true
+end)
+
 SuggestionButton.MouseButton1Click:Connect(function()
+if not DiscordPromptDismissed then
+SuggestionFrame.Visible=false
+DiscordPopup.Visible=true
+return
+end
+
+DiscordPopup.Visible=false
 SuggestionFrame.Visible=not SuggestionFrame.Visible
 if SuggestionFrame.Visible then
 SuggestionStatus.Text=""
@@ -2739,7 +2791,7 @@ dance=LoadDance("Rat1", "https://raw.githubusercontent.com/AstraOutlight/storage
 Info("Rat 1","Q")
 sound69:Play()
 if dance then
-playanim(dance) -- uuid. 106353328250763
+playanim(dance) 
 end
 else
 stopanim()
@@ -2755,7 +2807,7 @@ sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Boogie","E")
-playanim(122471664395501) -- uuid. 16769959846
+playanim(122471664395501)
 else
 stopanim()
 sound69.PlaybackSpeed = 1
@@ -2774,7 +2826,7 @@ dance=LoadDance("Assumptions", "https://raw.githubusercontent.com/AstraOutlight/
 sound69:Play()
 Info("Assumptions","R")
 if dance then
-playanim(dance) -- uuid. 136962185637891
+playanim(dance)
 end
 else
 stopanim()
@@ -2794,7 +2846,7 @@ dance=LoadDance("Egypt", "https://raw.githubusercontent.com/AstraOutlight/storag
 sound69:Play()
 Info("Egypt","T")
 if dance then
-playanim(dance) -- uuid. 130968726197789
+playanim(dance) 
 end
 else
 stopanim()
@@ -2814,7 +2866,7 @@ dance=LoadDance("Flop", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Flop","Y")
 if dance then 
-playanim(dance) -- uuid. 100864643591096
+playanim(dance)
 end
 else
 stopanim()
@@ -2832,7 +2884,7 @@ sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Caramell","U")
-playanim(114964447248296) -- uuid. 103597509139287
+playanim(114964447248296) 
 else
 stopanim()
 sound69.PlaybackSpeed = 1
@@ -2867,7 +2919,7 @@ sound69.SoundId = DanceAsset("gangnamm.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Gangnam","G")
-playanim(133530633475679) -- uuid. 12438774071
+playanim(133530633475679) 
 else
 stopanim()
 
@@ -2903,7 +2955,7 @@ sound69.SoundId = DanceAsset("dancingin.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Starlit","J")
-playanim(136139381223407) -- uuid. 96444866125796
+playanim(136139381223407) 
 else
 stopanim()
 
@@ -2919,7 +2971,7 @@ char.Humanoid.WalkSpeed = 4*char:GetScale()
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("DR","K")
-playanim(110403709064010,2) -- uuid. 12637912409
+playanim(110403709064010,2) 
 else
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 stopanim()
@@ -2936,7 +2988,7 @@ char.Humanoid.WalkSpeed = 4*char:GetScale()
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Griddy","L")
-playanim(114928062507098) -- uuid. 15704995372
+playanim(114928062507098) 
 else
 char.Humanoid.WalkSpeed = 14*char:GetScale()
 stopanim()
@@ -2952,7 +3004,7 @@ sound69.SoundId = DanceAsset("lux.ogg")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Luxurious","Z")
-playanim(94534967284996) -- uuid. 15092317950
+playanim(94534967284996)
 else
 
 stopanim()
@@ -2968,7 +3020,7 @@ sound69.SoundId = DanceAsset("kazot.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Kazot","X")
-playanim(86634257330162,1) -- uuid. 114036336168567
+playanim(86634257330162,1) 
 else
 stopanim()
 
@@ -2985,7 +3037,7 @@ dance=LoadDance("Domino", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Domino","H")
 if dance then 
-playanim(dance) -- impossible for now
+playanim(dance) 
 end
 else
 stopanim()
@@ -3003,7 +3055,7 @@ dance=LoadDance("Liar", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Liar","V")
 if dance then
-playanim(dance) -- uuid. 16361564081
+playanim(dance) 
 end
 else
 stopanim()
@@ -3022,7 +3074,7 @@ dance=LoadDance("Mesmerizer", "https://raw.githubusercontent.com/AstraOutlight/s
 sound69:Play()
 Info("Mesmerizer","C")
 if dance then
-playanim(dance) -- uuid. 118766274919427
+playanim(dance) 
 end
 else
 stopanim()
@@ -3059,7 +3111,7 @@ dance=LoadDance("Static", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Static",",")
 if dance then 
-playanim(dance) -- uuid. 131401099812672
+playanim(dance) 
 end
 else
 stopanim()
@@ -3150,7 +3202,7 @@ sound69.SoundId = DanceAsset("XO.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("XO","Q")
-playanim(89807443968447) -- uuid. 73559770055600
+playanim(89807443968447)
 else
 stopanim()
 
@@ -3167,7 +3219,7 @@ dance=LoadDance("Soda", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Soda","E")
 if dance then
-playanim(dance) -- uuid. 100177280567649
+playanim(dance) 
 end
 else
 stopanim()
@@ -3185,7 +3237,7 @@ dance=LoadDance("L4U", "https://raw.githubusercontent.com/AstraOutlight/storage/
 sound69:Play()
 Info("L4U","R")
 if dance then
-playanim(dance) -- uuid. 101564911432113
+playanim(dance)
 end
 else
 stopanim()
@@ -3201,7 +3253,7 @@ sound69.SoundId = DanceAsset("assum.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Assumptions Shuffle","T")
-playanim(129275138998868) -- uuid. 15705077587
+playanim(129275138998868) 
 else
 stopanim()
 
@@ -3216,7 +3268,7 @@ sound69.SoundId = DanceAsset("balls.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Peashooter","Y")
-playanim(124616782933406) -- uuid. 15039779727
+playanim(124616782933406) 
 else
 stopanim()
 
@@ -3251,7 +3303,7 @@ dance=LoadDance("ItBurns", "https://raw.githubusercontent.com/AstraOutlight/stor
 sound69:Play()
 Info("ItBurns","G")
 if dance then
-playanim(dance) -- uuid. 14887006269
+playanim(dance) 
 end
 else
 stopanim()
@@ -3269,7 +3321,7 @@ dance=LoadDance("Chronoshift", "https://raw.githubusercontent.com/AstraOutlight/
 sound69:Play()
 Info("Chronoshift","F")
 if dance then 
-playanim(dance) -- uuid. 125834337223799
+playanim(dance) 
 end
 else
 stopanim()
@@ -3289,7 +3341,7 @@ sound69:Play()
 Info("Keep Up","J")
 coolparticles.Parent = char.Torso
 if dance then 
-playanim(dance) -- uuid. 93585895457618
+playanim(dance) 
 end
 else
 stopanim()
@@ -3306,7 +3358,7 @@ sound69.SoundId = DanceAsset("Boombox.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Boombox","K")
-playanim(92629504992703) -- uuid. 84471848998012
+playanim(92629504992703)
 else
 stopanim()
 
@@ -3321,7 +3373,7 @@ sound69.SoundId = DanceAsset("bloodpop.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Bloodpop","U")
-playanim(82472212108809) -- uuid. 132026285699359
+playanim(82472212108809) 
 else
 stopanim()
 
@@ -3338,7 +3390,7 @@ sound69:Play()
 char.Humanoid.WalkSpeed = 0*char:GetScale()
 Info("Sit","N")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance) 
 end
 else
 stopanim()
@@ -3353,7 +3405,7 @@ sound69.SoundId = DanceAsset("leftright.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Two","Z")
-playanim(107261816578577) -- uuid. 137845929482571
+playanim(107261816578577) 
 else
 stopanim()
 
@@ -3368,7 +3420,7 @@ sound69.SoundId = DanceAsset("heavylove.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Heavylove","X")
-playanim(101332118847458) -- uuid. 85856686932206
+playanim(101332118847458) 
 else
 stopanim()
 
@@ -3399,7 +3451,7 @@ dance=LoadDance("BillieJean", "https://raw.githubusercontent.com/AstraOutlight/s
 sound69:Play()
 Info("BJ","V")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance) 
 end
 else
 stopanim()
@@ -3416,8 +3468,7 @@ dance=LoadDance("Savor", "https://raw.githubusercontent.com/AstraOutlight/storag
 sound69:Play()
 Info("Savor","B")
 if dance then 
-playanim(dance) -- uuid. 118311613925473
-end
+playanim(dance)
 else
 stopanim()
 end
@@ -3433,7 +3484,7 @@ dance=LoadDance("Yamero", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Yamero","P")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance)
 end
 else
 stopanim()
@@ -3450,7 +3501,7 @@ dance=LoadDance("Angel", "https://raw.githubusercontent.com/AstraOutlight/storag
 sound69:Play()
 Info("Angel",",")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance)
 end
 else
 stopanim()
@@ -3467,7 +3518,7 @@ dance=LoadDance("ClubPenguin", "https://raw.githubusercontent.com/AstraOutlight/
 sound69:Play()
 Info("Club","-")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance) 
 end
 else
 stopanim()
@@ -3484,7 +3535,7 @@ dance=LoadDance("Runaway", "https://raw.githubusercontent.com/AstraOutlight/stor
 sound69:Play()
 Info("Runaway","[")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance)
 end
 else
 stopanim()
@@ -3501,7 +3552,7 @@ dance=LoadDance("Miohonda", "https://raw.githubusercontent.com/AstraOutlight/sto
 sound69:Play()
 Info("MioHonda","]")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance) 
 end
 else
 stopanim()
@@ -3518,7 +3569,7 @@ dance=LoadDance("Firework", "https://raw.githubusercontent.com/AstraOutlight/sto
 sound69:Play()
 Info("Firework","L")
 if dance then
-playanim(dance) -- uuid. 118311613925473
+playanim(dance)
 end
 else
 stopanim()
@@ -3538,7 +3589,7 @@ dance=LoadDance("C14", "https://raw.githubusercontent.com/AstraOutlight/storage/
 sound69:Play()
 Info("C14","Q")
 if dance then 
-playanim(dance) -- uuid. 72723551972407
+playanim(dance)
 end
 else
 stopanim()
@@ -3555,7 +3606,7 @@ dance=LoadDance("Slickback", "https://raw.githubusercontent.com/AstraOutlight/st
 sound69:Play()
 Info("Slickback","E")
 if dance then
-playanim(dance) -- uuid. 90069083924245
+playanim(dance)
 end
 else
 stopanim()
@@ -3572,7 +3623,7 @@ dance=LoadDance("Doodle", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Doodle","R")
 if dance then
-playanim(dance) -- uuid. 13357063395
+playanim(dance) 
 end
 else
 stopanim()
@@ -3589,7 +3640,7 @@ dance=LoadDance("Goat", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Goat","T")
 if dance then
-playanim(dance) -- uuid. 87342159331194
+playanim(dance)
 end
 else
 stopanim()
@@ -3606,7 +3657,7 @@ dance=LoadDance("Bumblebee", "https://raw.githubusercontent.com/AstraOutlight/st
 sound69:Play()
 Info("Bumblebee","Y")
 if dance then
-playanim(dance) -- uuid. 18985726113
+playanim(dance)
 end
 else
 stopanim()
@@ -3623,7 +3674,7 @@ dance=LoadDance("Stock", "https://raw.githubusercontent.com/AstraOutlight/storag
 sound69:Play()
 Info("Stock","U")
 if dance then
-playanim(dance) -- uuid. 8915458946
+playanim(dance)
 end
 else
 stopanim()
@@ -3645,7 +3696,7 @@ dance=LoadDance("Rat2", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Rat 2","P")
 if dance then
-playanim(dance) -- uuid. 8915458946
+playanim(dance)
 end
 else
 stopanim()
@@ -3663,7 +3714,7 @@ dance=LoadDance("Shuba",
 sound69:Play()
 Info("Shuba Duck","F")
  if dance then
-playanim(dance) -- uuid. 79630525228564
+playanim(dance) 
 end
 else
 stopanim()
@@ -3678,7 +3729,7 @@ sound69.SoundId = DanceAsset("Lemon.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Lemon","G")
-playanim(138510336377177,.8) -- uuid. 120262284704633
+playanim(138510336377177,.8)
 else
 stopanim()
 end
@@ -3694,7 +3745,7 @@ dance=LoadDance("Birdbrain", "https://raw.githubusercontent.com/AstraOutlight/st
 Info("Birdbrain","H")
 sound69:Play()
 if dance then
-playanim(dance) -- uuid. 84471848998012
+playanim(dance)
 end
 else
 stopanim()
@@ -3711,7 +3762,7 @@ dance=LoadDance("Fein", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Fein","J")
 if dance then
-playanim(dance) -- uuid. 13357063395
+playanim(dance)
 end
 else
 stopanim()
@@ -3728,7 +3779,7 @@ dance=LoadDance("Popipo", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Popipo","K")
 if dance then
-playanim(dance) -- uuid. 13357063395
+playanim(dance) 
 end
 else
 stopanim()
@@ -3745,7 +3796,7 @@ dance=LoadDance("Pickup", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Pickup","L")
 if dance then
-playanim(dance) -- uuid. 13357063395
+playanim(dance) 
 end
 else
 stopanim()
@@ -3762,7 +3813,7 @@ dance=LoadDance("Billy", "https://raw.githubusercontent.com/AstraOutlight/storag
 sound69:Play()
 Info("Yourself","Z")
 if dance then
-playanim(dance) -- uuid. 15705077587
+playanim(dance) 
 end
 else
 stopanim()
@@ -3777,7 +3828,7 @@ sound69.SoundId = DanceAsset("rotten.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Sinful","X")
-playanim(89457637802764,2) -- uuid. 109990576374190
+playanim(89457637802764,2)
 else
 stopanim()
 end
@@ -3793,8 +3844,7 @@ dance=LoadDance("Spooky", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Spooky","C")
 if dance then
-playanim(dance) -- uuid. 84587788869282
-end
+playanim(dance)
 else
 stopanim()
 end
@@ -3810,7 +3860,7 @@ dance=LoadDance("Limited", "https://raw.githubusercontent.com/AstraOutlight/stor
 sound69:Play()
 Info("JK","V")
 if dance then
-playanim(dance) -- uuid. 100305033962391
+playanim(dance) 
 end
 else
 stopanim()
@@ -3827,7 +3877,7 @@ dance=LoadDance("Flexworks", "https://raw.githubusercontent.com/AstraOutlight/st
 sound69:Play()
 Info("KJ","B")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance)
 end
 else
 stopanim()
@@ -3843,7 +3893,7 @@ sound69.PlaybackSpeed = 1
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("CrissCross","N")
-playanim(109275255555630) -- uuid. 136962185637891
+playanim(109275255555630) 
 else
 stopanim()
 end
@@ -3858,7 +3908,7 @@ timeposcur = sound69.TimePosition
 sound69:Play()
 Info("Brain",",")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
-playanim(93547721311170) -- uuid. 71723925114737
+playanim(93547721311170) 
 else
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 stopanim()
@@ -3873,7 +3923,7 @@ sound69.SoundId = DanceAsset("espresso.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Espresso","[")
-playanim(87342159331194) -- uuid. 71723925114737
+playanim(87342159331194) 
 else
 stopanim()
 end
@@ -3887,7 +3937,7 @@ sound69.SoundId = DanceAsset("rakuten.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Rakuten","]")
-playanim(121967347012647) -- uuid. 71723925114737
+playanim(121967347012647) 
 else
 stopanim()
 end
@@ -3901,7 +3951,7 @@ sound69.SoundId = DanceAsset("tort.mp3")
 timeposcur = sound69.TimePosition 
 sound69:Play()
 Info("Torture","-")
-playanim(99811468921857) -- uuid. 71723925114737
+playanim(99811468921857)
 else
 stopanim()
 end
@@ -3920,7 +3970,7 @@ dance=LoadDance("Unlockit", "https://raw.githubusercontent.com/AstraOutlight/sto
 sound69:Play()
 Info("Unlockit","Q")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -3937,7 +3987,7 @@ dance=LoadDance("SmoothMoves", "https://raw.githubusercontent.com/AstraOutlight/
 sound69:Play()
 Info("Smooth Moves","E")
 if dance then
-playanim(dance) -- 
+playanim(dance) 
 end
 else
 stopanim()
@@ -3954,7 +4004,7 @@ dance=LoadDance("Lagtrain", "https://raw.githubusercontent.com/AstraOutlight/sto
 sound69:Play()
 Info("Lagtrain","R")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -3971,7 +4021,7 @@ dance=LoadDance("Suki", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Suki","T")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -3988,7 +4038,7 @@ dance=LoadDance("Cafeteria", "https://raw.githubusercontent.com/AstraOutlight/st
 sound69:Play()
 Info("Cafeteria","Y")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance)
 end
 else
 stopanim()
@@ -4005,7 +4055,7 @@ dance=LoadDance("Dare", "https://raw.githubusercontent.com/AstraOutlight/storage
 sound69:Play()
 Info("Dare","U")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance)
 end
 else
 stopanim()
@@ -4023,7 +4073,7 @@ sound69:Play()
 Info("Tenna 1","P")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4040,7 +4090,7 @@ sound69:Play()
 Info("Insanity","F")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4056,7 +4106,7 @@ dance=LoadDance("Tenna2", "https://raw.githubusercontent.com/AstraOutlight/stora
 sound69:Play()
 Info("Tenna 2","G")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance)
 end
 else
 stopanim()
@@ -4074,7 +4124,7 @@ sound69:Play()
 Info("Rambunctious","H")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4090,7 +4140,7 @@ dance=LoadDance("Sideshuffle", "https://raw.githubusercontent.com/AstraOutlight/
 sound69:Play()
 Info("Side Shuffle","J")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -4107,7 +4157,7 @@ dance=LoadDance("Electro", "https://raw.githubusercontent.com/AstraOutlight/stor
 sound69:Play()
 Info("Electo","K")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -4125,7 +4175,7 @@ sound69:Play()
 Info("Step","L")
 char.Humanoid.WalkSpeed = 4*char:GetScale()
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -4142,7 +4192,7 @@ dance=LoadDance("Applepen", "https://raw.githubusercontent.com/AstraOutlight/sto
 sound69:Play()
 Info("Apple Pen","Z")
 if dance then 
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -4159,7 +4209,7 @@ dance=LoadDance("Crankthat", "https://raw.githubusercontent.com/AstraOutlight/st
 sound69:Play()
 Info("Crank That","X")
 if dance then
-playanim(dance) -- uuid. 71723925114737
+playanim(dance) 
 end
 else
 stopanim()
@@ -4177,7 +4227,7 @@ Info("TakeDown","C")
 sound69:Play()
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4194,7 +4244,7 @@ sound69:Play()
 Info("Going Down","V")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4211,7 +4261,7 @@ sound69:Play()
 Info("Spamton","B")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -4228,7 +4278,7 @@ sound69:Play()
 Info("Kemusan","N")
 if dance then
 playanim(dance) 
-end-- uuid. 71723925114737
+end
 else
 stopanim()
 end
@@ -5324,7 +5374,6 @@ imgl2b.Rotation = imgl2b.Rotation + (20 + 240*bgmVisualizerLevel)*deltaTime
 imgl2b.ImageColor3 = Color3.new(0,0.3 + Playsound.PlaybackLoudness/1500,0.6 + Playsound.PlaybackLoudness/1000)
 end
 end
---textLabel1.Rotation=5*cos(sine/1)+math.random(-2.5,2.5)
 ned.Rotation = 0 - 2 * math.cos(sine / 24)
 ned.Position = UDim2.new(0.6,0 - 10 * math.cos(sine / 32),0.8,0 - 10 * math.cos(sine / 45))
 end)
@@ -5353,16 +5402,7 @@ end
 Forcestop()
 Playsound:Stop()
 Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
---[[local player = game.Players.LocalPlayer
-if player.Character then
-local head = player.Character:FindFirstChild("Head")
-if head then
-local billboard = head:FindFirstChild("Test")
-if billboard then
-billboard:Destroy()
-end
-end
-end]]
+
 if UPDATE then
 UPDATE:Disconnect()
 UPDATE = nil

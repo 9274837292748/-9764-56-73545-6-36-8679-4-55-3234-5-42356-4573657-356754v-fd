@@ -1531,7 +1531,10 @@ local ImportedAutoSyncIgnore={
 ["Akage"]=true,
 ["Igaku"]=true,
 ["Lagtrain"]=true,
-["MioHonda"]=true
+["MioHonda"]=true,
+["Yamero"]=true,
+["Angel"]=true
+
 }
 
 local function ImportedAutoSyncIsIgnored(danceData)

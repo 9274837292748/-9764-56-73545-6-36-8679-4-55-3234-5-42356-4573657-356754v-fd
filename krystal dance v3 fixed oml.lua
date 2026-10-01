@@ -1525,76 +1525,6 @@ currentanim:Play()
 iscurrentadance = isadance == true
 end
 
-local ImportedAutoSyncIgnore={
-["psychoteddy"]=true,
-["daidaidaikirai"]=true,
-["Akage"]=true,
-["Igaku"]=true,
-["Lagtrain"]=true,
-["MioHonda"]=true,
-["Yamero"]=true,
-["Angel"]=true,
-["Jumpstyle"]=true,
-["Jumpstyle3"]=true,
-["Jumpstyle4"]=true,
-["Doom Mc Bringer"]=true
-
-
-}
-
-local function ImportedAutoSyncIsIgnored(danceData)
-if not danceData then return false end
-local name=string.lower(tostring(danceData.Name or ""))
-local danceName=string.lower(tostring(danceData.DanceName or ""))
-return ImportedAutoSyncIgnore[name]==true or ImportedAutoSyncIgnore[danceName]==true
-end
-
-local ImportedAutoSyncToken=0
-local ImportedAutoSyncConnection=nil
-
-local function StopImportedAutoSync()
-ImportedAutoSyncToken=ImportedAutoSyncToken+1
-if ImportedAutoSyncConnection then
-ImportedAutoSyncConnection:Disconnect()
-ImportedAutoSyncConnection=nil
-end
-end
-
-local function StartImportedAutoSync(audio,animation,offset)
-StopImportedAutoSync()
-if not audio or not animation then return end
-local token=ImportedAutoSyncToken
-task.spawn(function()
-local deadline=os.clock()+4
-while token==ImportedAutoSyncToken and os.clock()<deadline and (audio.TimeLength<=0 or animation.Length<=0) do
-task.wait(.05)
-end
-if token~=ImportedAutoSyncToken or currentanim~=animation or audio.TimeLength<=0 or animation.Length<=0 then return end
-local audioLength=audio.TimeLength
-local animLength=animation.Length
-local baseSpeed=math.clamp(animLength/audioLength,.92,1.08)
-animation.Speed=baseSpeed
-local lastCorrection=0
-ImportedAutoSyncConnection=RunService.PreSimulation:Connect(function()
-if token~=ImportedAutoSyncToken or not dancing or currentanim~=animation or not animation.IsPlaying or not audio.IsPlaying then
-StopImportedAutoSync()
-return
-end
-local now=os.clock()
-if now-lastCorrection<.08 then return end
-lastCorrection=now
-local audioPos=math.max(0,audio.TimePosition-(offset or 0))
-local audioPhase=(audioPos%audioLength)/audioLength
-local animPhase=(animation.TimePosition%animLength)/animLength
-local phaseError=audioPhase-animPhase
-if phaseError>.5 then phaseError=phaseError-1 elseif phaseError<-.5 then phaseError=phaseError+1 end
-local correction=math.clamp(phaseError*.12,-.035,.035)
-local target=math.clamp(baseSpeed+correction,.90,1.10)
-animation.Speed=animation.Speed+(target-animation.Speed)*.18
-end)
-end)
-end
-
 local JUMP_ANIMATION_URL = "https://raw.githubusercontent.com/AstraOutlight/storage/main/jump"
 local FALL_ANIMATION_URL = "https://raw.githubusercontent.com/AstraOutlight/storage/main/fall"
 
@@ -1628,7 +1558,6 @@ end
 wait(.1)
 playbacktrack=true
 local function stopanim()
- StopImportedAutoSync()
  Info("None","None")
  loopsplaying = math.max(0, loopsplaying - 1)
  local SavedTime = Playsound.TimePosition
@@ -1848,7 +1777,7 @@ local ImportedTableOfDances={
 
 {Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
-{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Miss The Quiet",Music="i miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -1861,7 +1790,7 @@ local ImportedTableOfDances={
 {Name="Rodeo",Music="Rodeo.mp3",DanceName="Rodeo",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rodeo.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Epical",Music="Epical.mp3",DanceName="Epical",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Epical.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Doom Mc Bringer",Music="Doom Mc Bringer.mp3",DanceName="Doom Mc Bringer",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Doom%20Mc%20Bringer.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
-{Name="Hai Yorokonde",Music="HaiYorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Hai Yorokonde",Music="Hai Yorokonde.mp3",DanceName="Hai Yorokonde",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Hai%20Yorokonde.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Rickroll",Music="Rickroll.mp3",DanceName="Rickroll",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rickroll.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Montagem Xonada",Music="Xonada.mp3",DanceName="Xonada",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Xonada.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Encore",Music="Encore.mp3",DanceName="Encore",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Encore.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -2316,11 +2245,6 @@ sound69:Play()
 end
 if animation then
 playanim(animation)
-if currentanim and not ImportedAutoSyncIsIgnored(danceData) then
-StartImportedAutoSync(sound69,currentanim,tonumber(danceData.Offset) or 0)
-else
-StopImportedAutoSync()
-end
 else
 notify("Animation unavailable: "..tostring(danceData.Name))
 stopanim()

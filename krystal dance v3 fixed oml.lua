@@ -1526,7 +1526,7 @@ iscurrentadance = isadance == true
 end
 
 local ImportedAutoSyncIgnore={
-["dai dai dai kirai"]=true,
+["psychoteddy"]=true,
 ["daidaidaikirai"]=true,
 ["Akage"]=true
 }

@@ -1533,7 +1533,10 @@ local ImportedAutoSyncIgnore={
 ["Lagtrain"]=true,
 ["MioHonda"]=true,
 ["Yamero"]=true,
-["Angel"]=true
+["Angel"]=true,
+["Jumpstyle"]=true,
+["Jumpstyle3"]=true,
+["Jumpstyle4"]=true
 
 }
 

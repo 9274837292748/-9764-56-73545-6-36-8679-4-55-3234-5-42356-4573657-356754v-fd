@@ -1525,6 +1525,19 @@ currentanim:Play()
 iscurrentadance = isadance == true
 end
 
+local ImportedAutoSyncIgnore={
+["dai dai dai kirai"]=true,
+["daidaidaikirai"]=true,
+["Akage"]=true
+}
+
+local function ImportedAutoSyncIsIgnored(danceData)
+if not danceData then return false end
+local name=string.lower(tostring(danceData.Name or ""))
+local danceName=string.lower(tostring(danceData.DanceName or ""))
+return ImportedAutoSyncIgnore[name]==true or ImportedAutoSyncIgnore[danceName]==true
+end
+
 local ImportedAutoSyncToken=0
 local ImportedAutoSyncConnection=nil
 
@@ -1824,7 +1837,7 @@ local ImportedTableOfDances={
 
 {Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
-{Name="Miss The Quiet",Music="i miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -2292,8 +2305,10 @@ sound69:Play()
 end
 if animation then
 playanim(animation)
-if currentanim then
+if currentanim and not ImportedAutoSyncIsIgnored(danceData) then
 StartImportedAutoSync(sound69,currentanim,tonumber(danceData.Offset) or 0)
+else
+StopImportedAutoSync()
 end
 else
 notify("Animation unavailable: "..tostring(danceData.Name))

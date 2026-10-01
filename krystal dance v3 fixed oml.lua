@@ -1536,7 +1536,9 @@ local ImportedAutoSyncIgnore={
 ["Angel"]=true,
 ["Jumpstyle"]=true,
 ["Jumpstyle3"]=true,
-["Jumpstyle4"]=true
+["Jumpstyle4"]=true,
+["Doom Mc Bringer"]=true
+
 
 }
 

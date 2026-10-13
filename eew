@@ -1,34 +1,23 @@
 
 --[[
     Moonlight Multi-F3X
-    Fixed, compatibility-focused version
+    Fixed Version 2.1
 
-    Features:
-    - Multiple F3X tool discovery
-    - Round-robin tool selection
-    - Original CallAPI / CallAPISync / CallAPIAsync interface
+    - Fixes F3X:Equip() expected boolean
+    - Supports F3X:Equip(), Equip(true), Equip(false)
+    - Detects multiple F3X tools
+    - Round-robin tool distribution
+    - FIFO request scheduling
     - Automatic equipment handling
-    - FIFO request queue
-    - Configurable concurrency
-    - Preserved original F3X helper methods
-    - Safe re-execution
-    - Request statistics
-    - Automatic tool refresh
+    - Preserves original Moonlight methods
+    - Preserves asynchronous thread returns
+    - Handles script re-execution
+    - Tracks request statistics
 
-    IMPORTANT:
-    Roblox normally equips one Tool at a time.
-    This implementation keeps using the currently equipped
-    tool while requests are active, switching tools only
-    when it is safe to do so.
-
-    Default concurrent request limit is 1 to preserve
-    request ordering. Raising it can cause dependent
-    operations to execute in an unexpected order.
+    NOTE:
+    Default concurrency is 1 to prevent equipment
+    conflicts and preserve operation ordering.
 ]]
-
---// Environment
-
-local ENV = (getgenv and getgenv()) or _G
 
 --// Configuration
 
@@ -45,18 +34,20 @@ local CONFIG = {
 
     EquipTimeout = 2,
 
-    -- If true, requests with more than one in flight
-    -- can finish out of submission order.
     AllowParallel = false,
 }
-
-_G.MoonlightDebug = CONFIG.Debug
 
 if not CONFIG.AllowParallel then
     CONFIG.MaxConcurrentGlobal = 1
 end
 
---// Shutdown previous instance
+--// Environment
+
+local ENV = (getgenv and getgenv()) or _G
+
+_G.MoonlightDebug = CONFIG.Debug
+
+--// Shutdown previous Moonlight
 
 if ENV.Moonlight then
     local previous = ENV.Moonlight
@@ -71,12 +62,11 @@ end
 --// Services
 
 local Players = game:GetService("Players")
-
 local speaker = Players.LocalPlayer
 
-assert(speaker, "Moonlight: LocalPlayer not found")
+assert(speaker, "Moonlight: LocalPlayer unavailable")
 
---// Action mappings (original)
+--// Original action mappings
 
 local FilterMappings = {
     Offset = speaker.AccountAge + 3,
@@ -133,7 +123,7 @@ local ActionCache = {}
 local function UnfilterAction(input)
     assert(
         type(input) == "string",
-        "Expected action name to be string"
+        "Expected action string"
     )
 
     if ActionCache[input] then
@@ -162,7 +152,7 @@ local function UnfilterAction(input)
     return decoded
 end
 
---// Tool utilities
+--// Character utilities
 
 local function GetBackpack()
     return speaker:FindFirstChildOfClass("Backpack")
@@ -181,6 +171,8 @@ local function GetHumanoid()
 
     return character:FindFirstChildOfClass("Humanoid")
 end
+
+--// F3X detection
 
 local function GetRemote(tool)
     if not tool or not tool.Parent then
@@ -201,11 +193,7 @@ local function GetRemote(tool)
 end
 
 local function IsF3XTool(tool)
-    if not tool then
-        return false
-    end
-
-    if not tool:IsA("Tool") then
+    if not tool or not tool:IsA("Tool") then
         return false
     end
 
@@ -240,9 +228,11 @@ local function GetAllTools()
     return result
 end
 
+--// Equipment
+
 local function EquipTool(tool)
     if not tool or not tool.Parent then
-        return false, "Tool no longer exists"
+        return false, "Tool unavailable"
     end
 
     local character = GetCharacter()
@@ -250,7 +240,7 @@ local function EquipTool(tool)
     local humanoid = GetHumanoid()
 
     if not character or not backpack or not humanoid then
-        return false, "Character, Backpack or Humanoid unavailable"
+        return false, "Character, Backpack or Humanoid missing"
     end
 
     if tool.Parent == character then
@@ -258,7 +248,7 @@ local function EquipTool(tool)
     end
 
     if tool.Parent ~= backpack then
-        return false, "Tool is not in Backpack or Character"
+        return false, "Tool not in Backpack or Character"
     end
 
     local success, err = pcall(function()
@@ -287,7 +277,7 @@ local function EquipTool(tool)
         return true
     end
 
-    return false, "F3X tool could not be equipped"
+    return false, "F3X equip timed out"
 end
 
 local function UnequipTool(tool)
@@ -397,7 +387,7 @@ function Dispatcher:RefreshTools()
     end
 
     if previousCount ~= #self.Tools then
-        Debug("Detected", #self.Tools, "F3X tool(s)")
+        Debug("Detected F3X tools:", #self.Tools)
     end
 end
 
@@ -416,9 +406,6 @@ function Dispatcher:GetToolList()
 end
 
 function Dispatcher:ChooseTool()
-    -- Keep using the currently active equipped tool
-    -- until every outstanding request is complete.
-
     if self.ActiveRequests > 0 then
         local selected = self.SelectedTool
 
@@ -457,26 +444,18 @@ function Dispatcher:ChooseTool()
 end
 
 function Dispatcher:Submit(action, args)
-    assert(
-        type(action) == "string",
-        "Expected action string"
-    )
+    assert(type(action) == "string", "Expected action string")
+    assert(type(args) == "table", "Expected argument table")
 
-    assert(
-        type(args) == "table",
-        "Expected argument table"
-    )
-
-    -- Validate before queueing.
     UnfilterAction(action)
 
     if not self.Running then
-        error("Moonlight dispatcher is stopped", 2)
+        error("Moonlight dispatcher stopped", 2)
     end
 
     if self:QueueLength() >= CONFIG.MaxQueueSize then
         self.Stats.Rejected += 1
-        error("Moonlight request queue is full", 2)
+        error("Moonlight queue full", 2)
     end
 
     local request = {
@@ -534,10 +513,7 @@ function Dispatcher:Execute(tool, request)
     local data = self.ToolData[tool]
 
     if not data then
-        self:FailRequest(
-            request,
-            "F3X tool data unavailable"
-        )
+        self:FailRequest(request, "Tool data unavailable")
         return
     end
 
@@ -555,7 +531,6 @@ function Dispatcher:Execute(tool, request)
                     error("Dispatcher stopped")
                 end
 
-                -- Restore original equip behaviour.
                 local equipped, equipError = EquipTool(tool)
 
                 if not equipped then
@@ -568,12 +543,8 @@ function Dispatcher:Execute(tool, request)
                     error("F3X RemoteFunction missing")
                 end
 
-                local decodedAction = UnfilterAction(
-                    request.Action
-                )
-
                 return remote:InvokeServer(
-                    decodedAction,
+                    UnfilterAction(request.Action),
                     table.unpack(
                         request.Args,
                         1,
@@ -646,11 +617,9 @@ function Dispatcher:Dispatch()
 
     local request = self:Pop()
 
-    if not request then
-        return
+    if request then
+        self:Execute(tool, request)
     end
-
-    self:Execute(tool, request)
 end
 
 function Dispatcher:Start()
@@ -755,10 +724,7 @@ function Dispatcher:Shutdown()
         end
     end
 
-    -- Already-running InvokeServer calls cannot reliably
-    -- be cancelled. Their results are allowed to finish.
-
-    Debug("Dispatcher shut down")
+    Debug("Dispatcher stopped")
 end
 
 --// F3X class
@@ -780,7 +746,14 @@ function F3X:IsActive()
         and self.Dispatcher:GetToolCount() > 0
 end
 
+--// FIXED EQUIP FUNCTION
+
 function F3X:Equip(state)
+    -- Default to true when omitted.
+    if state == nil then
+        state = true
+    end
+
     assert(
         type(state) == "boolean",
         "Expected boolean"
@@ -808,16 +781,17 @@ function F3X:Equip(state)
         end
 
         return success
-    else
-        if self.Dispatcher.ActiveRequests > 0 then
-            return false
-        end
-
-        return UnequipTool(tool)
     end
+
+    if self.Dispatcher.ActiveRequests > 0 then
+        return false
+    end
+
+    return UnequipTool(tool)
 end
 
--- Original CallAPI interface preserved.
+--// API calls
+
 function F3X:CallAPI(sync, action, ...)
     assert(
         type(sync) == "boolean",
@@ -829,7 +803,6 @@ function F3X:CallAPI(sync, action, ...)
         "Expected action to be string"
     )
 
-    -- Refresh immediately if tools were added or removed.
     self.Dispatcher:RefreshTools()
 
     assert(
@@ -846,8 +819,6 @@ function F3X:CallAPI(sync, action, ...)
         return dispatcher:Wait(request)
     end
 
-    -- Preserve original task.spawn return type.
-    -- Errors are reported inside the spawned thread.
     return task.spawn(function()
         local request = dispatcher:Submit(action, args)
         dispatcher:Wait(request)
@@ -865,25 +836,11 @@ end
 --// Original helper methods
 
 function F3X:Weld(p1, p2)
-    assert(
-        typeof(p1) == "Instance",
-        "Expected p1 to be Instance"
-    )
+    assert(typeof(p1) == "Instance", "Expected Instance")
+    assert(typeof(p2) == "Instance", "Expected Instance")
 
-    assert(
-        typeof(p2) == "Instance",
-        "Expected p2 to be Instance"
-    )
-
-    assert(
-        p1:IsA("BasePart"),
-        "Expected p1 to be BasePart"
-    )
-
-    assert(
-        p2:IsA("BasePart"),
-        "Expected p2 to be BasePart"
-    )
+    assert(p1:IsA("BasePart"), "Expected BasePart")
+    assert(p2:IsA("BasePart"), "Expected BasePart")
 
     if (p1.Locked and not p2.Locked)
         or (not p1.Locked and not p2.Locked) then
@@ -908,12 +865,9 @@ function F3X:Weld(p1, p2)
 end
 
 function F3X:DestroyInstances(instances)
-    assert(
-        type(instances) == "table",
-        "Expected instances to be table"
-    )
+    assert(type(instances) == "table", "Expected table")
 
-    -- Original Moonlight behaviour preserved.
+    -- Original behaviour preserved.
     return self:CallAPIAsync(
         "UndoRemove",
         instances
@@ -923,10 +877,9 @@ end
 function F3X:DestroyInstance(instance)
     assert(
         typeof(instance) == "Instance",
-        "Expected instance to be Instance"
+        "Expected Instance"
     )
 
-    -- Original Moonlight behaviour preserved.
     return self:CallAPIAsync(
         "UndoRemove",
         {instance}
@@ -936,17 +889,17 @@ end
 function F3X:SetProperties(instance, properties)
     assert(
         typeof(instance) == "Instance",
-        "Expected instance to be Instance"
+        "Expected Instance"
     )
 
     assert(
         instance:IsA("BasePart"),
-        "Expected instance to be BasePart"
+        "Expected BasePart"
     )
 
     assert(
         type(properties) == "table",
-        "Expected properties to be table"
+        "Expected table"
     )
 
     local surfaces = {}
@@ -966,8 +919,7 @@ function F3X:SetProperties(instance, properties)
     )
 end
 
--- Additional explicit delete helper.
--- Does not change the original DestroyInstance methods.
+--// Additional helpers
 
 function F3X:RemoveInstances(instances)
     assert(type(instances) == "table", "Expected table")
@@ -1008,10 +960,9 @@ function Moonlight.new()
     local self = setmetatable({}, Moonlight)
 
     self.Dispatcher = Dispatcher.new()
-
     self.F3X = F3X.new(self.Dispatcher)
 
-    self.Version = "Multi-F3X Fixed 2.0"
+    self.Version = "Multi-F3X Fixed 2.1"
 
     return self
 end
@@ -1056,7 +1007,7 @@ Debug(
 )
 
 Debug(
-    "F3X tools detected:",
+    "Detected F3X tools:",
     instance:GetToolCount()
 )
 

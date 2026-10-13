@@ -1,72 +1,101 @@
 
 --[[
-    Moonlight Multi-F3X
-    Fixed Version 2.1
+    Moonlight Multi-F3X v3.0
+    Persistent Multi-Tool Dispatcher
 
-    - Fixes F3X:Equip() expected boolean
-    - Supports F3X:Equip(), Equip(true), Equip(false)
-    - Detects multiple F3X tools
-    - Round-robin tool distribution
-    - FIFO request scheduling
-    - Automatic equipment handling
-    - Preserves original Moonlight methods
-    - Preserves asynchronous thread returns
-    - Handles script re-execution
-    - Tracks request statistics
+    Features:
+    - Attempts simultaneous F3X equipment
+    - No per-request tool switching
+    - Persistent RemoteFunction references
+    - Concurrent requests
+    - Round-robin request distribution
+    - FIFO dispatch queue
+    - Automatic tool discovery
+    - Configurable request limits
+    - Original Moonlight API compatibility
+    - Safe reload handling
+    - Request statistics
 
     NOTE:
-    Default concurrency is 1 to prevent equipment
-    conflicts and preserve operation ordering.
+    Requests are dispatched in FIFO order, but concurrent
+    requests can complete out of order.
+
+    Server-side rate limits and permissions still apply.
 ]]
 
---// Configuration
+--// CONFIGURATION
 
 local CONFIG = {
     Debug = true,
 
-    MaxConcurrentGlobal = 1,
-    MaxConcurrentPerTool = 1,
+    -- Attempt to keep multiple F3X tools equipped
+    MultiEquip = true,
 
-    MaxQueueSize = 1000,
+    -- Equip discovered tools during initialization
+    AutoEquip = true,
 
-    RefreshInterval = 1,
+    -- Maximum simultaneous requests for each tool
+    MaxConcurrentPerTool = 4,
+
+    -- Maximum simultaneous requests overall
+    MaxConcurrentGlobal = 8,
+
+    -- Maximum queued requests
+    MaxQueueSize = 2000,
+
+    -- Scheduler
     SchedulerInterval = 0.01,
 
-    EquipTimeout = 2,
+    -- Tool discovery
+    RefreshInterval = 2,
 
-    AllowParallel = false,
+    -- Requests dispatched per scheduler cycle
+    DispatchBatchSize = 16,
+
+    -- Retry failed requests?
+    -- Disabled because retrying mutations can duplicate them.
+    RetryFailedRequests = false,
 }
 
-if not CONFIG.AllowParallel then
-    CONFIG.MaxConcurrentGlobal = 1
-end
-
---// Environment
+--// ENVIRONMENT
 
 local ENV = (getgenv and getgenv()) or _G
 
 _G.MoonlightDebug = CONFIG.Debug
 
---// Shutdown previous Moonlight
+--// SHUTDOWN PREVIOUS INSTANCE
 
 if ENV.Moonlight then
-    local previous = ENV.Moonlight
+    local old = ENV.Moonlight
 
-    if type(previous.Shutdown) == "function" then
+    if type(old.Shutdown) == "function" then
         pcall(function()
-            previous:Shutdown()
+            old:Shutdown()
         end)
     end
 end
 
---// Services
+--// SERVICES
 
 local Players = game:GetService("Players")
+
 local speaker = Players.LocalPlayer
 
-assert(speaker, "Moonlight: LocalPlayer unavailable")
+assert(speaker, "LocalPlayer unavailable")
 
---// Original action mappings
+--// LOGGING
+
+local function Debug(...)
+    if CONFIG.Debug then
+        print("[Moonlight]", ...)
+    end
+end
+
+local function Warn(...)
+    warn("[Moonlight]", ...)
+end
+
+--// ACTION MAPPINGS
 
 local FilterMappings = {
     Offset = speaker.AccountAge + 3,
@@ -104,19 +133,7 @@ local FilterMappings = {
     }
 }
 
---// Logging
-
-local function Debug(...)
-    if CONFIG.Debug then
-        print("[Moonlight]", ...)
-    end
-end
-
-local function Warn(...)
-    warn("[Moonlight]", ...)
-end
-
---// Action decoding
+--// ACTION DECODING
 
 local ActionCache = {}
 
@@ -134,7 +151,7 @@ local function UnfilterAction(input)
 
     assert(
         encoded,
-        string.format('Unknown action "%s"', input)
+        "Unknown F3X action: " .. tostring(input)
     )
 
     local output = {}
@@ -152,27 +169,17 @@ local function UnfilterAction(input)
     return decoded
 end
 
---// Character utilities
-
-local function GetBackpack()
-    return speaker:FindFirstChildOfClass("Backpack")
-end
+--// CHARACTER UTILITIES
 
 local function GetCharacter()
     return speaker.Character
 end
 
-local function GetHumanoid()
-    local character = GetCharacter()
-
-    if not character then
-        return nil
-    end
-
-    return character:FindFirstChildOfClass("Humanoid")
+local function GetBackpack()
+    return speaker:FindFirstChildOfClass("Backpack")
 end
 
---// F3X detection
+--// TOOL UTILITIES
 
 local function GetRemote(tool)
     if not tool or not tool.Parent then
@@ -192,7 +199,7 @@ local function GetRemote(tool)
     )
 end
 
-local function IsF3XTool(tool)
+local function IsF3X(tool)
     if not tool or not tool:IsA("Tool") then
         return false
     end
@@ -205,109 +212,72 @@ local function IsF3XTool(tool)
     return GetRemote(tool) ~= nil
 end
 
-local function GetAllTools()
-    local result = {}
-    local seen = {}
+--// MULTI EQUIPMENT
 
-    local containers = {
-        GetCharacter(),
-        GetBackpack()
-    }
+local function EquipMultiple(tools)
+    local character = GetCharacter()
+    local backpack = GetBackpack()
 
-    for _, container in ipairs(containers) do
-        if container then
-            for _, child in ipairs(container:GetChildren()) do
-                if IsF3XTool(child) and not seen[child] then
-                    seen[child] = true
-                    result[#result + 1] = child
-                end
+    if not character or not backpack then
+        return false
+    end
+
+    local equipped = 0
+
+    -- Direct parenting avoids calling Humanoid:EquipTool,
+    -- which normally unequips other tools.
+
+    for _, tool in ipairs(tools) do
+        if tool.Parent == character then
+            equipped += 1
+
+        elseif tool.Parent == backpack then
+            local success, err = pcall(function()
+                tool.Parent = character
+            end)
+
+            if success and tool.Parent == character then
+                equipped += 1
+            else
+                Warn(
+                    "Could not equip",
+                    tool.Name,
+                    err or "Parent change rejected"
+                )
             end
         end
     end
 
-    return result
+    Debug(
+        "Equipment attempt:",
+        equipped,
+        "/",
+        #tools
+    )
+
+    return equipped == #tools
 end
 
---// Equipment
-
-local function EquipTool(tool)
-    if not tool or not tool.Parent then
-        return false, "Tool unavailable"
-    end
-
+local function UnequipMultiple(tools)
     local character = GetCharacter()
     local backpack = GetBackpack()
-    local humanoid = GetHumanoid()
 
-    if not character or not backpack or not humanoid then
-        return false, "Character, Backpack or Humanoid missing"
+    if not character or not backpack then
+        return false
     end
 
-    if tool.Parent == character then
-        return true
-    end
-
-    if tool.Parent ~= backpack then
-        return false, "Tool not in Backpack or Character"
-    end
-
-    local success, err = pcall(function()
-        humanoid:EquipTool(tool)
-    end)
-
-    if not success then
-        return false, tostring(err)
-    end
-
-    local started = os.clock()
-
-    while tool.Parent ~= character do
-        if os.clock() - started >= CONFIG.EquipTimeout then
-            break
+    for _, tool in ipairs(tools) do
+        if tool.Parent == character then
+            pcall(function()
+                tool.Parent = backpack
+            end)
         end
-
-        if not tool.Parent then
-            break
-        end
-
-        task.wait()
     end
 
-    if tool.Parent == character then
-        return true
-    end
-
-    return false, "F3X equip timed out"
+    return true
 end
 
-local function UnequipTool(tool)
-    if not tool then
-        return false
-    end
-
-    local backpack = GetBackpack()
-    local character = GetCharacter()
-
-    if not backpack or not character then
-        return false
-    end
-
-    if tool.Parent == backpack then
-        return true
-    end
-
-    if tool.Parent ~= character then
-        return false
-    end
-
-    local success = pcall(function()
-        tool.Parent = backpack
-    end)
-
-    return success and tool.Parent == backpack
-end
-
---// Dispatcher
+--// DISPATCHER
 
 local Dispatcher = {}
 Dispatcher.__index = Dispatcher
@@ -324,9 +294,9 @@ function Dispatcher.new()
     self.QueueHead = 1
     self.QueueTail = 0
 
-    self.ActiveRequests = 0
-    self.SelectedTool = nil
     self.NextToolIndex = 1
+
+    self.ActiveRequests = 0
 
     self.Stats = {
         Submitted = 0,
@@ -337,35 +307,82 @@ function Dispatcher.new()
     }
 
     self:RefreshTools()
+
+    if CONFIG.AutoEquip then
+        self:EquipAll()
+    end
+
     self:Start()
 
     return self
 end
 
-function Dispatcher:QueueLength()
-    return math.max(
-        0,
-        self.QueueTail - self.QueueHead + 1
-    )
-end
+--// TOOL DISCOVERY
 
 function Dispatcher:RefreshTools()
-    local detected = GetAllTools()
+    local character = GetCharacter()
+    local backpack = GetBackpack()
+
+    local found = {}
+    local seen = {}
+
+    -- Preserve the existing tool order.
+    -- This prevents tools from changing dispatcher
+    -- positions during ordinary refreshes.
+
+    for _, tool in ipairs(self.Tools) do
+        if IsF3X(tool)
+            and (
+                tool.Parent == character
+                or tool.Parent == backpack
+            ) then
+
+            found[#found + 1] = tool
+            seen[tool] = true
+        end
+    end
+
+    local containers = {
+        character,
+        backpack
+    }
+
+    for _, container in ipairs(containers) do
+        if container then
+            for _, tool in ipairs(container:GetChildren()) do
+                if IsF3X(tool) and not seen[tool] then
+                    seen[tool] = true
+
+                    found[#found + 1] = tool
+                end
+            end
+        end
+    end
+
     local previousCount = #self.Tools
 
-    local valid = {}
-
-    for _, tool in ipairs(detected) do
-        valid[tool] = true
-
+    for _, tool in ipairs(found) do
         if not self.ToolData[tool] then
             self.ToolData[tool] = {
                 Tool = tool,
+                Remote = GetRemote(tool),
+
                 Active = 0,
                 Completed = 0,
                 Failed = 0,
+
+                -- Prevents repeated automatic equipping.
+                EquipAttempted = false,
             }
+        else
+            self.ToolData[tool].Remote = GetRemote(tool)
         end
+    end
+
+    local valid = {}
+
+    for _, tool in ipairs(found) do
+        valid[tool] = true
     end
 
     for tool, data in pairs(self.ToolData) do
@@ -374,20 +391,40 @@ function Dispatcher:RefreshTools()
         end
     end
 
-    self.Tools = detected
-
-    if self.SelectedTool
-        and not valid[self.SelectedTool]
-        and self.ActiveRequests == 0 then
-        self.SelectedTool = nil
-    end
+    self.Tools = found
 
     if self.NextToolIndex > #self.Tools then
         self.NextToolIndex = 1
     end
 
     if previousCount ~= #self.Tools then
-        Debug("Detected F3X tools:", #self.Tools)
+        Debug(
+            "Detected F3X tools:",
+            #self.Tools
+        )
+    end
+
+    -- Only attempt automatic equipment once per tool.
+    -- Do not keep switching tools during refreshes.
+
+    if CONFIG.AutoEquip and CONFIG.MultiEquip then
+        local pending = {}
+
+        for _, tool in ipairs(self.Tools) do
+            local data = self.ToolData[tool]
+
+            if data and not data.EquipAttempted then
+                data.EquipAttempted = true
+
+                if tool.Parent == GetBackpack() then
+                    pending[#pending + 1] = tool
+                end
+            end
+        end
+
+        if #pending > 0 then
+            EquipMultiple(pending)
+        end
     end
 end
 
@@ -395,7 +432,7 @@ function Dispatcher:GetToolCount()
     return #self.Tools
 end
 
-function Dispatcher:GetToolList()
+function Dispatcher:GetTools()
     local result = {}
 
     for _, tool in ipairs(self.Tools) do
@@ -405,53 +442,60 @@ function Dispatcher:GetToolList()
     return result
 end
 
-function Dispatcher:ChooseTool()
+--// EQUIPMENT CONTROL
+
+function Dispatcher:EquipAll()
+    self:RefreshTools()
+
+    local success = EquipMultiple(self.Tools)
+
+    for _, tool in ipairs(self.Tools) do
+        local data = self.ToolData[tool]
+
+        if data then
+            data.EquipAttempted = true
+        end
+    end
+
+    return success
+end
+
+function Dispatcher:UnequipAll()
     if self.ActiveRequests > 0 then
-        local selected = self.SelectedTool
-
-        if selected
-            and IsF3XTool(selected)
-            and self.ToolData[selected]
-            and self.ToolData[selected].Active
-                < CONFIG.MaxConcurrentPerTool then
-            return selected
-        end
-
-        return nil
+        return false
     end
 
-    local count = #self.Tools
+    -- Do not immediately re-equip on the next refresh.
+    for _, tool in ipairs(self.Tools) do
+        local data = self.ToolData[tool]
 
-    if count == 0 then
-        return nil
-    end
-
-    for offset = 0, count - 1 do
-        local index = (
-            (self.NextToolIndex + offset - 1) % count
-        ) + 1
-
-        local tool = self.Tools[index]
-
-        if IsF3XTool(tool) then
-            self.NextToolIndex = (index % count) + 1
-
-            return tool
+        if data then
+            data.EquipAttempted = true
         end
     end
 
-    return nil
+    return UnequipMultiple(self.Tools)
+end
+
+--// QUEUE
+
+function Dispatcher:QueueLength()
+    return math.max(
+        0,
+        self.QueueTail - self.QueueHead + 1
+    )
 end
 
 function Dispatcher:Submit(action, args)
-    assert(type(action) == "string", "Expected action string")
-    assert(type(args) == "table", "Expected argument table")
+    assert(type(action) == "string")
+    assert(type(args) == "table")
 
     UnfilterAction(action)
 
-    if not self.Running then
-        error("Moonlight dispatcher stopped", 2)
-    end
+    assert(
+        self.Running,
+        "Moonlight dispatcher stopped"
+    )
 
     if self:QueueLength() >= CONFIG.MaxQueueSize then
         self.Stats.Rejected += 1
@@ -468,7 +512,7 @@ function Dispatcher:Submit(action, args)
         Results = nil,
         Error = nil,
 
-        SubmittedAt = os.clock()
+        SubmittedAt = os.clock(),
     }
 
     self.QueueTail += 1
@@ -497,52 +541,66 @@ function Dispatcher:Pop()
     return request
 end
 
-function Dispatcher:FailRequest(request, message)
-    if request.Done then
-        return
+--// TOOL SELECTION
+
+function Dispatcher:SelectTool()
+    local count = #self.Tools
+
+    if count == 0 then
+        return nil
     end
 
-    request.Error = tostring(message)
-    request.Success = false
-    request.Done = true
+    local character = GetCharacter()
 
-    self.Stats.Failed += 1
+    for offset = 0, count - 1 do
+        local index = (
+            (self.NextToolIndex + offset - 1) % count
+        ) + 1
+
+        local tool = self.Tools[index]
+        local data = self.ToolData[tool]
+
+        if data
+            and data.Remote
+            and data.Remote.Parent
+            and tool.Parent == character
+            and data.Active < CONFIG.MaxConcurrentPerTool then
+
+            self.NextToolIndex = (index % count) + 1
+
+            return data
+        end
+    end
+
+    return nil
 end
 
-function Dispatcher:Execute(tool, request)
-    local data = self.ToolData[tool]
+--// REQUEST EXECUTION
 
-    if not data then
-        self:FailRequest(request, "Tool data unavailable")
-        return
-    end
-
-    self.SelectedTool = tool
-
+function Dispatcher:Execute(data, request)
     data.Active += 1
     self.ActiveRequests += 1
 
-    task.spawn(function()
-        local started = os.clock()
+    local started = os.clock()
 
+    task.spawn(function()
         local result = table.pack(
             pcall(function()
                 if not self.Running then
                     error("Dispatcher stopped")
                 end
 
-                local equipped, equipError = EquipTool(tool)
+                local remote = data.Remote
 
-                if not equipped then
-                    error(equipError)
+                if not remote or not remote.Parent then
+                    error("F3X RemoteFunction unavailable")
                 end
 
-                local remote = GetRemote(tool)
-
-                if not remote then
-                    error("F3X RemoteFunction missing")
+                if data.Tool.Parent ~= GetCharacter() then
+                    error("F3X tool is no longer equipped")
                 end
 
+                -- No tool switching occurs here.
                 return remote:InvokeServer(
                     UnfilterAction(request.Action),
                     table.unpack(
@@ -580,57 +638,56 @@ function Dispatcher:Execute(tool, request)
             end
 
             self.Stats.TotalLatency += latency
+
             request.Done = true
         end
 
         data.Active -= 1
         self.ActiveRequests -= 1
-
-        if self.ActiveRequests == 0 then
-            self.SelectedTool = nil
-        end
     end)
 end
+
+--// DISPATCH LOOP
 
 function Dispatcher:Dispatch()
     if not self.Running then
         return
     end
 
-    if self:QueueLength() == 0 then
-        return
-    end
+    local dispatched = 0
 
-    if self.ActiveRequests >= CONFIG.MaxConcurrentGlobal then
-        return
-    end
+    while self:QueueLength() > 0
+        and self.ActiveRequests < CONFIG.MaxConcurrentGlobal
+        and dispatched < CONFIG.DispatchBatchSize do
 
-    if #self.Tools == 0 then
-        return
-    end
+        local data = self:SelectTool()
 
-    local tool = self:ChooseTool()
+        if not data then
+            break
+        end
 
-    if not tool then
-        return
-    end
+        local request = self:Pop()
 
-    local request = self:Pop()
+        if not request then
+            break
+        end
 
-    if request then
-        self:Execute(tool, request)
+        self:Execute(data, request)
+
+        dispatched += 1
     end
 end
 
 function Dispatcher:Start()
     task.spawn(function()
-        local lastRefresh = 0
+        local lastRefresh = os.clock()
 
         while self.Running do
             local now = os.clock()
 
             if now - lastRefresh >= CONFIG.RefreshInterval then
                 self:RefreshTools()
+
                 lastRefresh = now
             end
 
@@ -640,8 +697,10 @@ function Dispatcher:Start()
         end
     end)
 
-    Debug("Dispatcher started")
+    Debug("Multi-tool dispatcher started")
 end
+
+--// SYNCHRONOUS WAIT
 
 function Dispatcher:Wait(request)
     while not request.Done do
@@ -664,9 +723,11 @@ function Dispatcher:Wait(request)
     end
 end
 
+--// STATISTICS
+
 function Dispatcher:GetStats()
-    local finished = self.Stats.Completed
-        + self.Stats.Failed
+    local finished =
+        self.Stats.Completed + self.Stats.Failed
 
     local average = 0
 
@@ -674,28 +735,31 @@ function Dispatcher:GetStats()
         average = self.Stats.TotalLatency / finished
     end
 
-    local tools = {}
+    local details = {}
 
-    for _, tool in ipairs(self.Tools) do
+    for index, tool in ipairs(self.Tools) do
         local data = self.ToolData[tool]
 
         if data then
-            tools[#tools + 1] = {
+            details[#details + 1] = {
+                Index = index,
                 Name = tool.Name,
+
+                Equipped = tool.Parent == GetCharacter(),
+
                 Active = data.Active,
                 Completed = data.Completed,
                 Failed = data.Failed,
-                Equipped = tool.Parent == GetCharacter()
             }
         end
     end
 
     return {
         Tools = #self.Tools,
-        ToolDetails = tools,
+        ToolDetails = details,
 
-        Queued = self:QueueLength(),
         Active = self.ActiveRequests,
+        Queued = self:QueueLength(),
 
         Submitted = self.Stats.Submitted,
         Completed = self.Stats.Completed,
@@ -705,6 +769,8 @@ function Dispatcher:GetStats()
         AverageLatency = average,
     }
 end
+
+--// SHUTDOWN
 
 function Dispatcher:Shutdown()
     if not self.Running then
@@ -717,39 +783,49 @@ function Dispatcher:Shutdown()
         local request = self:Pop()
 
         if request then
-            self:FailRequest(
-                request,
-                "Moonlight dispatcher shut down"
-            )
+            request.Done = true
+            request.Success = false
+            request.Error = "Dispatcher stopped"
+
+            self.Stats.Failed += 1
         end
     end
 
+    -- In-flight InvokeServer calls cannot be cancelled.
     Debug("Dispatcher stopped")
 end
 
---// F3X class
+--// F3X CLASS
 
 local F3X = {}
 F3X.__index = F3X
 
 function F3X.new(dispatcher)
-    assert(dispatcher, "Dispatcher required")
-
     return setmetatable({
         Dispatcher = dispatcher,
-        Tool = dispatcher.Tools[1]
+        Tool = dispatcher.Tools[1],
     }, F3X)
 end
 
 function F3X:IsActive()
-    return self.Dispatcher.Running
-        and self.Dispatcher:GetToolCount() > 0
+    if not self.Dispatcher.Running then
+        return false
+    end
+
+    local character = GetCharacter()
+
+    for _, tool in ipairs(self.Dispatcher.Tools) do
+        if tool.Parent == character and GetRemote(tool) then
+            return true
+        end
+    end
+
+    return false
 end
 
---// FIXED EQUIP FUNCTION
+--// EQUIPMENT API
 
 function F3X:Equip(state)
-    -- Default to true when omitted.
     if state == nil then
         state = true
     end
@@ -759,55 +835,29 @@ function F3X:Equip(state)
         "Expected boolean"
     )
 
-    self.Dispatcher:RefreshTools()
-
-    local tool = self.Tool
-
-    if not IsF3XTool(tool) then
-        tool = self.Dispatcher.Tools[1]
-    end
-
-    if not tool then
-        return false
-    end
-
-    self.Tool = tool
-
     if state then
-        local success, err = EquipTool(tool)
-
-        if not success then
-            Warn("Equip failed:", err)
-        end
-
-        return success
+        return self.Dispatcher:EquipAll()
+    else
+        return self.Dispatcher:UnequipAll()
     end
-
-    if self.Dispatcher.ActiveRequests > 0 then
-        return false
-    end
-
-    return UnequipTool(tool)
 end
 
---// API calls
+--// REMOTE API
 
 function F3X:CallAPI(sync, action, ...)
     assert(
         type(sync) == "boolean",
-        "Expected sync to be boolean"
+        "Expected sync boolean"
     )
 
     assert(
         type(action) == "string",
-        "Expected action to be string"
+        "Expected action string"
     )
 
-    self.Dispatcher:RefreshTools()
-
     assert(
-        self:IsActive(),
-        "F3X is inactive"
+        self.Dispatcher.Running,
+        "Moonlight dispatcher stopped"
     )
 
     local args = table.pack(...)
@@ -816,11 +866,16 @@ function F3X:CallAPI(sync, action, ...)
 
     if sync then
         local request = dispatcher:Submit(action, args)
+
         return dispatcher:Wait(request)
     end
 
+    -- Original asynchronous return type:
+    -- task.spawn returns a thread.
+
     return task.spawn(function()
         local request = dispatcher:Submit(action, args)
+
         dispatcher:Wait(request)
     end)
 end
@@ -833,41 +888,38 @@ function F3X:CallAPIAsync(action, ...)
     return self:CallAPI(false, action, ...)
 end
 
---// Original helper methods
+--// ORIGINAL HELPER METHODS
 
 function F3X:Weld(p1, p2)
-    assert(typeof(p1) == "Instance", "Expected Instance")
-    assert(typeof(p2) == "Instance", "Expected Instance")
+    assert(typeof(p1) == "Instance")
+    assert(typeof(p2) == "Instance")
 
-    assert(p1:IsA("BasePart"), "Expected BasePart")
-    assert(p2:IsA("BasePart"), "Expected BasePart")
+    assert(p1:IsA("BasePart"))
+    assert(p2:IsA("BasePart"))
 
-    if (p1.Locked and not p2.Locked)
-        or (not p1.Locked and not p2.Locked) then
+    if p1.Locked and p2.Locked then
+        error("Cannot weld two locked parts")
+    end
 
-        return self:CallAPIAsync(
-            "CreateWelds",
-            {p2},
-            p1
-        )
-
-    elseif not p1.Locked and p2.Locked then
-
+    if p2.Locked then
         return self:CallAPIAsync(
             "CreateWelds",
             {p1},
             p2
         )
-
-    else
-        error("Cannot weld two locked parts")
     end
+
+    return self:CallAPIAsync(
+        "CreateWelds",
+        {p2},
+        p1
+    )
 end
 
 function F3X:DestroyInstances(instances)
-    assert(type(instances) == "table", "Expected table")
+    assert(type(instances) == "table")
 
-    -- Original behaviour preserved.
+    -- Original Moonlight behaviour.
     return self:CallAPIAsync(
         "UndoRemove",
         instances
@@ -875,10 +927,7 @@ function F3X:DestroyInstances(instances)
 end
 
 function F3X:DestroyInstance(instance)
-    assert(
-        typeof(instance) == "Instance",
-        "Expected Instance"
-    )
+    assert(typeof(instance) == "Instance")
 
     return self:CallAPIAsync(
         "UndoRemove",
@@ -887,20 +936,9 @@ function F3X:DestroyInstance(instance)
 end
 
 function F3X:SetProperties(instance, properties)
-    assert(
-        typeof(instance) == "Instance",
-        "Expected Instance"
-    )
-
-    assert(
-        instance:IsA("BasePart"),
-        "Expected BasePart"
-    )
-
-    assert(
-        type(properties) == "table",
-        "Expected table"
-    )
+    assert(typeof(instance) == "Instance")
+    assert(instance:IsA("BasePart"))
+    assert(type(properties) == "table")
 
     local surfaces = {}
 
@@ -919,10 +957,10 @@ function F3X:SetProperties(instance, properties)
     )
 end
 
---// Additional helpers
+--// ADDITIONAL HELPERS
 
 function F3X:RemoveInstances(instances)
-    assert(type(instances) == "table", "Expected table")
+    assert(type(instances) == "table")
 
     return self:CallAPIAsync(
         "Remove",
@@ -931,10 +969,7 @@ function F3X:RemoveInstances(instances)
 end
 
 function F3X:RemoveInstance(instance)
-    assert(
-        typeof(instance) == "Instance",
-        "Expected Instance"
-    )
+    assert(typeof(instance) == "Instance")
 
     return self:RemoveInstances({instance})
 end
@@ -943,15 +978,15 @@ function F3X:GetStats()
     return self.Dispatcher:GetStats()
 end
 
+function F3X:GetTools()
+    return self.Dispatcher:GetTools()
+end
+
 function F3X:GetToolCount()
     return self.Dispatcher:GetToolCount()
 end
 
-function F3X:GetTools()
-    return self.Dispatcher:GetToolList()
-end
-
---// Moonlight class
+--// MOONLIGHT CLASS
 
 local Moonlight = {}
 Moonlight.__index = Moonlight
@@ -962,7 +997,7 @@ function Moonlight.new()
     self.Dispatcher = Dispatcher.new()
     self.F3X = F3X.new(self.Dispatcher)
 
-    self.Version = "Multi-F3X Fixed 2.1"
+    self.Version = "Multi-F3X 3.0"
 
     return self
 end
@@ -975,17 +1010,25 @@ function Moonlight:GetStats()
     return self.Dispatcher:GetStats()
 end
 
-function Moonlight:GetToolCount()
-    return self.Dispatcher:GetToolCount()
+function Moonlight:GetTools()
+    return self.Dispatcher:GetTools()
 end
 
-function Moonlight:GetTools()
-    return self.Dispatcher:GetToolList()
+function Moonlight:GetToolCount()
+    return self.Dispatcher:GetToolCount()
 end
 
 function Moonlight:RefreshTools()
     self.Dispatcher:RefreshTools()
     self.F3X.Tool = self.Dispatcher.Tools[1]
+end
+
+function Moonlight:EquipAll()
+    return self.Dispatcher:EquipAll()
+end
+
+function Moonlight:UnequipAll()
+    return self.Dispatcher:UnequipAll()
 end
 
 function Moonlight:Shutdown()
@@ -994,20 +1037,19 @@ function Moonlight:Shutdown()
     end
 end
 
---// Initialize
+--// INITIALIZATION
 
 local instance = Moonlight.new()
 
 ENV.Moonlight = instance
 
 Debug(
-    "Moonlight",
-    instance.Version,
-    "initialized"
+    "Initialized",
+    instance.Version
 )
 
 Debug(
-    "Detected F3X tools:",
+    "Detected tools:",
     instance:GetToolCount()
 )
 

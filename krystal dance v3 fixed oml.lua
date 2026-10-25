@@ -22,6 +22,7 @@ if ws:FindFirstChild("full") then
 ws.full:Destroy()
 end
 local Global = (getgenv and getgenv()) or shared
+local EXPERIMENTAL = Global.AETHER == true or tostring(Global.AETHER):lower() == "true" or Global.EXPERIMENTAL == true or tostring(Global.EXPERIMENTAL):lower() == "true"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/packages/FunctionPack.lua"))()
 local function choot(msg)
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
@@ -90,11 +91,43 @@ REANIMATE.BorderSizePixel = 0
 REANIMATE.Position = UDim2.new(0, 0, .350, 0)
 REANIMATE.Size = UDim2.new(0.5, 0, 0, 45)
 REANIMATE.Font = "Arcade"
-REANIMATE.Text = "REANIMATE"
+REANIMATE.Text = EXPERIMENTAL and "REANIMATE (AETHER)" or "REANIMATE"
 REANIMATE.TextColor3 = Color3.new(1,1,1)
 REANIMATE.TextScaled = true
 REANIMATE.TextSize = 10
 REANIMATE.TextWrapped = true
+local AetherToggle = Instance.new("TextButton", ui)
+AetherToggle.Name = "AetherToggle"
+AetherToggle.Position = UDim2.new(0.5, 0, 0.350, 0)
+AetherToggle.Size = UDim2.new(0.5, 0, 0, 45)
+AetherToggle.BorderSizePixel = 0
+AetherToggle.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
+AetherToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+AetherToggle.Font = Enum.Font.Arcade
+AetherToggle.TextSize = 10
+AetherToggle.TextWrapped = true
+Instance.new("UICorner", AetherToggle)
+AetherToggle.TextScaled = true
+local function RefreshAetherToggle()
+AetherToggle.Text = "AETHER = " .. tostring(EXPERIMENTAL):upper()
+REANIMATE.Text = EXPERIMENTAL and "REANIMATE (AETHER)" or "REANIMATE"
+Global.AETHER = EXPERIMENTAL
+Global.EXPERIMENTAL = EXPERIMENTAL
+end
+AetherToggle.Activated:Connect(function()
+if Run1.Position.X.Scale == 0 then
+notify("Select AETHER before reanimating")
+return
+end
+EXPERIMENTAL = not EXPERIMENTAL
+RefreshAetherToggle()
+end)
+RefreshAetherToggle()
+
+local AETHER_HEAD_WRITER = "CurrentAngle6D"
+local AETHER_KEEP_HEALTH = true
+Global.KDV3_AetherHeadWriter = AETHER_HEAD_WRITER
+Global.KDV3_AetherKeepHealth = true
 
 Run1.Name = "Stick"
 Run1.Parent = ui
@@ -399,71 +432,169 @@ local Place = game.placeId
 local REANIMATION = false
 local REANIMATED = false
 local REANIMATED_CHARACTER = nil
+local AETHER_CONTROLLER = nil
+
+local function HasUsableR6Motors(character)
+if typeof(character) ~= "Instance" or not character:IsA("Model") or not character.Parent then
+return false
+end
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+if not humanoid or humanoid.Health <= 0 or humanoid:GetState() == Enum.HumanoidStateType.Dead then
+return false
+end
+local torso = character:FindFirstChild("Torso")
+if not torso then return false end
+return torso:FindFirstChild("Right Shoulder") ~= nil and torso:FindFirstChild("Left Shoulder") ~= nil
+end
 
 local function IsReanimated()
 local character = game:GetService("Players").LocalPlayer.Character
-
-if not REANIMATED then
-return false
-end
-
-if not character or character ~= REANIMATED_CHARACTER or not character.Parent then
+if not REANIMATED then return false end
+if not character or character ~= REANIMATED_CHARACTER or not HasUsableR6Motors(character) then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
 return false
 end
-
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-if not humanoid or humanoid.Health <= 0 then
-REANIMATED = false
-REANIMATED_CHARACTER = nil
-return false
-end
-
 return true
+end
+
+local function ReadAetherSource()
+local sources = {
+    {"https://raw.githubusercontent.com/AstraOutlight/randomprojects/main/module.luau", "Module.luau"},
+    {"https://raw.githubusercontent.com/AstraOutlight/randomprojects/main/main%20(2).lua", "Main.lua"},
+}
+local failures = {}
+for _, entry in ipairs(sources) do
+    local ok, source = pcall(function() return game:HttpGet(entry[1]) end)
+    if ok and type(source) == "string" and #source > 0 then
+        local chunk, compileError = loadstring(source)
+        if chunk then return source, entry[2] end
+        table.insert(failures, entry[2] .. ": " .. tostring(compileError))
+    else
+        table.insert(failures, entry[2] .. ": " .. tostring(source))
+    end
+end
+error("KDV3 could not load patched Aether from AstraOutlight/randomprojects: " .. table.concat(failures, " | "))
+end
+
+local function InstallAetherDiagnostics(controller)
+Global.KDV3_AetherDebugDump = function()
+if not controller or type(controller.GetDebugDump) ~= "function" then
+warn("[KDV3] Aether diagnostics unavailable")
+return nil
+end
+local ok, dump = pcall(function() return controller:GetDebugDump() end)
+if ok and type(dump) == "string" then
+warn(dump)
+if type(setclipboard) == "function" then pcall(setclipboard, dump) end
+return dump
+end
+warn("[KDV3] Aether debug dump failed: " .. tostring(dump))
+return nil
+end
+end
+
+local function StartAether()
+local player = game:GetService("Players").LocalPlayer
+local before = player.Character
+if AETHER_KEEP_HEALTH and before then
+local originalHumanoid = before:FindFirstChildOfClass("Humanoid")
+if not originalHumanoid or originalHumanoid.Health <= 0 then
+error("NON-PD requires a living character before starting Aether")
+end
+end
+local source, fileName = ReadAetherSource()
+local compiled, compileError = loadstring(source)
+if not compiled then error(compileError) end
+if fileName == "Main.lua" then
+local configuration = Global.GelatekReanimateConfig or {}
+configuration.Gelatek = configuration.Gelatek or {}
+configuration.Gelatek.AnimationsDisabled = true
+configuration.Gelatek.PermanentDeath = false
+configuration.Gelatek.AntiSleep = true
+configuration.Gelatek.DirectPositionCorrection = true
+configuration.Writers = configuration.Writers or {}
+configuration.Writers.GelatekHead = AETHER_HEAD_WRITER
+Global.GelatekReanimateConfig = configuration
+end
+local result = compiled()
+local controller
+local rig
+if type(result) == "table" and type(result.new) == "function" then
+controller = result.new({Gelatek={AnimationsDisabled=true, PermanentDeath=false, AntiSleep=true, DirectPositionCorrection=true}, Writers={GelatekHead=AETHER_HEAD_WRITER}})
+elseif type(result) == "table" and type(result.Start) == "function" and type(result.WaitForReady) == "function" then
+controller = result
+end
+if controller then
+AETHER_CONTROLLER = controller
+if type(controller.Configure) == "function" then
+controller:Configure({Gelatek={AnimationsDisabled=true, PermanentDeath=false, AntiSleep=true, DirectPositionCorrection=true}, Writers={GelatekHead=AETHER_HEAD_WRITER}})
+end
+InstallAetherDiagnostics(controller)
+controller:Start()
+local reason
+rig, reason = controller:WaitForReady(60)
+if not rig then error("Aether failed to initialize: " .. tostring(reason)) end
+elseif typeof(result) == "Instance" and result:IsA("Model") then
+rig = result
+end
+if not rig then
+for _ = 1, 40 do
+local candidate = player.Character
+if candidate and candidate ~= before and HasUsableR6Motors(candidate) then
+rig = candidate
+break
+end
+task.wait(.25)
+end
+end
+if not HasUsableR6Motors(rig) then
+error("Aether did not provide a living R6 controller rig; check its console output and setup")
+end
+if player.Character ~= rig then
+player.Character = rig
+end
+local camera = workspace.CurrentCamera
+if camera then
+camera.CameraSubject = rig:FindFirstChildOfClass("Humanoid")
+end
+return rig
 end
 
 local function Backup()
-if REANIMATION then
-return false
-end
-
-if IsReanimated() then
-return true
-end
-
+if REANIMATION then return false end
+if IsReanimated() then return true end
 REANIMATION = true
-
-if not game:IsLoaded() then
-game.Loaded:Wait()
-end
-
+if not game:IsLoaded() then game.Loaded:Wait() end
+local character
 local ok, err = pcall(function()
+if EXPERIMENTAL then
+character = StartAether()
+else
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Jskfhggjxu/My-Script/refs/heads/main/Cool-Reanimate.lua"))()
+task.wait(.35)
+character = game:GetService("Players").LocalPlayer.Character
+end
 end)
-
 REANIMATION = false
-
 if not ok then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
-warn("[KDV3] Cool-Reanimate failed:", err)
+if AETHER_CONTROLLER and type(AETHER_CONTROLLER.Stop) == "function" then
+pcall(function() AETHER_CONTROLLER:Stop() end)
+AETHER_CONTROLLER = nil
+Global.KDV3_AetherDebugDump = nil
+end
+warn("[KDV3] " .. (EXPERIMENTAL and "AetherReanimate" or "Cool-Reanimate") .. " failed:", err)
 notify("Reanimate failed - check console")
 return false
 end
-
-task.wait(0.35)
-
-local character = game:GetService("Players").LocalPlayer.Character
-local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-
-if not character or not character.Parent or not humanoid then
+if not HasUsableR6Motors(character) then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
-notify("Reanimate did not create a usable rig")
+notify("Reanimate did not create a usable R6 rig")
 return false
 end
-
 REANIMATED = true
 REANIMATED_CHARACTER = character
 return true
@@ -1005,6 +1136,9 @@ if REANIMATION then return notify("Reanimating please wait") end
 if RUNNING then return notify("SCRIPT IS RUNNING!!") end
 
 if IsReanimated() then
+char = REANIMATED_CHARACTER
+Character = char
+Humanoid = char:FindFirstChildOfClass("Humanoid")
 Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
 RUNNING = true
 
@@ -1501,7 +1635,7 @@ end
 local currentCharacter, currentRig = GetAnimationRig()
 
 if not currentCharacter or not currentRig then
-warn("[KDV3] Cool-Reanimate animation rig is unavailable")
+warn("[KDV3] Reanimation rig is unavailable")
 return
 end
 
@@ -1777,7 +1911,7 @@ local ImportedTableOfDances={
 
 {Name="Bouncin",Music="Bouncin.mp3",DanceName="Bouncin",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Bouncin.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Static Alt",Music="Static.mp3",DanceName="StaticAlt",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/StaticAlt.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.050},
-{Name="Miss The Quiet",Music="i miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
+{Name="Miss The Quiet",Music="miss the quiet.mp3",DanceName="miss the quiet",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/miss%20the%20quiet.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Shucks",Music="shucks.mp3",DanceName="shucks",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/shucks.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Teto Territory",Music="teto territory.mp3",DanceName="teto territory",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/teto%20territory.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
 {Name="Analog horror funk",Music="Analog horror funk.mp3",DanceName="Analog horror funk",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Analog%20horror%20funk.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=true,Alpha=.1},
@@ -2707,7 +2841,112 @@ SuggestionClose.MouseButton1Click:Connect(function()
 SuggestionFrame.Visible=false
 end)
 
+local Language="English"
+local JapaneseText={
+["REANIMATE"]="再アニメート",["Run"]="実行",["Disable"]="無効",["Enable"]="有効",
+["CONTROLS"]="操作一覧",["DANCE CONTROLS  |  RIGHT CLICK = FAV"]="ダンス操作  |  右クリックでお気に入り",
+["Search dance, page, or key"]="ダンス・ページ・キーを検索",["PREDOWNLOAD ALL"]="すべて事前ダウンロード",
+["SUGGEST"]="提案",["SEND A SUGGESTION"]="提案を送信",["Your username, send time and device type are included."]="ユーザー名、送信時刻、端末情報が含まれます。",
+["Type your suggestion here..."]="ここに提案を入力してください...",["SEND"]="送信",["CHECKING"]="確認中",["SENDING"]="送信中",
+["CLOSE"]="閉じる",["Please join the discord server!"]="Discordサーバーに参加してください！",
+["COPIED!"]="コピーしました！",["Write a suggestion first."]="先に提案を入力してください。",
+["Your executor does not support HTTP requests."]="この実行環境はHTTPリクエストに対応していません。",
+["Checking suggestion permissions..."]="提案の送信権限を確認しています...",
+["Could not verify suggestion permissions. Try again later."]="送信権限を確認できませんでした。後でもう一度お試しください。",
+["You are blacklisted from sending suggestions."]="提案の送信が禁止されています。",
+["Sending suggestion..."]="提案を送信しています...",["Suggestion sent successfully."]="提案を送信しました。",
+["Failed to send. Try again."]="送信に失敗しました。もう一度お試しください。",
+["PAGE "]="ページ ",["Favourites"]="お気に入り",["DOWNLOADING "]="ダウンロード中 ",
+["Tap to copy"]="タップしてコピー",["Clipboard unsupported"]="クリップボード非対応",
+["Modded By Xyris"]="Xyrisによる改造版",["DANCE CONTROLS"]="ダンス操作"
+}
+local EnglishText=setmetatable({}, {__mode="k"})
+local UpdatingLanguage=false
+local function TranslateUIValue(value)
+if JapaneseText[value] then return JapaneseText[value] end
+if value:match("^PAGE %d+") then
+return (value:gsub("^PAGE ","ページ "):gsub("Favourites","お気に入り"))
+end
+if value:match("^DOWNLOADING ") then return value:gsub("^DOWNLOADING ","ダウンロード中 ") end
+if value:match("^PAGE ") or value:match("^★ FAV ") then
+return value:gsub("PAGE ","ページ "):gsub("FAV ","お気に入り ")
+end
+if value:find("\nTap to copy",1,true) then return value:gsub("Tap to copy","タップしてコピー") end
+if value:find("Clipboard unsupported",1,true) then return value:gsub("Clipboard unsupported","クリップボード非対応") end
+return value
+end
+local function LocalizeObject(obj)
+if not (obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox")) then return end
+for _,prop in ipairs({"Text","PlaceholderText"}) do
+if prop=="Text" or obj:IsA("TextBox") then
+local ok,value=pcall(function() return obj[prop] end)
+if ok then
+local values=EnglishText[obj]
+if not values then values={} EnglishText[obj]=values end
+if values[prop]==nil then values[prop]=value end
+local function update()
+if UpdatingLanguage then return end
+local current=obj[prop]
+local values=EnglishText[obj]
+if values then
+if Language=="English" then
+values[prop]=current
+elseif current~=TranslateUIValue(values[prop] or "") then
+values[prop]=current
+end
+end
+if Language=="Japanese" then
+local translated=TranslateUIValue(current)
+if translated~=current then
+UpdatingLanguage=true
+obj[prop]=translated
+UpdatingLanguage=false
+end
+end
+end
+obj:GetPropertyChangedSignal(prop):Connect(update)
+end
+end
+end
+end
+local function SetLanguage(lang)
+Language=lang
+UpdatingLanguage=true
+for _,obj in ipairs(ScreenGui:GetDescendants()) do
+if obj:IsA("TextLabel") or obj:IsA("TextButton") or obj:IsA("TextBox") then
+for _,prop in ipairs({"Text","PlaceholderText"}) do
+if prop=="Text" or obj:IsA("TextBox") then
+local values=EnglishText[obj]
+if not values then values={} EnglishText[obj]=values end
+local current=obj[prop]
+if lang=="Japanese" then
+if values[prop]==nil then values[prop]=current end
+obj[prop]=TranslateUIValue(values[prop])
+else
+if values[prop]~=nil then obj[prop]=values[prop] end
+end
+end
+end
+end
+end
+UpdatingLanguage=false
+SuggestionBox.Text=""
+SuggestionStatus.Text=lang=="Japanese" and "日本語に変更しました。" or "Switched to English."
+end
+for _,obj in ipairs(ScreenGui:GetDescendants()) do LocalizeObject(obj) end
+ScreenGui.DescendantAdded:Connect(LocalizeObject)
+local function HandleLanguageCommand()
+local command=SuggestionBox.Text:match("^%s*(.-)%s*$"):lower()
+if command=="!japanese" then SetLanguage("Japanese") return true end
+if command=="!english" then SetLanguage("English") return true end
+return false
+end
+SuggestionBox.FocusLost:Connect(function()
+HandleLanguageCommand()
+end)
+
 SendSuggestion.MouseButton1Click:Connect(function()
+if HandleLanguageCommand() then return end
 if SendingSuggestion then
 return
 end
@@ -2729,10 +2968,44 @@ return
 end
 
 SendingSuggestion=true
+SendSuggestion.Text="CHECKING"
+SuggestionStatus.Text="Checking suggestion permissions..."
+
+task.spawn(function()
+local player=game:GetService("Players").LocalPlayer
+local blacklistOk,blacklistResponse=pcall(function()
+return requestFunction({
+Url="https://raw.githubusercontent.com/AstraOutlight/my-scripts/main/suggestionblacklist",
+Method="GET",
+Headers={}
+})
+end)
+local blacklistText=nil
+if blacklistOk and type(blacklistResponse)=="table" then
+local code=tonumber(blacklistResponse.StatusCode or blacklistResponse.Status or 0) or 0
+if code>=200 and code<300 then
+blacklistText=blacklistResponse.Body or blacklistResponse.body
+end
+end
+if type(blacklistText)~="string" then
+SuggestionStatus.Text="Could not verify suggestion permissions. Try again later."
+SendSuggestion.Text="SEND"
+SendingSuggestion=false
+return
+end
+local user=string.lower(player.Name)
+for line in blacklistText:gmatch("[^\r\n]+") do
+local name=line:match("^%s*([^,%s]+)")
+if name and string.lower(name)==user then
+SuggestionStatus.Text="You are blacklisted from sending suggestions."
+SendSuggestion.Text="SEND"
+SendingSuggestion=false
+return
+end
+end
 SendSuggestion.Text="SENDING"
 SuggestionStatus.Text="Sending suggestion..."
 
-local player=game:GetService("Players").LocalPlayer
 local sentTime=os.date("%Y-%m-%d %H:%M:%S")
 local placeId=game.PlaceId
 local jobId=game.JobId
@@ -2792,7 +3065,7 @@ SendSuggestion.Text="SEND"
 SendingSuggestion=false
 end)
 end)
-
+end)
 end)()
 
 local Predownloading=false
@@ -5438,7 +5711,9 @@ end
 Neck.C0 = Neck.C0:Lerp(NeckOriginC0 * NeckCFrame, updatesPerSecond * deltaTime)
 end
 elseif dancing == true then
+if not EXPERIMENTAL then
 Neck.C0 = oldC0N
+end
 end
 if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then
 walking = false
@@ -5530,7 +5805,7 @@ ned.Rotation = 0 - 2 * math.cos(sine / 24)
 ned.Position = UDim2.new(0.6,0 - 10 * math.cos(sine / 32),0.8,0 - 10 * math.cos(sine / 45))
 end)
 else
-notify("Wait for the health to be 0")
+notify("Reanimate first, then press RUN")
 Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
  return end
 end)

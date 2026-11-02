@@ -22,7 +22,6 @@ if ws:FindFirstChild("full") then
 ws.full:Destroy()
 end
 local Global = (getgenv and getgenv()) or shared
-local EXPERIMENTAL = Global.AETHER == true or tostring(Global.AETHER):lower() == "true" or Global.EXPERIMENTAL == true or tostring(Global.EXPERIMENTAL):lower() == "true"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/packages/FunctionPack.lua"))()
 local function choot(msg)
 game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
@@ -91,43 +90,11 @@ REANIMATE.BorderSizePixel = 0
 REANIMATE.Position = UDim2.new(0, 0, .350, 0)
 REANIMATE.Size = UDim2.new(0.5, 0, 0, 45)
 REANIMATE.Font = "Arcade"
-REANIMATE.Text = EXPERIMENTAL and "REANIMATE (AETHER)" or "REANIMATE"
+REANIMATE.Text = "REANIMATE"
 REANIMATE.TextColor3 = Color3.new(1,1,1)
 REANIMATE.TextScaled = true
 REANIMATE.TextSize = 10
 REANIMATE.TextWrapped = true
-local AetherToggle = Instance.new("TextButton", ui)
-AetherToggle.Name = "AetherToggle"
-AetherToggle.Position = UDim2.new(0.5, 0, 0.350, 0)
-AetherToggle.Size = UDim2.new(0.5, 0, 0, 45)
-AetherToggle.BorderSizePixel = 0
-AetherToggle.BackgroundColor3 = Color3.new(0.25, 0.25, 0.25)
-AetherToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-AetherToggle.Font = Enum.Font.Arcade
-AetherToggle.TextSize = 10
-AetherToggle.TextWrapped = true
-Instance.new("UICorner", AetherToggle)
-AetherToggle.TextScaled = true
-local function RefreshAetherToggle()
-AetherToggle.Text = "AETHER = " .. tostring(EXPERIMENTAL):upper()
-REANIMATE.Text = EXPERIMENTAL and "REANIMATE (AETHER)" or "REANIMATE"
-Global.AETHER = EXPERIMENTAL
-Global.EXPERIMENTAL = EXPERIMENTAL
-end
-AetherToggle.Activated:Connect(function()
-if Run1.Position.X.Scale == 0 then
-notify("Select AETHER before reanimating")
-return
-end
-EXPERIMENTAL = not EXPERIMENTAL
-RefreshAetherToggle()
-end)
-RefreshAetherToggle()
-
-local AETHER_HEAD_WRITER = "CurrentAngle6D"
-local AETHER_KEEP_HEALTH = true
-Global.KDV3_AetherHeadWriter = AETHER_HEAD_WRITER
-Global.KDV3_AetherKeepHealth = true
 
 Run1.Name = "Stick"
 Run1.Parent = ui
@@ -432,169 +399,71 @@ local Place = game.placeId
 local REANIMATION = false
 local REANIMATED = false
 local REANIMATED_CHARACTER = nil
-local AETHER_CONTROLLER = nil
-
-local function HasUsableR6Motors(character)
-if typeof(character) ~= "Instance" or not character:IsA("Model") or not character.Parent then
-return false
-end
-local humanoid = character:FindFirstChildOfClass("Humanoid")
-if not humanoid or humanoid.Health <= 0 or humanoid:GetState() == Enum.HumanoidStateType.Dead then
-return false
-end
-local torso = character:FindFirstChild("Torso")
-if not torso then return false end
-return torso:FindFirstChild("Right Shoulder") ~= nil and torso:FindFirstChild("Left Shoulder") ~= nil
-end
 
 local function IsReanimated()
 local character = game:GetService("Players").LocalPlayer.Character
-if not REANIMATED then return false end
-if not character or character ~= REANIMATED_CHARACTER or not HasUsableR6Motors(character) then
+
+if not REANIMATED then
+return false
+end
+
+if not character or character ~= REANIMATED_CHARACTER or not character.Parent then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
 return false
 end
+
+local humanoid = character:FindFirstChildOfClass("Humanoid")
+if not humanoid or humanoid.Health <= 0 then
+REANIMATED = false
+REANIMATED_CHARACTER = nil
+return false
+end
+
 return true
 end
 
-local function ReadAetherSource()
-local sources = {
-    {"https://raw.githubusercontent.com/AstraOutlight/randomprojects/main/module.luau", "Module.luau"},
-    {"https://raw.githubusercontent.com/AstraOutlight/randomprojects/main/main%20(2).lua", "Main.lua"},
-}
-local failures = {}
-for _, entry in ipairs(sources) do
-    local ok, source = pcall(function() return game:HttpGet(entry[1]) end)
-    if ok and type(source) == "string" and #source > 0 then
-        local chunk, compileError = loadstring(source)
-        if chunk then return source, entry[2] end
-        table.insert(failures, entry[2] .. ": " .. tostring(compileError))
-    else
-        table.insert(failures, entry[2] .. ": " .. tostring(source))
-    end
-end
-error("KDV3 could not load patched Aether from AstraOutlight/randomprojects: " .. table.concat(failures, " | "))
-end
-
-local function InstallAetherDiagnostics(controller)
-Global.KDV3_AetherDebugDump = function()
-if not controller or type(controller.GetDebugDump) ~= "function" then
-warn("[KDV3] Aether diagnostics unavailable")
-return nil
-end
-local ok, dump = pcall(function() return controller:GetDebugDump() end)
-if ok and type(dump) == "string" then
-warn(dump)
-if type(setclipboard) == "function" then pcall(setclipboard, dump) end
-return dump
-end
-warn("[KDV3] Aether debug dump failed: " .. tostring(dump))
-return nil
-end
-end
-
-local function StartAether()
-local player = game:GetService("Players").LocalPlayer
-local before = player.Character
-if AETHER_KEEP_HEALTH and before then
-local originalHumanoid = before:FindFirstChildOfClass("Humanoid")
-if not originalHumanoid or originalHumanoid.Health <= 0 then
-error("NON-PD requires a living character before starting Aether")
-end
-end
-local source, fileName = ReadAetherSource()
-local compiled, compileError = loadstring(source)
-if not compiled then error(compileError) end
-if fileName == "Main.lua" then
-local configuration = Global.GelatekReanimateConfig or {}
-configuration.Gelatek = configuration.Gelatek or {}
-configuration.Gelatek.AnimationsDisabled = true
-configuration.Gelatek.PermanentDeath = false
-configuration.Gelatek.AntiSleep = true
-configuration.Gelatek.DirectPositionCorrection = true
-configuration.Writers = configuration.Writers or {}
-configuration.Writers.GelatekHead = AETHER_HEAD_WRITER
-Global.GelatekReanimateConfig = configuration
-end
-local result = compiled()
-local controller
-local rig
-if type(result) == "table" and type(result.new) == "function" then
-controller = result.new({Gelatek={AnimationsDisabled=true, PermanentDeath=false, AntiSleep=true, DirectPositionCorrection=true}, Writers={GelatekHead=AETHER_HEAD_WRITER}})
-elseif type(result) == "table" and type(result.Start) == "function" and type(result.WaitForReady) == "function" then
-controller = result
-end
-if controller then
-AETHER_CONTROLLER = controller
-if type(controller.Configure) == "function" then
-controller:Configure({Gelatek={AnimationsDisabled=true, PermanentDeath=false, AntiSleep=true, DirectPositionCorrection=true}, Writers={GelatekHead=AETHER_HEAD_WRITER}})
-end
-InstallAetherDiagnostics(controller)
-controller:Start()
-local reason
-rig, reason = controller:WaitForReady(60)
-if not rig then error("Aether failed to initialize: " .. tostring(reason)) end
-elseif typeof(result) == "Instance" and result:IsA("Model") then
-rig = result
-end
-if not rig then
-for _ = 1, 40 do
-local candidate = player.Character
-if candidate and candidate ~= before and HasUsableR6Motors(candidate) then
-rig = candidate
-break
-end
-task.wait(.25)
-end
-end
-if not HasUsableR6Motors(rig) then
-error("Aether did not provide a living R6 controller rig; check its console output and setup")
-end
-if player.Character ~= rig then
-player.Character = rig
-end
-local camera = workspace.CurrentCamera
-if camera then
-camera.CameraSubject = rig:FindFirstChildOfClass("Humanoid")
-end
-return rig
-end
-
 local function Backup()
-if REANIMATION then return false end
-if IsReanimated() then return true end
-REANIMATION = true
-if not game:IsLoaded() then game.Loaded:Wait() end
-local character
-local ok, err = pcall(function()
-if EXPERIMENTAL then
-character = StartAether()
-else
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Jskfhggjxu/My-Script/refs/heads/main/Cool-Reanimate.lua"))()
-task.wait(.35)
-character = game:GetService("Players").LocalPlayer.Character
+if REANIMATION then
+return false
 end
+
+if IsReanimated() then
+return true
+end
+
+REANIMATION = true
+
+if not game:IsLoaded() then
+game.Loaded:Wait()
+end
+
+local ok, err = pcall(function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Jskfhggjxu/My-Script/refs/heads/main/Cool-Reanimate.lua"))()
 end)
+
 REANIMATION = false
+
 if not ok then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
-if AETHER_CONTROLLER and type(AETHER_CONTROLLER.Stop) == "function" then
-pcall(function() AETHER_CONTROLLER:Stop() end)
-AETHER_CONTROLLER = nil
-Global.KDV3_AetherDebugDump = nil
-end
-warn("[KDV3] " .. (EXPERIMENTAL and "AetherReanimate" or "Cool-Reanimate") .. " failed:", err)
+warn("[KDV3] Cool-Reanimate failed:", err)
 notify("Reanimate failed - check console")
 return false
 end
-if not HasUsableR6Motors(character) then
+
+task.wait(0.35)
+
+local character = game:GetService("Players").LocalPlayer.Character
+local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+
+if not character or not character.Parent or not humanoid then
 REANIMATED = false
 REANIMATED_CHARACTER = nil
-notify("Reanimate did not create a usable R6 rig")
+notify("Reanimate did not create a usable rig")
 return false
 end
+
 REANIMATED = true
 REANIMATED_CHARACTER = character
 return true
@@ -1136,9 +1005,6 @@ if REANIMATION then return notify("Reanimating please wait") end
 if RUNNING then return notify("SCRIPT IS RUNNING!!") end
 
 if IsReanimated() then
-char = REANIMATED_CHARACTER
-Character = char
-Humanoid = char:FindFirstChildOfClass("Humanoid")
 Run1.Position = UDim2.new(10, 0, 0.629999971, 0)
 RUNNING = true
 
@@ -1635,7 +1501,7 @@ end
 local currentCharacter, currentRig = GetAnimationRig()
 
 if not currentCharacter or not currentRig then
-warn("[KDV3] Reanimation rig is unavailable")
+warn("[KDV3] Cool-Reanimate animation rig is unavailable")
 return
 end
 
@@ -1691,7 +1557,18 @@ end
 end
 wait(.1)
 playbacktrack=true
+local DarlingDanceToken=0
+local DarlingDanceConnection=nil
+local function CancelDarlingDance()
+DarlingDanceToken+=1
+if DarlingDanceConnection then
+DarlingDanceConnection:Disconnect()
+DarlingDanceConnection=nil
+end
+end
+
 local function stopanim()
+ CancelDarlingDance()
  Info("None","None")
  loopsplaying = math.max(0, loopsplaying - 1)
  local SavedTime = Playsound.TimePosition
@@ -1741,6 +1618,10 @@ end
 
 
 local ImportedTableOfDances={
+{Name="Darling Dance",Music="darlingdanceintro.wav",DanceName="darlingdanceintro",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/darlingdanceintro.lua",IntroLoop={IntroMusic="darlingdanceintro.wav",LoopMusic="darlingdanceloop.wav",IntroDance="darlingdanceintro",LoopDance="darlingdanceloop",IntroUrl="https://raw.githubusercontent.com/AstraOutlight/storage/main/darlingdanceintro.lua",LoopUrl="https://raw.githubusercontent.com/AstraOutlight/storage/main/darlingdanceloop.lua"},Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Honestly",Music="honestly.wav",DanceName="honestly",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/honestly.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Memeism",Music="memeism.wav",DanceName="memeism",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/memeism.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
+{Name="Naoya Party",Music="naoyaparty.wav",DanceName="naoyaparty",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/naoyaparty.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Rat 1",Music="rat.mp3",DanceName="Rat1",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Rat1.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Boogie Down",Music="FunkedUp.mp3",DanceName="None",Url="None",Id=122471664395501,Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
 {Name="Assumptions",Music="Assumptions.mp3",DanceName="Assumptions",Url="https://raw.githubusercontent.com/AstraOutlight/storage/main/Assumptions.lua",Id="None",Offset=0,WalkSpeed=14,Looped=true,UseSoundPos=false,Alpha=.1},
@@ -2358,11 +2239,51 @@ stopanim()
 return true
 end
 stopanim()
+if danceData.IntroLoop then
+local parts=danceData.IntroLoop
+local introAnimation=LoadDance(parts.IntroDance,parts.IntroUrl)
+local loopAnimation=LoadDance(parts.LoopDance,parts.LoopUrl)
+local introAudio=DanceAsset(parts.IntroMusic)
+local loopAudio=DanceAsset(parts.LoopMusic)
+if not introAnimation or not loopAnimation or introAudio=="" or loopAudio=="" then
+notify("Darling Dance: failed to load intro or loop")
+return true
+end
+dancing=true
+Playsound.Volume=0
+char.Humanoid.WalkSpeed=(tonumber(danceData.WalkSpeed) or 14)*char:GetScale()
+Info(danceData.Name,keyName)
+sound69:Stop()
+sound69.Looped=false
+sound69.SoundId=introAudio
+sound69.TimePosition=0
+playanim(introAnimation,1,true,nil,false)
+sound69:Play()
+local token=DarlingDanceToken
+local switched=false
+local started=os.clock()
+DarlingDanceConnection=game:GetService("RunService").Heartbeat:Connect(function()
+if token~=DarlingDanceToken or not dancing or switched then return end
+if currentanim and not currentanim.IsPlaying and os.clock()-started>.1 then
+switched=true
+if DarlingDanceConnection then DarlingDanceConnection:Disconnect() DarlingDanceConnection=nil end
+if token~=DarlingDanceToken or not dancing then return end
+sound69:Stop()
+sound69.SoundId=loopAudio
+sound69.Looped=true
+sound69.TimePosition=0
+playanim(loopAnimation,1,true,nil,true)
+sound69:Play()
+end
+end)
+return true
+end
 dancing=true
 Playsound.Volume=0
 task.wait(.005)
 char.Humanoid.WalkSpeed=(tonumber(danceData.WalkSpeed) or 14)*char:GetScale()
 sound69.PlaybackSpeed=1
+sound69.Looped=true
 sound69.TimePosition=tonumber(danceData.Offset) or 0
 if danceData.Music and danceData.Music~="None" then
 sound69.SoundId=DanceAsset(danceData.Music)
@@ -3078,6 +2999,11 @@ local uniqueDance={}
 local jobs=0
 for _,entry in ipairs(ImportedTableOfDances) do
 if entry.Music and entry.Music~="None" and not uniqueAudio[entry.Music] then uniqueAudio[entry.Music]=true jobs+=1 end
+if entry.IntroLoop then
+local p=entry.IntroLoop
+if not uniqueAudio[p.LoopMusic] then uniqueAudio[p.LoopMusic]=true jobs+=1 end
+if not uniqueDance[p.LoopDance] then uniqueDance[p.LoopDance]=p.LoopUrl jobs+=1 end
+end
 if entry.Url and entry.Url~="None" and entry.DanceName and entry.DanceName~="None" and not uniqueDance[entry.DanceName] then uniqueDance[entry.DanceName]=entry.Url jobs+=1 end
 end
 local done=0
@@ -5711,9 +5637,7 @@ end
 Neck.C0 = Neck.C0:Lerp(NeckOriginC0 * NeckCFrame, updatesPerSecond * deltaTime)
 end
 elseif dancing == true then
-if not EXPERIMENTAL then
 Neck.C0 = oldC0N
-end
 end
 if char.Humanoid.MoveDirection == Vector3.new(0,0,0) then
 walking = false
@@ -5805,7 +5729,7 @@ ned.Rotation = 0 - 2 * math.cos(sine / 24)
 ned.Position = UDim2.new(0.6,0 - 10 * math.cos(sine / 32),0.8,0 - 10 * math.cos(sine / 45))
 end)
 else
-notify("Reanimate first, then press RUN")
+notify("Wait for the health to be 0")
 Run1.Position = UDim2.new(0, 0, 0.629999971, 0)
  return end
 end)
